@@ -96,6 +96,7 @@ namespace DotGGPK
                         switch (recordMarker.Type)
                         {
                             case "GGPK":
+                                currentEntry = GgpkMainRecord.FromStream(recordStream);
                                 break;
 
                             default:

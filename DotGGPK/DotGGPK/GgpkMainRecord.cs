@@ -56,7 +56,22 @@ namespace DotGGPK
         /// <returns>A <see cref="GgpkMainRecord"/>.</returns>
         public static GgpkMainRecord FromStream(Stream stream)
         {
-            throw new NotImplementedException();
+            List<long> recordOffsets = new List<long>();
+
+            using (BinaryReader reader = new BinaryReader(stream))
+            {
+                int numberOfRecords = reader.ReadInt32();
+
+                for (int i = 0; i < numberOfRecords; i++)
+                {
+                    recordOffsets.Add(reader.ReadInt64());
+                }
+            }
+
+            return new GgpkMainRecord()
+            {
+                RecordOffsets = recordOffsets
+            };
         }
 
         #endregion
