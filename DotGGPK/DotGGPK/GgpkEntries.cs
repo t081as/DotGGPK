@@ -77,16 +77,51 @@ namespace DotGGPK
                 throw new FileNotFoundException($"Archive file {file.FullName} not found", file.FullName);
             }
 
-            using (BinaryReader ggpkStreamReader = new BinaryReader(File.OpenRead(file.FullName)))
+            List<GgpkEntry> entries = new List<GgpkEntry>();
+
+            using (Stream ggpkStream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read))
             {
-                while (ggpkStreamReader.BaseStream.Position < ggpkStreamReader.BaseStream.Length)
+                while (ggpkStream.Position < ggpkStream.Length)
                 {
-                    uint entryLength = ggpkStreamReader.ReadUInt32();
-                    string entryType = Encoding.ASCII.GetString(ggpkStreamReader.ReadBytes(4));
+                    byte[] binaryEntryLength = new byte[4];
+                    byte[] binaryEntryType = new byte[4];
+
+                    if (ggpkStream.Read(binaryEntryLength, 0, binaryEntryLength.Length) != binaryEntryLength.Length)
+                    {
+                        throw new InvalidDataException();
+                    }
+
+                    if (ggpkStream.Read(binaryEntryType, 0, binaryEntryType.Length) != binaryEntryType.Length)
+                    {
+                        throw new InvalidDataException();
+                    }
+
+                    uint entryLength = BitConverter.ToUInt32(binaryEntryLength, 0);
+                    string entryType = Encoding.ASCII.GetString(binaryEntryType);
+
+                    byte[] entryBuffer = new byte[entryLength];
+
+                    ggpkStream.Seek(-(binaryEntryLength.Length + binaryEntryType.Length), SeekOrigin.Current);
+                    if (ggpkStream.Read(entryBuffer, 0, entryBuffer.Length) != entryBuffer.Length)
+                    {
+                        throw new InvalidDataException();
+                    }
+
+                    MemoryStream entryStream = new MemoryStream(entryBuffer);
+                    //// GgpkEntries currentEntry = null;
+
+                    switch (entryType)
+                    {
+                        case "GGPK":
+                            break;
+
+                        default:
+                            throw new InvalidDataException();
+                    }
                 }
             }
 
-            throw new NotImplementedException();
+            return entries;
         }
 
         #endregion
