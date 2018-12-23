@@ -1,0 +1,24 @@
+image: microsoft/dotnet:latest
+
+stages:
+    - test
+    - deploy
+
+before_script:
+    - dotnet restore
+
+release:
+    stage: deploy
+    only:
+        - tags
+    artifacts:
+        name: "${CI_PROJECT_NAME}-${CI_COMMIT_TAG}"
+        paths:
+          - ./*.nupkg
+    script:
+        - dotnet build
+
+debug:
+    stage: test
+    script:
+        - dotnet test DotGGPK/DotGGPK.Tests/DotGGPK.Tests.csproj
