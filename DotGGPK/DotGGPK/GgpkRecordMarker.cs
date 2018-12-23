@@ -26,27 +26,58 @@
 #endregion
 
 #region Namespaces
-using System;
+using System.IO;
+using System.Text;
 #endregion
 
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the abstract base class of all raw ggpk archive records.
+    /// Represents the ggpk record marker that is in front of each ggpk record.
     /// </summary>
-    public abstract class GgpkRecord
+    internal sealed class GgpkRecordMarker
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// The size of the record marker, in byte.
+        /// </summary>
+        public const int Size = 8; // length (uint, 4 bytes), type (string, 4 bytes)
+
+        #endregion
+
         #region Properties
 
         /// <summary>
-        /// Gets or sets the length of the entry (not including the record marker (8 bytes)).
+        /// Gets or sets the length of the complete record (including this record marker).
         /// </summary>
         public uint Length { get; set; } = 0;
 
         /// <summary>
-        /// Gets or sets the offset of the data within the archive file.
+        /// Gets or sets the record type following this record marker.
         /// </summary>
-        public long Offset { get; set; } = 0;
+        public string Type { get; set; } = string.Empty;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Reads a <see cref="GgpkRecordMarker"/> from the given <see cref="Stream"/>.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
+        /// <returns>A <see cref="GgpkRecordMarker"/>.</returns>
+        public static GgpkRecordMarker FromStream(Stream stream)
+        {
+            using (BinaryReader reader = new BinaryReader(stream))
+            {
+                return new GgpkRecordMarker()
+                {
+                    Length = reader.ReadUInt32(),
+                    Type = Encoding.ASCII.GetString(reader.ReadBytes(4))
+                };
+            }
+        }
 
         #endregion
     }

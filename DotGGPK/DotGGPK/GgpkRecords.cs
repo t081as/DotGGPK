@@ -29,7 +29,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using DotGGPK.Extensions;
 #endregion
 
@@ -78,7 +77,7 @@ namespace DotGGPK
                 throw new FileNotFoundException($"Archive file {file.FullName} not found", file.FullName);
             }
 
-            List<GgpkRecord> entries = new List<GgpkRecord>();
+            List<GgpkRecord> records = new List<GgpkRecord>();
 
             using (Stream ggpkStream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read))
             {
@@ -88,26 +87,25 @@ namespace DotGGPK
                     {
                         long offset = ggpkStream.Position;
 
-                        (uint recordLength, string recordType) = ReadRecordMarker(ggpkStream);
-
-                        // record length (4 Bytes) and record type (4 bytes) have already been read
-                        MemoryStream entryStream = ggpkStream.Read((int)recordLength - 8);
+                        MemoryStream recordMarkerStream = ggpkStream.Read(GgpkRecordMarker.Size);
+                        GgpkRecordMarker recordMarker = GgpkRecordMarker.FromStream(recordMarkerStream);
+                        MemoryStream recordStream = ggpkStream.Read((int)recordMarker.Length - GgpkRecordMarker.Size);
 
                         GgpkRecord currentEntry = null;
 
-                        switch (recordType)
+                        switch (recordMarker.Type)
                         {
                             case "GGPK":
                                 break;
 
                             default:
-                                throw new InvalidDataException($"Unknown record type: {recordType}");
+                                throw new InvalidDataException($"Unknown record type: {recordMarker.Type}");
                         }
 
                         currentEntry.Offset = offset;
-                        currentEntry.Length = recordLength;
+                        currentEntry.Length = recordMarker.Length - GgpkRecordMarker.Size;
 
-                        entries.Add(currentEntry);
+                        records.Add(currentEntry);
                     }
                 }
                 catch (Exception ex)
@@ -120,33 +118,7 @@ namespace DotGGPK
                 }
             }
 
-            return entries;
-        }
-
-        /// <summary>
-        /// Reads a ggpk record marker in the given <see cref="Stream"/>.
-        /// </summary>
-        /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
-        /// <returns>A record marker consisting of the record length and the record type.</returns>
-        private static(uint, string) ReadRecordMarker(Stream stream)
-        {
-            byte[] binaryRecordLength = new byte[4];
-            byte[] binaryRecordType = new byte[4];
-
-            if (stream.Read(binaryRecordLength, 0, binaryRecordLength.Length) != binaryRecordLength.Length)
-            {
-                throw new InvalidDataException("Unable to read record length");
-            }
-
-            if (stream.Read(binaryRecordType, 0, binaryRecordType.Length) != binaryRecordType.Length)
-            {
-                throw new InvalidDataException("Unable to read record type");
-            }
-
-            uint recordLength = BitConverter.ToUInt32(binaryRecordLength, 0);
-            string recordType = Encoding.ASCII.GetString(binaryRecordType);
-
-            return (recordLength, recordType);
+            return records;
         }
 
         #endregion
