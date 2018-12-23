@@ -81,28 +81,39 @@ namespace DotGGPK
 
             using (Stream ggpkStream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read))
             {
-                while (ggpkStream.Position < ggpkStream.Length)
+                try
                 {
-                    (uint entryMarkerLength, string entryMarkerType) = ReadEntryMarker(ggpkStream);
-
-                    byte[] entryBuffer = new byte[entryMarkerLength - 8]; // uint: 4 bytes, string: 4 bytes have already been read
-
-                    if (ggpkStream.Read(entryBuffer, 0, entryBuffer.Length) != entryBuffer.Length)
+                    while (ggpkStream.Position < ggpkStream.Length)
                     {
-                        throw new InvalidDataException();
-                    }
+                        (uint entryLength, string entryType) = ReadEntryMarker(ggpkStream);
 
-                    MemoryStream entryStream = new MemoryStream(entryBuffer);
-                    //// GgpkEntries currentEntry = null;
+                        byte[] entryBuffer = new byte[entryLength - 8]; // uint: 4 bytes, string: 4 bytes have already been read
 
-                    switch (entryMarkerType)
-                    {
-                        case "GGPK":
-                            break;
-
-                        default:
+                        if (ggpkStream.Read(entryBuffer, 0, entryBuffer.Length) != entryBuffer.Length)
+                        {
                             throw new InvalidDataException();
+                        }
+
+                        MemoryStream entryStream = new MemoryStream(entryBuffer);
+                        //// GgpkEntries currentEntry = null;
+
+                        switch (entryType)
+                        {
+                            case "GGPK":
+                                break;
+
+                            default:
+                                throw new InvalidDataException($"Unknown entry marker: {entryType}");
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    throw new GgpkException($"Error while parsing archive file {file.FullName}", ex)
+                    {
+                        FileName = file.FullName,
+                        Offset = ggpkStream.Position
+                    };
                 }
             }
 
@@ -113,7 +124,7 @@ namespace DotGGPK
         /// Reads a ggpk entry marker in the given <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
-        /// <returns>An entry marker consisting of an entry marker length and an entry marker type.</returns>
+        /// <returns>An entry marker consisting of the entry length and an entry type.</returns>
         private static(uint, string) ReadEntryMarker(Stream stream)
         {
             byte[] binaryEntryLength = new byte[4];
@@ -121,12 +132,12 @@ namespace DotGGPK
 
             if (stream.Read(binaryEntryLength, 0, binaryEntryLength.Length) != binaryEntryLength.Length)
             {
-                throw new InvalidDataException("Unable to read entry marker length");
+                throw new InvalidDataException("Unable to read entry length");
             }
 
             if (stream.Read(binaryEntryType, 0, binaryEntryType.Length) != binaryEntryType.Length)
             {
-                throw new InvalidDataException("Unable to read entry marker type");
+                throw new InvalidDataException("Unable to read entry type");
             }
 
             uint entryLength = BitConverter.ToUInt32(binaryEntryLength, 0);

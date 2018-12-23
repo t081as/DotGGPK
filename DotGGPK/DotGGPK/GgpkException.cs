@@ -93,7 +93,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the offset of the archive file where the error has been thrown.
         /// </summary>
-        public ulong Offset { get; set; } = 0;
+        public long Offset { get; set; } = -1;
 
         #endregion
     }
