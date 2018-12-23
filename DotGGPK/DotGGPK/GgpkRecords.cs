@@ -38,18 +38,18 @@ namespace DotGGPK
     /// <summary>
     /// Contains methods to read a ggpk archive in raw format.
     /// </summary>
-    public static class GgpkEntries
+    public static class GgpkRecords
     {
         #region Methods
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkEntry">entries</see>.
+        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">entries</see>.
         /// </summary>
         /// <param name="fileName">The ggpk archive file.</param>
-        /// <returns>All <see cref="GgpkEntry">entries</see> read from the file.</returns>
+        /// <returns>All <see cref="GgpkRecord">entries</see> read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>fileName</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>fileName</c> does not exist.</exception>
-        public static IEnumerable<GgpkEntry> FromFile(string fileName)
+        public static IEnumerable<GgpkRecord> FromFile(string fileName)
         {
             if (fileName is null)
             {
@@ -60,13 +60,13 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkEntry">entries</see>.
+        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">entries</see>.
         /// </summary>
         /// <param name="file">The ggpk archive file.</param>
-        /// <returns>All <see cref="GgpkEntry">entries</see> read from the file.</returns>
+        /// <returns>All <see cref="GgpkRecord">entries</see> read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>file</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>file</c> does not exist.</exception>
-        public static IEnumerable<GgpkEntry> FromFile(FileInfo file)
+        public static IEnumerable<GgpkRecord> FromFile(FileInfo file)
         {
             if (file is null)
             {
@@ -78,7 +78,7 @@ namespace DotGGPK
                 throw new FileNotFoundException($"Archive file {file.FullName} not found", file.FullName);
             }
 
-            List<GgpkEntry> entries = new List<GgpkEntry>();
+            List<GgpkRecord> entries = new List<GgpkRecord>();
 
             using (Stream ggpkStream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read))
             {
@@ -88,21 +88,21 @@ namespace DotGGPK
                     {
                         long offset = ggpkStream.Position;
 
-                        (uint entryLength, string entryType) = ReadEntryMarker(ggpkStream);
-                        MemoryStream entryStream = ggpkStream.ReadToMemoryStream((int)entryLength - 8);
-                        GgpkEntry currentEntry = null;
+                        (uint recordLength, string recordType) = ReadRecordMarker(ggpkStream);
+                        MemoryStream entryStream = ggpkStream.ReadToMemoryStream((int)recordLength - 8);
+                        GgpkRecord currentEntry = null;
 
-                        switch (entryType)
+                        switch (recordType)
                         {
                             case "GGPK":
                                 break;
 
                             default:
-                                throw new InvalidDataException($"Unknown entry type: {entryType}");
+                                throw new InvalidDataException($"Unknown record type: {recordType}");
                         }
 
                         currentEntry.Offset = offset;
-                        currentEntry.Length = entryLength;
+                        currentEntry.Length = recordLength;
 
                         entries.Add(currentEntry);
                     }
@@ -121,29 +121,29 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Reads a ggpk entry marker in the given <see cref="Stream"/>.
+        /// Reads a ggpk record marker in the given <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
-        /// <returns>An entry marker consisting of the entry length and an entry type.</returns>
-        private static(uint, string) ReadEntryMarker(Stream stream)
+        /// <returns>An record marker consisting of the record length and the record type.</returns>
+        private static(uint, string) ReadRecordMarker(Stream stream)
         {
-            byte[] binaryEntryLength = new byte[4];
-            byte[] binaryEntryType = new byte[4];
+            byte[] binaryRecordLength = new byte[4];
+            byte[] binaryRecordType = new byte[4];
 
-            if (stream.Read(binaryEntryLength, 0, binaryEntryLength.Length) != binaryEntryLength.Length)
+            if (stream.Read(binaryRecordLength, 0, binaryRecordLength.Length) != binaryRecordLength.Length)
             {
-                throw new InvalidDataException("Unable to read entry length");
+                throw new InvalidDataException("Unable to read record length");
             }
 
-            if (stream.Read(binaryEntryType, 0, binaryEntryType.Length) != binaryEntryType.Length)
+            if (stream.Read(binaryRecordType, 0, binaryRecordType.Length) != binaryRecordType.Length)
             {
-                throw new InvalidDataException("Unable to read entry type");
+                throw new InvalidDataException("Unable to read record type");
             }
 
-            uint entryLength = BitConverter.ToUInt32(binaryEntryLength, 0);
-            string entryType = Encoding.ASCII.GetString(binaryEntryType);
+            uint recordLength = BitConverter.ToUInt32(binaryRecordLength, 0);
+            string recordType = Encoding.ASCII.GetString(binaryRecordType);
 
-            return (entryLength, entryType);
+            return (recordLength, recordType);
         }
 
         #endregion

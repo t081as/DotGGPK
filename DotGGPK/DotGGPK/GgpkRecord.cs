@@ -34,7 +34,7 @@ namespace DotGGPK
     /// <summary>
     /// Represents the abstract base class of all raw ggpk archive entries.
     /// </summary>
-    public abstract class GgpkEntry
+    public abstract class GgpkRecord
     {
         #region Properties
 
