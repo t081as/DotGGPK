@@ -32,7 +32,7 @@ using System;
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the abstract base class of all raw ggpk archive entries.
+    /// Represents the abstract base class of all raw ggpk archive records.
     /// </summary>
     public abstract class GgpkRecord
     {

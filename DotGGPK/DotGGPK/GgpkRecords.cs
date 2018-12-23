@@ -36,7 +36,7 @@ using DotGGPK.Extensions;
 namespace DotGGPK
 {
     /// <summary>
-    /// Contains methods to read a ggpk archive in raw format.
+    /// Contains methods for reading a ggpk archive in raw format.
     /// </summary>
     public static class GgpkRecords
     {
