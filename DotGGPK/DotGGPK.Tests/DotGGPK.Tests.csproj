@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>..\DotGGPK.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>1701;1702;1705;NU1701</NoWarn>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\DotGGPK.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\DotGGPK.ruleset" Link="DotGGPK.ruleset" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\DotGGPK\DotGGPK.csproj" />
+  </ItemGroup>
+
+</Project>
