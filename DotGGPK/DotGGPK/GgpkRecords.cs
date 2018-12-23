@@ -43,10 +43,10 @@ namespace DotGGPK
         #region Methods
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">entries</see>.
+        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">records</see>.
         /// </summary>
         /// <param name="fileName">The ggpk archive file.</param>
-        /// <returns>All <see cref="GgpkRecord">entries</see> read from the file.</returns>
+        /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>fileName</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>fileName</c> does not exist.</exception>
         public static IEnumerable<GgpkRecord> FromFile(string fileName)
@@ -60,10 +60,10 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">entries</see>.
+        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">records</see>.
         /// </summary>
         /// <param name="file">The ggpk archive file.</param>
-        /// <returns>All <see cref="GgpkRecord">entries</see> read from the file.</returns>
+        /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>file</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>file</c> does not exist.</exception>
         public static IEnumerable<GgpkRecord> FromFile(FileInfo file)
@@ -124,7 +124,7 @@ namespace DotGGPK
         /// Reads a ggpk record marker in the given <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
-        /// <returns>An record marker consisting of the record length and the record type.</returns>
+        /// <returns>A record marker consisting of the record length and the record type.</returns>
         private static(uint, string) ReadRecordMarker(Stream stream)
         {
             byte[] binaryRecordLength = new byte[4];
