@@ -83,25 +83,10 @@ namespace DotGGPK
             {
                 while (ggpkStream.Position < ggpkStream.Length)
                 {
-                    byte[] binaryEntryLength = new byte[4];
-                    byte[] binaryEntryType = new byte[4];
+                    (uint entryMarkerLength, string entryMarkerType) = ReadEntryMarker(ggpkStream);
 
-                    if (ggpkStream.Read(binaryEntryLength, 0, binaryEntryLength.Length) != binaryEntryLength.Length)
-                    {
-                        throw new InvalidDataException();
-                    }
+                    byte[] entryBuffer = new byte[entryMarkerLength - 8]; // uint: 4 bytes, string: 4 bytes have already been read
 
-                    if (ggpkStream.Read(binaryEntryType, 0, binaryEntryType.Length) != binaryEntryType.Length)
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    uint entryLength = BitConverter.ToUInt32(binaryEntryLength, 0);
-                    string entryType = Encoding.ASCII.GetString(binaryEntryType);
-
-                    byte[] entryBuffer = new byte[entryLength];
-
-                    ggpkStream.Seek(-(binaryEntryLength.Length + binaryEntryType.Length), SeekOrigin.Current);
                     if (ggpkStream.Read(entryBuffer, 0, entryBuffer.Length) != entryBuffer.Length)
                     {
                         throw new InvalidDataException();
@@ -110,7 +95,7 @@ namespace DotGGPK
                     MemoryStream entryStream = new MemoryStream(entryBuffer);
                     //// GgpkEntries currentEntry = null;
 
-                    switch (entryType)
+                    switch (entryMarkerType)
                     {
                         case "GGPK":
                             break;
@@ -122,6 +107,32 @@ namespace DotGGPK
             }
 
             return entries;
+        }
+
+        /// <summary>
+        /// Reads a ggpk entry marker in the given <see cref="Stream"/>.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
+        /// <returns>An entry marker consisting of an entry marker length and an entry marker type.</returns>
+        private static(uint, string) ReadEntryMarker(Stream stream)
+        {
+            byte[] binaryEntryLength = new byte[4];
+            byte[] binaryEntryType = new byte[4];
+
+            if (stream.Read(binaryEntryLength, 0, binaryEntryLength.Length) != binaryEntryLength.Length)
+            {
+                throw new InvalidDataException("Unable to read entry marker length");
+            }
+
+            if (stream.Read(binaryEntryType, 0, binaryEntryType.Length) != binaryEntryType.Length)
+            {
+                throw new InvalidDataException("Unable to read entry marker type");
+            }
+
+            uint entryLength = BitConverter.ToUInt32(binaryEntryLength, 0);
+            string entryType = Encoding.ASCII.GetString(binaryEntryType);
+
+            return (entryLength, entryType);
         }
 
         #endregion
