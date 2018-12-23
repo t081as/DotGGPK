@@ -27,35 +27,36 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
 using System.IO;
 #endregion
 
-namespace DotGGPK.Extensions
+namespace DotGGPK
 {
     /// <summary>
-    /// Contains extension methods for the <see cref="Stream"/> class.
+    /// Represents the main ggpk record containing references to physical directory and free records.
     /// </summary>
-    public static class StreamExtension
+    public class GgpkMainRecord : GgpkRecord
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the list with offsets of PDIR and FREE records.
+        /// </summary>
+        public IEnumerable<long> RecordOffsets { get; set; } = new List<long>();
+
+        #endregion
+
         #region Methods
 
         /// <summary>
-        /// Reads the given number of bytes from the given stream and returns a <see cref="MemoryStream"/>.
+        /// Reads a <see cref="GgpkMainRecord"/> from the given <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
-        /// <param name="length">The number of bytes that shall be read.</param>
-        /// <returns>A <see cref="MemoryStream"/> containing the data.</returns>
-        /// <exception cref="InvalidOperationException">Unable to read the given number of bytes.</exception>
-        public static MemoryStream Read(this Stream stream, int length)
+        /// <returns>A <see cref="GgpkMainRecord"/>.</returns>
+        public static GgpkMainRecord FromStream(Stream stream)
         {
-            byte[] data = new byte[length];
-
-            if (stream.Read(data, 0, (int)length) != length)
-            {
-                throw new InvalidOperationException($"UJnable to read {length} byte(s) from the stream");
-            }
-
-            return new MemoryStream(data);
+            throw new NotImplementedException();
         }
 
         #endregion

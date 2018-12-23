@@ -89,7 +89,10 @@ namespace DotGGPK
                         long offset = ggpkStream.Position;
 
                         (uint recordLength, string recordType) = ReadRecordMarker(ggpkStream);
-                        MemoryStream entryStream = ggpkStream.ReadToMemoryStream((int)recordLength - 8);
+
+                        // record length (4 Bytes) and record type (4 bytes) have already been read
+                        MemoryStream entryStream = ggpkStream.Read((int)recordLength - 8);
+
                         GgpkRecord currentEntry = null;
 
                         switch (recordType)
