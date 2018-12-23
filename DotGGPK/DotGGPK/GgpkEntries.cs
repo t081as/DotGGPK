@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using DotGGPK.Extensions;
 #endregion
 
 namespace DotGGPK
@@ -85,17 +86,11 @@ namespace DotGGPK
                 {
                     while (ggpkStream.Position < ggpkStream.Length)
                     {
+                        long offset = ggpkStream.Position;
+
                         (uint entryLength, string entryType) = ReadEntryMarker(ggpkStream);
-
-                        byte[] entryBuffer = new byte[entryLength - 8]; // uint: 4 bytes, string: 4 bytes have already been read
-
-                        if (ggpkStream.Read(entryBuffer, 0, entryBuffer.Length) != entryBuffer.Length)
-                        {
-                            throw new InvalidDataException();
-                        }
-
-                        MemoryStream entryStream = new MemoryStream(entryBuffer);
-                        //// GgpkEntries currentEntry = null;
+                        MemoryStream entryStream = ggpkStream.ReadToMemoryStream((int)entryLength - 8);
+                        GgpkEntry currentEntry = null;
 
                         switch (entryType)
                         {
@@ -103,8 +98,13 @@ namespace DotGGPK
                                 break;
 
                             default:
-                                throw new InvalidDataException($"Unknown entry marker: {entryType}");
+                                throw new InvalidDataException($"Unknown entry type: {entryType}");
                         }
+
+                        currentEntry.Offset = offset;
+                        currentEntry.Length = entryLength;
+
+                        entries.Add(currentEntry);
                     }
                 }
                 catch (Exception ex)
