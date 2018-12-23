@@ -63,20 +63,17 @@ namespace DotGGPK
         #region Methods
 
         /// <summary>
-        /// Reads a <see cref="GgpkRecordMarker"/> from the given <see cref="Stream"/>.
+        /// Reads a <see cref="GgpkRecordMarker"/> from the given <see cref="BinaryReader"/>.
         /// </summary>
-        /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
+        /// <param name="reader">The <see cref="BinaryReader"/> that shall be used.</param>
         /// <returns>A <see cref="GgpkRecordMarker"/>.</returns>
-        public static GgpkRecordMarker FromStream(Stream stream)
+        public static GgpkRecordMarker From(BinaryReader reader)
         {
-            using (BinaryReader reader = new BinaryReader(stream))
+            return new GgpkRecordMarker()
             {
-                return new GgpkRecordMarker()
-                {
-                    Length = reader.ReadUInt32(),
-                    Type = Encoding.ASCII.GetString(reader.ReadBytes(4))
-                };
-            }
+                Length = reader.ReadUInt32(),
+                Type = Encoding.ASCII.GetString(reader.ReadBytes(4))
+            };
         }
 
         #endregion

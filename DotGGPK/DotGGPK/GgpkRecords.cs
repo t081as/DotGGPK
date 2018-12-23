@@ -48,14 +48,14 @@ namespace DotGGPK
         /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>fileName</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>fileName</c> does not exist.</exception>
-        public static IEnumerable<GgpkRecord> FromFile(string fileName)
+        public static IEnumerable<GgpkRecord> From(string fileName)
         {
             if (fileName is null)
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
 
-            return FromFile(new FileInfo(fileName));
+            return From(new FileInfo(fileName));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace DotGGPK
         /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>file</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>file</c> does not exist.</exception>
-        public static IEnumerable<GgpkRecord> FromFile(FileInfo file)
+        public static IEnumerable<GgpkRecord> From(FileInfo file)
         {
             if (file is null)
             {
@@ -79,34 +79,31 @@ namespace DotGGPK
 
             List<GgpkRecord> records = new List<GgpkRecord>();
 
-            using (Stream ggpkStream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read))
+            using (BinaryReader ggpkStreamReader = new BinaryReader(new FileStream(file.FullName, FileMode.Open, FileAccess.Read)))
             {
                 try
                 {
-                    while (ggpkStream.Position < ggpkStream.Length)
+                    while (ggpkStreamReader.BaseStream.Position < ggpkStreamReader.BaseStream.Length)
                     {
-                        long offset = ggpkStream.Position;
+                        long offset = ggpkStreamReader.BaseStream.Position;
 
-                        MemoryStream recordMarkerStream = ggpkStream.Read(GgpkRecordMarker.Size);
-                        GgpkRecordMarker recordMarker = GgpkRecordMarker.FromStream(recordMarkerStream);
-                        MemoryStream recordStream = ggpkStream.Read((int)recordMarker.Length - GgpkRecordMarker.Size);
-
-                        GgpkRecord currentEntry = null;
+                        GgpkRecordMarker recordMarker = GgpkRecordMarker.From(ggpkStreamReader);
+                        GgpkRecord currentRecord = null;
 
                         switch (recordMarker.Type)
                         {
                             case "GGPK":
-                                currentEntry = GgpkMainRecord.FromStream(recordStream);
+                                currentRecord = GgpkMainRecord.From(ggpkStreamReader);
                                 break;
 
                             default:
                                 throw new InvalidDataException($"Unknown record type: {recordMarker.Type}");
                         }
 
-                        currentEntry.Offset = offset;
-                        currentEntry.Length = recordMarker.Length - GgpkRecordMarker.Size;
+                        currentRecord.Offset = offset;
+                        currentRecord.Length = recordMarker.Length;
 
-                        records.Add(currentEntry);
+                        records.Add(currentRecord);
                     }
                 }
                 catch (Exception ex)
@@ -114,7 +111,7 @@ namespace DotGGPK
                     throw new GgpkException($"Error while parsing archive file {file.FullName}", ex)
                     {
                         FileName = file.FullName,
-                        Offset = ggpkStream.Position
+                        Offset = ggpkStreamReader.BaseStream.Position
                     };
                 }
             }

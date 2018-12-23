@@ -50,22 +50,19 @@ namespace DotGGPK
         #region Methods
 
         /// <summary>
-        /// Reads a <see cref="GgpkMainRecord"/> from the given <see cref="Stream"/>.
+        /// Reads a <see cref="GgpkMainRecord"/> from the given <see cref="BinaryReader"/>.
         /// </summary>
-        /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
+        /// <param name="reader">The <see cref="BinaryReader"/> that shall be read.</param>
         /// <returns>A <see cref="GgpkMainRecord"/>.</returns>
-        public static GgpkMainRecord FromStream(Stream stream)
+        public static GgpkMainRecord From(BinaryReader reader)
         {
             List<long> recordOffsets = new List<long>();
 
-            using (BinaryReader reader = new BinaryReader(stream))
-            {
-                int numberOfRecords = reader.ReadInt32();
+            int numberOfRecords = reader.ReadInt32();
 
-                for (int i = 0; i < numberOfRecords; i++)
-                {
-                    recordOffsets.Add(reader.ReadInt64());
-                }
+            for (int i = 0; i < numberOfRecords; i++)
+            {
+                recordOffsets.Add(reader.ReadInt64());
             }
 
             return new GgpkMainRecord()
