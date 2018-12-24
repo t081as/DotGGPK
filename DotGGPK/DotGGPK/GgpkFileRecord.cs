@@ -26,46 +26,17 @@
 #endregion
 
 #region Namespaces
-using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Text;
 #endregion
 
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the a ggpk record containing free space.
+    /// Represents the a ggpk record containing a single file.
     /// </summary>
-    public class GgpkFreeRecord : GgpkRecord
+    public class GgpkFileRecord
     {
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the amount of free space marked by this record, in byte.
-        /// </summary>
-        public uint DataLength { get; set; } = 0;
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Reads a <see cref="GgpkFreeRecord"/> from the given <see cref="BinaryReader"/>.
-        /// </summary>
-        /// <param name="marker">The <see cref="GgpkRecordMarker"/> of the record.</param>
-        /// <param name="reader">The <see cref="BinaryReader"/> that shall be read.</param>
-        /// <returns>A <see cref="GgpkFreeRecord"/>.</returns>
-        public static GgpkFreeRecord From(GgpkRecordMarker marker, BinaryReader reader)
-        {
-            GgpkFreeRecord record = new GgpkFreeRecord
-            {
-                DataLength = marker.Length - GgpkRecordMarker.Size
-            };
-
-            // Skip free space, move to position of next record
-            reader.BaseStream.Seek(record.DataLength, SeekOrigin.Current);
-
-            return record;
-        }
-
-        #endregion
     }
 }
