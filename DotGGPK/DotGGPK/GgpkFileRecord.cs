@@ -38,5 +38,28 @@ namespace DotGGPK
     /// </summary>
     public class GgpkFileRecord
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the name of the file.
+        /// </summary>
+        public string FileName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the SHA-256 hash of the data.
+        /// </summary>
+        public string Hash { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the offset of the actual file data.
+        /// </summary>
+        public long FileOffset { get; set; } = 0;
+
+        /// <summary>
+        /// Gets or sets the length of the actual file data.
+        /// </summary>
+        public long FileLength { get; set; } = 0;
+
+        #endregion
     }
 }
