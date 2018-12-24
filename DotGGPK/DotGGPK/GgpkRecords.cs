@@ -95,7 +95,7 @@ namespace DotGGPK
                                 break;
 
                             case "FREE":
-                                currentRecord = GgpkFreeRecord.From(ggpkStreamReader);
+                                currentRecord = GgpkFreeRecord.From(recordMarker, ggpkStreamReader);
                                 break;
 
                             default:

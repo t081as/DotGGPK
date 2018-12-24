@@ -33,9 +33,9 @@ using System.Text;
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the ggpk record marker that identifies each ggpk record.
+    /// Represents the ggpk record marker that identifies length and type of each ggpk record.
     /// </summary>
-    internal sealed class GgpkRecordMarker
+    public sealed class GgpkRecordMarker
     {
         #region Constants and Fields
 

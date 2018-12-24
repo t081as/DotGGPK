@@ -43,9 +43,10 @@ namespace DotGGPK
         /// <summary>
         /// Reads a <see cref="GgpkFreeRecord"/> from the given <see cref="BinaryReader"/>.
         /// </summary>
+        /// <param name="marker">The <see cref="GgpkRecordMarker"/> of the record.</param>
         /// <param name="reader">The <see cref="BinaryReader"/> that shall be read.</param>
         /// <returns>A <see cref="GgpkFreeRecord"/>.</returns>
-        public static GgpkFreeRecord From(BinaryReader reader)
+        public static GgpkFreeRecord From(GgpkRecordMarker marker, BinaryReader reader)
         {
             throw new NotImplementedException();
         }

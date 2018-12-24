@@ -39,7 +39,7 @@ namespace DotGGPK
         #region Properties
 
         /// <summary>
-        /// Gets or sets the length of the entry (not including the record marker (8 bytes)).
+        /// Gets or sets the length of the entry.
         /// </summary>
         public uint Length { get; set; } = 0;
 
