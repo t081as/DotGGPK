@@ -33,21 +33,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DotGGPK.Tests
 {
     /// <summary>
-    /// Contains tests for the <see cref="GgpkArchive"/> class.
+    /// Contains tests for the <see cref="GgpkRecords"/> class.
     /// </summary>
     [TestClass]
-    public class GgpkArchiveTests
+    public class GgpkRecordsTests
     {
         #region Methods
-
-        /// <summary>
-        /// Does nothing, successfully.
-        /// </summary>
-        [TestMethod]
-        public void DoNothingTest()
-        {
-            Console.WriteLine("Nothing");
-        }
 
         #endregion
     }
