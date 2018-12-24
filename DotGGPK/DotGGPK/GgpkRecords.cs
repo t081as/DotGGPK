@@ -65,6 +65,7 @@ namespace DotGGPK
         /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>file</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>file</c> does not exist.</exception>
+        /// <exception cref="GgpkException">Error while reading the archive.</exception>
         public static IEnumerable<GgpkRecord> From(FileInfo file)
         {
             if (file is null)
@@ -85,8 +86,6 @@ namespace DotGGPK
                 {
                     while (ggpkStreamReader.BaseStream.Position < ggpkStreamReader.BaseStream.Length)
                     {
-                        long offset = ggpkStreamReader.BaseStream.Position;
-
                         GgpkRecordMarker recordMarker = GgpkRecordMarker.From(ggpkStreamReader);
                         GgpkRecord currentRecord = null;
 
@@ -100,7 +99,7 @@ namespace DotGGPK
                                 throw new InvalidDataException($"Unknown record type: {recordMarker.Type}");
                         }
 
-                        currentRecord.Offset = offset;
+                        currentRecord.Offset = recordMarker.Offset;
                         currentRecord.Length = recordMarker.Length;
 
                         records.Add(currentRecord);

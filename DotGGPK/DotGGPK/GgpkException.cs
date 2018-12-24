@@ -91,7 +91,7 @@ namespace DotGGPK
         public string FileName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the offset of the archive file where the error has been thrown.
+        /// Gets or sets the offset of the archive file where the exception has been thrown.
         /// </summary>
         public long Offset { get; set; } = -1;
 

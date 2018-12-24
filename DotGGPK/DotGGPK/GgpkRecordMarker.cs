@@ -33,20 +33,16 @@ using System.Text;
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the ggpk record marker that is in front of each ggpk record.
+    /// Represents the ggpk record marker that identifies each ggpk record.
     /// </summary>
     internal sealed class GgpkRecordMarker
     {
-        #region Constants and Fields
+        #region Properties
 
         /// <summary>
-        /// The size of the record marker, in byte.
+        /// Gets or sets the offset of this record marker.
         /// </summary>
-        public const int Size = 8; // length (uint, 4 bytes), type (string, 4 bytes)
-
-        #endregion
-
-        #region Properties
+        public long Offset { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the length of the complete record (including this record marker).
@@ -71,6 +67,7 @@ namespace DotGGPK
         {
             return new GgpkRecordMarker()
             {
+                Offset = reader.BaseStream.Position,
                 Length = reader.ReadUInt32(),
                 Type = Encoding.ASCII.GetString(reader.ReadBytes(4))
             };
