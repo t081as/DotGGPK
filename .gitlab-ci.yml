@@ -5,6 +5,7 @@ stages:
     - deploy
 
 before_script:
+    - export PATH="$PATH:/root/.dotnet/tools"
     - dotnet tool install --global Cake.Tool --version 0.31.0 
     - dotnet restore
 
