@@ -94,6 +94,10 @@ namespace DotGGPK
                                 currentRecord = GgpkMainRecord.From(ggpkStreamReader);
                                 break;
 
+                            case "FREE":
+                                currentRecord = GgpkFreeRecord.From(ggpkStreamReader);
+                                break;
+
                             default:
                                 throw new InvalidDataException($"Unknown record type: {recordMarker.Type}");
                         }

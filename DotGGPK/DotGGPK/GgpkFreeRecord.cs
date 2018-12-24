@@ -26,60 +26,28 @@
 #endregion
 
 #region Namespaces
+using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Text;
 #endregion
 
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the ggpk record marker that identifies each ggpk record.
+    /// Represents the a ggpk record containing free space.
     /// </summary>
-    internal sealed class GgpkRecordMarker
+    public class GgpkFreeRecord : GgpkRecord
     {
-        #region Constants and Fields
-
-        /// <summary>
-        /// The size of a ggpk record marker, in byte.
-        /// </summary>
-        public const int Size = 8;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the offset of this record marker.
-        /// </summary>
-        public long Offset { get; set; } = 0;
-
-        /// <summary>
-        /// Gets or sets the length of the complete record (including this record marker).
-        /// </summary>
-        public uint Length { get; set; } = 0;
-
-        /// <summary>
-        /// Gets or sets the record type following this record marker.
-        /// </summary>
-        public string Type { get; set; } = string.Empty;
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Reads a <see cref="GgpkRecordMarker"/> from the given <see cref="BinaryReader"/>.
+        /// Reads a <see cref="GgpkFreeRecord"/> from the given <see cref="BinaryReader"/>.
         /// </summary>
-        /// <param name="reader">The <see cref="BinaryReader"/> that shall be used.</param>
-        /// <returns>A <see cref="GgpkRecordMarker"/>.</returns>
-        public static GgpkRecordMarker From(BinaryReader reader)
+        /// <param name="reader">The <see cref="BinaryReader"/> that shall be read.</param>
+        /// <returns>A <see cref="GgpkFreeRecord"/>.</returns>
+        public static GgpkFreeRecord From(BinaryReader reader)
         {
-            return new GgpkRecordMarker()
-            {
-                Offset = reader.BaseStream.Position,
-                Length = reader.ReadUInt32(),
-                Type = Encoding.ASCII.GetString(reader.ReadBytes(4))
-            };
+            throw new NotImplementedException();
         }
 
         #endregion
