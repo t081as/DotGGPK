@@ -10,6 +10,11 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\DotGGPK.Tests.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugType>None</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\DotGGPK.ruleset" Link="DotGGPK.ruleset" />
   </ItemGroup>
