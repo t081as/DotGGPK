@@ -27,6 +27,8 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
@@ -39,6 +41,46 @@ namespace DotGGPK.Tests
     public class GgpkRecordsTests
     {
         #region Methods
+
+        /// <summary>
+        /// Checks if a null reference is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromStringNullTest()
+        {
+            IEnumerable<GgpkRecord> records = GgpkRecords.From((string)null);
+        }
+
+        /// <summary>
+        /// Checks if a non existing file is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void FromStringNotExistsTest()
+        {
+            IEnumerable<GgpkRecord> records = GgpkRecords.From(@"C:\i_do_not_exist.test");
+        }
+
+        /// <summary>
+        /// Checks if a null reference is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromFileNullTest()
+        {
+            IEnumerable<GgpkRecord> records = GgpkRecords.From((FileInfo)null);
+        }
+
+        /// <summary>
+        /// Checks if a non existing file is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void FromFileNotExistsTest()
+        {
+            IEnumerable<GgpkRecord> records = GgpkRecords.From(new FileInfo(@"C:\i_do_not_exist.test"));
+        }
 
         #endregion
     }
