@@ -27,7 +27,7 @@
 
 #region Namespaces
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Text;
 #endregion
 
@@ -59,6 +59,39 @@ namespace DotGGPK
         /// Gets or sets the length of the actual file data.
         /// </summary>
         public long FileLength { get; set; } = 0;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Reads a <see cref="GgpkFileRecord"/> from the given <see cref="BinaryReader"/>.
+        /// </summary>
+        /// <param name="marker">The <see cref="GgpkRecordMarker"/> of the record.</param>
+        /// <param name="reader">The <see cref="BinaryReader"/> that shall be read.</param>
+        /// <returns>A <see cref="GgpkFileRecord"/>.</returns>
+        public static GgpkFileRecord From(GgpkRecordMarker marker, BinaryReader reader)
+        {
+            int fileNameLength = reader.ReadInt32();
+            string hash = Convert.ToBase64String(reader.ReadBytes(32));
+            string fileName = Encoding.Unicode.GetString(reader.ReadBytes(fileNameLength * 2)).TrimEnd('\0');
+            long fileOffset = reader.BaseStream.Position;
+            long fileRecordHeaderLength = fileOffset - marker.Offset;
+            long fileLength = marker.Length - fileRecordHeaderLength;
+
+            GgpkFileRecord record = new GgpkFileRecord
+            {
+                FileName = fileName,
+                Hash = hash,
+                FileOffset = fileOffset,
+                FileLength = fileLength
+            };
+
+            // Skip actual file data, move to position of next record
+            reader.BaseStream.Seek(record.FileLength, SeekOrigin.Current);
+
+            return record;
+        }
 
         #endregion
     }
