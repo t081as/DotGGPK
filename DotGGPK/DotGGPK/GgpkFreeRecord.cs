@@ -38,6 +38,15 @@ namespace DotGGPK
     /// </summary>
     public class GgpkFreeRecord : GgpkRecord
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the amount of free space marked by this record, in byte.
+        /// </summary>
+        public uint DataLength { get; set; } = 0;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -48,7 +57,15 @@ namespace DotGGPK
         /// <returns>A <see cref="GgpkFreeRecord"/>.</returns>
         public static GgpkFreeRecord From(GgpkRecordMarker marker, BinaryReader reader)
         {
-            throw new NotImplementedException();
+            GgpkFreeRecord record = new GgpkFreeRecord
+            {
+                DataLength = marker.Length - GgpkRecordMarker.Size
+            };
+
+            // Skip free space, move to position of next record
+            reader.BaseStream.Seek(record.DataLength, SeekOrigin.Current);
+
+            return record;
         }
 
         #endregion
