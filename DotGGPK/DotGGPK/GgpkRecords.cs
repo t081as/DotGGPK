@@ -88,6 +88,11 @@ namespace DotGGPK
                         GgpkRecordMarker recordMarker = GgpkRecordMarker.From(ggpkStreamReader);
                         GgpkRecord currentRecord = null;
 
+                        if (recordMarker.Offset + recordMarker.Length > ggpkStreamReader.BaseStream.Length)
+                        {
+                            throw new InvalidDataException($"Invalid record length {recordMarker.Length} at offset {recordMarker.Offset}");
+                        }
+
                         switch (recordMarker.Type)
                         {
                             case "GGPK":
@@ -99,7 +104,7 @@ namespace DotGGPK
                                 break;
 
                             default:
-                                throw new InvalidDataException($"Unknown record type: {recordMarker.Type}");
+                                throw new InvalidDataException($"Unknown record type {recordMarker.Type} at offset {recordMarker.Offset}");
                         }
 
                         currentRecord.Offset = recordMarker.Offset;
