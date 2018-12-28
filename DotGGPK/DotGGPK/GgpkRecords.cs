@@ -88,7 +88,7 @@ namespace DotGGPK
                         GgpkRecordMarker recordMarker = GgpkRecordMarker.From(ggpkStreamReader);
                         GgpkRecord currentRecord = null;
 
-                        if (recordMarker.Offset + recordMarker.Length > ggpkStreamReader.BaseStream.Length)
+                        if (recordMarker.Offset + recordMarker.Length > (ulong)ggpkStreamReader.BaseStream.Length)
                         {
                             throw new InvalidDataException($"Invalid record length {recordMarker.Length} at offset {recordMarker.Offset}");
                         }

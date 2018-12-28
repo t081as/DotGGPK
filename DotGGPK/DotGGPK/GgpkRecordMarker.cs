@@ -40,7 +40,7 @@ namespace DotGGPK
         #region Constants and Fields
 
         /// <summary>
-        /// The size of a ggpk record marker, in byte.
+        /// The size of a <see cref="GgpkRecordMarker"/>, in byte.
         /// </summary>
         public const int Size = 8;
 
@@ -51,7 +51,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the offset of this record marker.
         /// </summary>
-        public long Offset { get; set; } = 0;
+        public ulong Offset { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the length of the complete record (including this record marker).
@@ -76,7 +76,7 @@ namespace DotGGPK
         {
             return new GgpkRecordMarker()
             {
-                Offset = reader.BaseStream.Position,
+                Offset = (ulong)reader.BaseStream.Position,
                 Length = reader.ReadUInt32(),
                 Type = Encoding.ASCII.GetString(reader.ReadBytes(4))
             };

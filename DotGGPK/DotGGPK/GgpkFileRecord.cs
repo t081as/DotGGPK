@@ -53,12 +53,12 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the offset of the actual file data.
         /// </summary>
-        public long FileOffset { get; set; } = 0;
+        public ulong FileOffset { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the length of the actual file data.
         /// </summary>
-        public long FileLength { get; set; } = 0;
+        public ulong FileLength { get; set; } = 0;
 
         #endregion
 
@@ -75,9 +75,9 @@ namespace DotGGPK
             uint fileNameLength = reader.ReadUInt32();
             string hash = Convert.ToBase64String(reader.ReadBytes(32));
             string fileName = Encoding.Unicode.GetString(reader.ReadBytes((int)fileNameLength * 2)).TrimEnd('\0');
-            long fileOffset = reader.BaseStream.Position;
-            long fileRecordHeaderLength = fileOffset - marker.Offset;
-            long fileLength = marker.Length - fileRecordHeaderLength;
+            ulong fileOffset = (ulong)reader.BaseStream.Position;
+            ulong fileRecordHeaderLength = fileOffset - marker.Offset;
+            ulong fileLength = marker.Length - fileRecordHeaderLength;
 
             GgpkFileRecord record = new GgpkFileRecord
             {
@@ -88,7 +88,7 @@ namespace DotGGPK
             };
 
             // Skip actual file data, move to position of next record
-            reader.BaseStream.Seek(record.FileLength, SeekOrigin.Current);
+            reader.BaseStream.Seek((long)record.FileLength, SeekOrigin.Current);
 
             return record;
         }

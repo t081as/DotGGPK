@@ -46,7 +46,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the offset of the data within the archive file.
         /// </summary>
-        public long Offset { get; set; } = 0;
+        public ulong Offset { get; set; } = 0;
 
         #endregion
     }

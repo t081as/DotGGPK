@@ -36,12 +36,26 @@ namespace DotGGPK
     /// </summary>
     public class GgpkFreeRecord : GgpkRecord
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// The size of a <see cref="GgpkFreeRecord"/>, in byte.
+        /// </summary>
+        public const int Size = 8;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
         /// Gets or sets the amount of free space marked by this record, in byte.
         /// </summary>
         public uint DataLength { get; set; } = 0;
+
+        /// <summary>
+        /// Gets or sets the offset of the next <see cref="GgpkFreeRecord"/> in the ggpk file.
+        /// </summary>
+        public ulong NextFreeRecordOffset { get; set; } = 0;
 
         #endregion
 
@@ -57,11 +71,12 @@ namespace DotGGPK
         {
             GgpkFreeRecord record = new GgpkFreeRecord
             {
+                NextFreeRecordOffset = reader.ReadUInt64(),
                 DataLength = marker.Length - GgpkRecordMarker.Size
             };
 
             // Skip free space, move to position of next record
-            reader.BaseStream.Seek(record.DataLength, SeekOrigin.Current);
+            reader.BaseStream.Seek(record.DataLength - Size, SeekOrigin.Current);
 
             return record;
         }
