@@ -20,8 +20,8 @@ Stable versions can be downloaded [here](https://gitlab.com/tobiaskoch/DotGGPK/p
 #### Requirements
 The following tools must be available:
 
-* [.NET core sdk](https://dotnet.microsoft.com/download)
-* [Cake global tool](https://www.nuget.org/packages/Cake.Tool/)
+* [.NET Core SDK](https://dotnet.microsoft.com/download)
+* [Cake Global Tool](https://www.nuget.org/packages/Cake.Tool/)
 
 #### Source code
 Get the source code using the following command:
