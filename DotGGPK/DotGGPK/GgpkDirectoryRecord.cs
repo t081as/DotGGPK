@@ -27,6 +27,9 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 #endregion
 
 namespace DotGGPK
@@ -48,9 +51,45 @@ namespace DotGGPK
         /// </summary>
         public string Hash { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the entries of this <see cref="GgpkDirectoryRecord"/>.
+        /// </summary>
+        public IEnumerable<GgpkDirectoryRecordEntry> Entries { get; set; } = new List<GgpkDirectoryRecordEntry>();
+
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Reads a <see cref="GgpkDirectoryRecord"/> from the given <see cref="BinaryReader"/>.
+        /// </summary>
+        /// <param name="reader">The <see cref="BinaryReader"/> that shall be read.</param>
+        /// <returns>A <see cref="GgpkDirectoryRecord"/>.</returns>
+        public static GgpkDirectoryRecord From(BinaryReader reader)
+        {
+            uint directoryNameLength = reader.ReadUInt32();
+            uint numberOfEntries = reader.ReadUInt32();
+            string hash = Convert.ToBase64String(reader.ReadBytes(32));
+            string directoryName = Encoding.Unicode.GetString(reader.ReadBytes((int)directoryNameLength * 2)).TrimEnd('\0');
+
+            List<GgpkDirectoryRecordEntry> entries = new List<GgpkDirectoryRecordEntry>();
+
+            for (int i = 0; i < numberOfEntries; i++)
+            {
+                entries.Add(new GgpkDirectoryRecordEntry()
+                {
+                    TimeStamp = reader.ReadUInt32(),
+                    Offset = reader.ReadUInt64()
+                });
+            }
+
+            return new GgpkDirectoryRecord()
+            {
+                DirectoryName = directoryName,
+                Hash = hash,
+                Entries = entries
+            };
+        }
 
         #endregion
     }
