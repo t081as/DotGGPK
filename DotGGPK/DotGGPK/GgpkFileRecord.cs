@@ -93,6 +93,17 @@ namespace DotGGPK
             return record;
         }
 
+        /// <summary>
+        /// Gets the <see cref="string"/> representation of this class.
+        /// </summary>
+        /// <returns>The <see cref="string"/> representation of this class.</returns>
+        public override string ToString() =>
+            $@"FILE:
+File name: {this.FileName}
+Hash: {this.Hash}
+File offset: {this.FileOffset}
+File length: {this.FileLength}";
+
         #endregion
     }
 }

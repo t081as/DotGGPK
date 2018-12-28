@@ -29,6 +29,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 #endregion
 
 namespace DotGGPK
@@ -70,6 +71,14 @@ namespace DotGGPK
                 RecordOffsets = recordOffsets
             };
         }
+
+        /// <summary>
+        /// Gets the <see cref="string"/> representation of this class.
+        /// </summary>
+        /// <returns>The <see cref="string"/> representation of this class.</returns>
+        public override string ToString() =>
+$@"GGPK:
+Elements: {this.RecordOffsets.Count()}";
 
         #endregion
     }

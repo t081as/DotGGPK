@@ -29,6 +29,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 #endregion
 
@@ -90,6 +91,16 @@ namespace DotGGPK
                 Entries = entries
             };
         }
+
+        /// <summary>
+        /// Gets the <see cref="string"/> representation of this class.
+        /// </summary>
+        /// <returns>The <see cref="string"/> representation of this class.</returns>
+        public override string ToString() =>
+            $@"PDIR:
+Directory name: {this.DirectoryName}
+Hash: {this.Hash}
+Elements: {this.Entries.Count()}";
 
         #endregion
     }

@@ -81,6 +81,14 @@ namespace DotGGPK
             return record;
         }
 
+        /// <summary>
+        /// Gets the <see cref="string"/> representation of this class.
+        /// </summary>
+        /// <returns>The <see cref="string"/> representation of this class.</returns>
+        public override string ToString() =>
+            $@"FREE:
+Offset: {this.NextFreeRecordOffset}";
+
         #endregion
     }
 }

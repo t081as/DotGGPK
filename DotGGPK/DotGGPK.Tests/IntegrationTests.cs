@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
@@ -67,7 +68,15 @@ namespace DotGGPK.Tests
             }
 
             IEnumerable<GgpkRecord> records = GgpkRecords.From(contentFile);
+            StringBuilder builder = new StringBuilder();
 
+            foreach (GgpkRecord record in records)
+            {
+                builder.AppendLine(record.ToString());
+                builder.AppendLine();
+            }
+
+            File.WriteAllText("ggpk-content.txt", builder.ToString());
             Assert.IsTrue(records.Count() > 0);
         }
 
