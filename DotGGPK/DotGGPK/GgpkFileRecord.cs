@@ -72,9 +72,9 @@ namespace DotGGPK
         /// <returns>A <see cref="GgpkFileRecord"/>.</returns>
         public static GgpkFileRecord From(GgpkRecordMarker marker, BinaryReader reader)
         {
-            int fileNameLength = reader.ReadInt32();
+            uint fileNameLength = reader.ReadUInt32();
             string hash = Convert.ToBase64String(reader.ReadBytes(32));
-            string fileName = Encoding.Unicode.GetString(reader.ReadBytes(fileNameLength * 2)).TrimEnd('\0');
+            string fileName = Encoding.Unicode.GetString(reader.ReadBytes((int)fileNameLength * 2)).TrimEnd('\0');
             long fileOffset = reader.BaseStream.Position;
             long fileRecordHeaderLength = fileOffset - marker.Offset;
             long fileLength = marker.Length - fileRecordHeaderLength;

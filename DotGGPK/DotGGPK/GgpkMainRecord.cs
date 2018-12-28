@@ -43,7 +43,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the list with offsets of PDIR and FREE records.
         /// </summary>
-        public IEnumerable<long> RecordOffsets { get; set; } = new List<long>();
+        public IEnumerable<ulong> RecordOffsets { get; set; } = new List<ulong>();
 
         #endregion
 
@@ -56,13 +56,13 @@ namespace DotGGPK
         /// <returns>A <see cref="GgpkMainRecord"/>.</returns>
         public static GgpkMainRecord From(BinaryReader reader)
         {
-            List<long> recordOffsets = new List<long>();
+            List<ulong> recordOffsets = new List<ulong>();
 
-            int numberOfRecords = reader.ReadInt32();
+            uint numberOfRecords = reader.ReadUInt32();
 
             for (int i = 0; i < numberOfRecords; i++)
             {
-                recordOffsets.Add(reader.ReadInt64());
+                recordOffsets.Add(reader.ReadUInt64());
             }
 
             return new GgpkMainRecord()
