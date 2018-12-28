@@ -37,7 +37,7 @@ namespace DotGGPK
     /// <summary>
     /// Represents the a ggpk record containing a directory.
     /// </summary>
-    public class GgpkDirectoryRecord
+    public class GgpkDirectoryRecord : GgpkRecord
     {
         #region Properties
 

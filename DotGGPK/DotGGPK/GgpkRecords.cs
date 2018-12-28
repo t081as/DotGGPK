@@ -103,6 +103,14 @@ namespace DotGGPK
                                 currentRecord = GgpkFreeRecord.From(recordMarker, ggpkStreamReader);
                                 break;
 
+                            case "FILE":
+                                currentRecord = GgpkFileRecord.From(recordMarker, ggpkStreamReader);
+                                break;
+
+                            case "PDIR":
+                                currentRecord = GgpkDirectoryRecord.From(ggpkStreamReader);
+                                break;
+
                             default:
                                 throw new InvalidDataException($"Unknown record type {recordMarker.Type} at offset {recordMarker.Offset}");
                         }

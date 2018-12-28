@@ -36,7 +36,7 @@ namespace DotGGPK
     /// <summary>
     /// Represents the a ggpk record containing a single file.
     /// </summary>
-    public class GgpkFileRecord
+    public class GgpkFileRecord : GgpkRecord
     {
         #region Properties
 
