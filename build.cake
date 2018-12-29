@@ -65,7 +65,7 @@ Task("versioning")
     Information("Version (long): " + longVersionString);
     Information("Version (short): " + shortVersionString);
 
-    WriteVersion("./DotGGPK/DotGGPK/Version.props", shortVersionString, versionString);
+    WriteVersion("./src/DotGGPK/Version.props", shortVersionString, versionString);
 });
 
 Task("build")
@@ -87,16 +87,16 @@ Task("test")
     {
         CollectCoverage = true,
         CoverletOutputFormat = CoverletOutputFormat.opencover,
-        CoverletOutputDirectory = Directory(@"./DotGGPK/DotGGPK.Tests/bin/Debug/"),
+        CoverletOutputDirectory = Directory(@"./src/DotGGPK.Tests/bin/Debug/"),
         CoverletOutputName = $"coverage"
     };
 
-    DotNetCoreTest("./DotGGPK/DotGGPK.Tests/DotGGPK.Tests.csproj", testSettings, coverletSettings);
+    DotNetCoreTest("./src/DotGGPK.Tests/DotGGPK.Tests.csproj", testSettings, coverletSettings);
 
     // Since CAKE report generator addin does not support .NET Core yet we'll call report generator global tool if available
     try
     {
-        StartProcess("reportgenerator", "-reports:./DotGGPK/DotGGPK.Tests/bin/Debug/coverage*.* -targetdir:./DotGGPK/DotGGPK.Tests/bin/Debug/coverage/");
+        StartProcess("reportgenerator", "-reports:./src/DotGGPK.Tests/bin/Debug/coverage*.* -targetdir:./src/DotGGPK.Tests/bin/Debug/coverage/");
     }
     catch
     {

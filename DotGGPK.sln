@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotGGPK", "DotGGPK\DotGGPK\DotGGPK.csproj", "{6D546739-9F85-499C-8A6C-42B5BCDDA05A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotGGPK", "src\DotGGPK\DotGGPK.csproj", "{6D546739-9F85-499C-8A6C-42B5BCDDA05A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GGPKSharp.Tests", "DotGGPK\DotGGPK.Tests\DotGGPK.Tests.csproj", "{4F0CF8F0-DF46-41E7-95A9-981D9E35D0F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GGPKSharp.Tests", "src\DotGGPK.Tests\DotGGPK.Tests.csproj", "{4F0CF8F0-DF46-41E7-95A9-981D9E35D0F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

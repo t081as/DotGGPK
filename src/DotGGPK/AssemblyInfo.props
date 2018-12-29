@@ -12,7 +12,7 @@
     <RepositoryUrl>https://gitlab.com/tobiaskoch/DotGGPK</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageIconUrl>https://gitlab.com/tobiaskoch/DotGGPK/raw/master/Media/DotGGPK.png</PackageIconUrl>
+    <PackageIconUrl>https://gitlab.com/tobiaskoch/DotGGPK/raw/master/img/DotGGPK.png</PackageIconUrl>
     <PackageTags>pathofexile poe ggpk</PackageTags>
   </PropertyGroup>
   

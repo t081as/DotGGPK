@@ -1,4 +1,4 @@
-![DotGGPK](https://gitlab.com/tobiaskoch/DotGGPK/raw/master/Media/DotGGPK.png)
+![DotGGPK](https://gitlab.com/tobiaskoch/DotGGPK/raw/master/img/DotGGPK.png)
 
 # DOTGGPK
 
@@ -33,12 +33,12 @@ Get the source code using the following command:
 #### Test
     > dotnet-cake
 
-The script will report if the tests succeeded; the coverage report will be located in the directory *./DotGGPK/DotGGPK.Tests/bin/Debug/Coverage/*.
+The script will report if the tests succeeded; the coverage report will be located in the directory *./src/DotGGPK.Tests/bin/Debug/Coverage/*.
 
 #### Build
     > dotnet-cake --configuration=Release
 
-The libraries will be located in the directory *./DotGGPK/DotGGPK/bin/Release* if the build succeeds.
+The libraries will be located in the directory *./src/DotGGPK/bin/Release* if the build succeeds.
 
 ## Usage
 
