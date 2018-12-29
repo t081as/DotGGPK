@@ -214,6 +214,9 @@ ModelManifest.xml
 # StyleCop
 StyleCop.Cache
 
+# Persistent cache (gitlab ci)
+.cache/
+
 # CAKE build
 tools/**
 !tools/Packages.config
