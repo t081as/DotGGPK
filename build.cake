@@ -59,6 +59,7 @@ Task("test")
 
 Task("pack")
     .IsDependentOn("test")
+    .WithCriteria(configuration == "Release")
     .Does(() =>
 {
     Information("pack");
