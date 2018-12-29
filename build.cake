@@ -2,6 +2,7 @@
 #addin nuget:?package=Cake.Git&version=0.19.0
 
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 
 //////////////////////////////////////////////////////////////////////
@@ -60,7 +61,11 @@ Task("versioning")
     string shortVersionString = string.Format("{0}.{1}.{2}", major, minor, revision);
     string longVersionString = string.Format("{0}.{1}.{2}.{3}-{4}", major, minor, buildNumber, revision, shasum);
 
-    Information("Version: " + versionString + " (" + longVersionString + ")");
+    Information("Version: " + versionString);
+    Information("Version (long): " + longVersionString);
+    Information("Version (short): " + shortVersionString);
+
+    WriteVersion("./DotGGPK/DotGGPK/Version.props", shortVersionString, versionString);
 });
 
 Task("build")
@@ -154,4 +159,18 @@ public static int GetPersistentBuildNumber(string baseDirectory)
     System.IO.File.WriteAllText(persistentFileName, buildNumber.ToString());
 
     return buildNumber;
+}
+
+public static void WriteVersion(string fileName, string shortVersion, string version)
+{
+    StringBuilder builder = new StringBuilder();
+    builder.AppendLine("<Project>");
+    builder.AppendLine("  <PropertyGroup>");
+    builder.AppendLine("    <AssemblyVersion>" + version + "</AssemblyVersion>");
+    builder.AppendLine("    <FileVersion>" + version + "</FileVersion>");
+    builder.AppendLine("    <Version>" + shortVersion + "</Version>");
+    builder.AppendLine("  </PropertyGroup>");
+    builder.AppendLine("</Project>");
+
+    System.IO.File.WriteAllText(fileName, builder.ToString());
 }
