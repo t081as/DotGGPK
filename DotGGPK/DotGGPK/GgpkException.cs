@@ -27,7 +27,6 @@
 
 #region Namespaces
 using System;
-using System.Runtime.Serialization;
 #endregion
 
 namespace DotGGPK
@@ -35,7 +34,6 @@ namespace DotGGPK
     /// <summary>
     /// Represents errors that occur during parsing a ggpk archive file.
     /// </summary>
-    [Serializable]
     public class GgpkException : Exception
     {
         #region Constructors and Destructors
@@ -68,16 +66,6 @@ namespace DotGGPK
         /// </summary>
         protected GgpkException()
             : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GgpkException"/> class with serialized data.
-        /// </summary>
-        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>
-        protected GgpkException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
 
