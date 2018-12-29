@@ -214,5 +214,6 @@ ModelManifest.xml
 # StyleCop
 StyleCop.Cache
 
-# Veronique
-.veronique/
+# CAKE build
+tools/**
+!tools/Packages.config
