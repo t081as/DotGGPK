@@ -26,6 +26,7 @@ Task("restore")
 
 Task("versioning")
     .IsDependentOn("restore")
+    .WithCriteria(configuration == "Release")
     .Does(() =>
 {
     Information("versioning");
