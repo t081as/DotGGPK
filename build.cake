@@ -55,6 +55,16 @@ Task("test")
     };
 
     DotNetCoreTest("./DotGGPK/DotGGPK.Tests/DotGGPK.Tests.csproj", testSettings, coverletSettings);
+
+    // Since CAKE report generator addin does not support .NET Core yet we'll call report generator global tool if available
+    try
+    {
+        StartProcess("reportgenerator", "-reports:./DotGGPK/DotGGPK.Tests/bin/Debug/coverage*.* -targetdir:./DotGGPK/DotGGPK.Tests/bin/Debug/coverage/");
+    }
+    catch
+    {
+        Information("Unable to execute Report Generator (Global Tool)");
+    }
 });
 
 Task("pack")

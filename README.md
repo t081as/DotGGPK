@@ -23,6 +23,7 @@ The following tools must be available:
 
 * [.NET Core SDK](https://dotnet.microsoft.com/download)
 * [Cake Global Tool](https://www.nuget.org/packages/Cake.Tool/)
+* [Reportgenerator Global Tool](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)
 
 #### Source code
 Get the source code using the following command:
