@@ -23,6 +23,7 @@ release:
           - ./*.nupkg
     script:
         - dotnet-cake --configuration=Release
+        - dotnet nuget push DotGGPK*.nuget -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
 
 debug:
     stage: test
