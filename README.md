@@ -30,10 +30,15 @@ Get the source code using the following command:
 
     > git clone https://gitlab.com/tobiaskoch/DotGGPK.git
 
-#### Build
+#### Test
     > dotnet-cake
 
-The library will be located in the directory *TBD* if the build succeeds.
+The script will report if the tests succeeded; the coverage report will be located in the directory *./DotGGPK/DotGGPK.Tests/bin/Debug/Coverage/*.
+
+#### Build
+    > dotnet-cake --configuration=Release
+
+The libraries will be located in the directory *./DotGGPK/DotGGPK/bin/Release* if the build succeeds.
 
 ## Usage
 
