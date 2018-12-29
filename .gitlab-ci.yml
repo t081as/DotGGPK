@@ -7,7 +7,6 @@ stages:
 before_script:
     - export PATH="$PATH:/root/.dotnet/tools"
     - dotnet tool install --global Cake.Tool --version 0.31.0 
-    - dotnet restore
 
 release:
     stage: deploy
@@ -18,9 +17,9 @@ release:
         paths:
           - ./*.nupkg
     script:
-        - dotnet build
+        - dotnet-cake --configuration=Release
 
 debug:
     stage: test
     script:
-        - dotnet test DotGGPK/DotGGPK.Tests/DotGGPK.Tests.csproj
+        - dotnet-cake
