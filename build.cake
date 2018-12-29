@@ -1,5 +1,3 @@
-#tool "nuget:?package=ReportGenerator&version=4.0.4"
-
 #addin nuget:?package=Cake.Coverlet&version=2.1.2
 
 //////////////////////////////////////////////////////////////////////
@@ -47,25 +45,16 @@ Task("test")
     .IsDependentOn("build")
     .Does(() =>
 {
-    if (configuration == "Debug")
+    var testSettings = new DotNetCoreTestSettings();
+    var coverletSettings = new CoverletSettings
     {
-        var testSettings = new DotNetCoreTestSettings();
-        var coverletSettings = new CoverletSettings
-        {
-            CollectCoverage = true,
-            CoverletOutputFormat = CoverletOutputFormat.opencover,
-            CoverletOutputDirectory = Directory(@"./DotGGPK/DotGGPK.Tests/bin/Debug/"),
-            CoverletOutputName = $"coverage"
-        };
+        CollectCoverage = true,
+        CoverletOutputFormat = CoverletOutputFormat.opencover,
+        CoverletOutputDirectory = Directory(@"./DotGGPK/DotGGPK.Tests/bin/Debug/"),
+        CoverletOutputName = $"coverage"
+    };
 
-        DotNetCoreTest("./DotGGPK/DotGGPK.Tests/DotGGPK.Tests.csproj", testSettings, coverletSettings);
-
-        ReportGenerator("DotGGPK/DotGGPK.Tests/bin/Debug/coverage.opencover.xml", "DotGGPK/DotGGPK.Tests/bin/Debug/coverage");
-    }
-    else
-    {
-        DotNetCoreTest();
-    }
+    DotNetCoreTest("./DotGGPK/DotGGPK.Tests/DotGGPK.Tests.csproj", testSettings, coverletSettings);
 });
 
 Task("pack")
@@ -73,13 +62,6 @@ Task("pack")
     .Does(() =>
 {
     Information("pack");
-});
-
-Task("deploy")
-    .IsDependentOn("pack")
-    .Does(() =>
-{
-    Information("deyploy");
 });
 
 //////////////////////////////////////////////////////////////////////
