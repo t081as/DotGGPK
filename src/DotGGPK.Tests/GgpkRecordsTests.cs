@@ -74,6 +74,16 @@ namespace DotGGPK.Tests
         }
 
         /// <summary>
+        /// Checks if a null reference is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromStreamNullTest()
+        {
+            IEnumerable<GgpkRecord> records = GgpkRecords.From((Stream)null);
+        }
+
+        /// <summary>
         /// Checks if a non existing file is detected correctly.
         /// </summary>
         [TestMethod]

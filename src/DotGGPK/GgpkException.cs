@@ -74,11 +74,6 @@ namespace DotGGPK
         #region Properties
 
         /// <summary>
-        /// Gets or sets the path and filename of the affected ggpk archive file.
-        /// </summary>
-        public string FileName { get; set; } = string.Empty;
-
-        /// <summary>
         /// Gets or sets the offset of the archive file where the exception has been thrown.
         /// </summary>
         public long Offset { get; set; } = -1;

@@ -77,9 +77,25 @@ namespace DotGGPK
                 throw new FileNotFoundException($"Archive file {file.FullName} not found", file.FullName);
             }
 
+            return From(new FileStream(file.FullName, FileMode.Open, FileAccess.Read, FileShare.Read));
+        }
+
+        /// <summary>
+        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">records</see>.
+        /// </summary>
+        /// <param name="stream">The ggpk <see cref="Stream"/>.</param>
+        /// <returns>All <see cref="GgpkRecord">records</see> read from the <see cref="Stream"/>.</returns>
+        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
+        public static IEnumerable<GgpkRecord> From(Stream stream)
+        {
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             List<GgpkRecord> records = new List<GgpkRecord>();
 
-            using (BinaryReader ggpkStreamReader = new BinaryReader(new FileStream(file.FullName, FileMode.Open, FileAccess.Read)))
+            using (BinaryReader ggpkStreamReader = new BinaryReader(stream))
             {
                 try
                 {
@@ -123,9 +139,8 @@ namespace DotGGPK
                 }
                 catch (Exception ex)
                 {
-                    throw new GgpkException($"Error while parsing archive file {file.FullName}", ex)
+                    throw new GgpkException($"Error while parsing the ggpk archive file", ex)
                     {
-                        FileName = file.FullName,
                         Offset = ggpkStreamReader.BaseStream.Position
                     };
                 }
