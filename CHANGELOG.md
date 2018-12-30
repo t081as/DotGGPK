@@ -1,4 +1,4 @@
-## X.Y.Z (YYYY-MM-DD)
+## 0.2.0 (2018-12-30)
 
 - New logo added
 - Additional unit tests added
