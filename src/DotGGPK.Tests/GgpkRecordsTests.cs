@@ -111,7 +111,30 @@ namespace DotGGPK.Tests
         {
             IEnumerable<GgpkRecord> records = GgpkRecords.From(@"pass.ggpk");
 
-            Assert.AreEqual<int>(records.Count(), 5);
+            Assert.AreEqual<int>(5, records.Count());
+            Assert.AreEqual<int>(1, records.OfType<GgpkMainRecord>().Count());
+            Assert.AreEqual<int>(1, records.OfType<GgpkDirectoryRecord>().Count());
+            Assert.AreEqual<int>(2, records.OfType<GgpkFileRecord>().Count());
+            Assert.AreEqual<int>(1, records.OfType<GgpkFreeRecord>().Count());
+
+            GgpkMainRecord mainRecord = records.OfType<GgpkMainRecord>().FirstOrDefault();
+            GgpkDirectoryRecord dirRecord = records.OfType<GgpkDirectoryRecord>().FirstOrDefault();
+            GgpkFileRecord fileRecord1 = records.OfType<GgpkFileRecord>().Where(r => r.Offset == 20).FirstOrDefault();
+            GgpkFileRecord fileRecord2 = records.OfType<GgpkFileRecord>().Where(r => r.Offset == 100).FirstOrDefault();
+            GgpkFreeRecord freeRecord = records.OfType<GgpkFreeRecord>().FirstOrDefault();
+
+            Assert.AreEqual<int>(1, mainRecord.RecordOffsets.Count());
+
+            Assert.AreEqual<string>("Dir_1", dirRecord.DirectoryName);
+            Assert.AreEqual<int>(2, dirRecord.Entries.Count());
+
+            Assert.AreEqual<string>("test-file-1.bin", fileRecord1.FileName);
+            Assert.AreEqual<ulong>(4, fileRecord1.FileLength);
+
+            Assert.AreEqual<string>("Aa_Bb-Cc.DdEe", fileRecord2.FileName);
+            Assert.AreEqual<ulong>(6, fileRecord2.FileLength);
+
+            Assert.AreEqual<ulong>(0, freeRecord.NextFreeRecordOffset);
         }
 
         #endregion
