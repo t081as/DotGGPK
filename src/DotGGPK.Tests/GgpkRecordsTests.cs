@@ -29,6 +29,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
@@ -87,7 +88,7 @@ namespace DotGGPK.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(GgpkException))]
-        public void FromFileWrongLength()
+        public void FromFileWrongLengthTest()
         {
             IEnumerable<GgpkRecord> records = GgpkRecords.From(@"fail-length.ggpk");
         }
@@ -97,9 +98,20 @@ namespace DotGGPK.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(GgpkException))]
-        public void FromFileWrongMarker()
+        public void FromFileWrongMarkerTest()
         {
             IEnumerable<GgpkRecord> records = GgpkRecords.From(@"fail-marker.ggpk");
+        }
+
+        /// <summary>
+        /// Checks if a valid ggpk file is read correctly.
+        /// </summary>
+        [TestMethod]
+        public void FromTest()
+        {
+            IEnumerable<GgpkRecord> records = GgpkRecords.From(@"pass.ggpk");
+
+            Assert.AreEqual<int>(records.Count(), 5);
         }
 
         #endregion

@@ -22,6 +22,9 @@
     <None Include="..\..\test\fail-marker.ggpk" Link="fail-marker.ggpk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\test\pass.ggpk" Link="pass.ggpk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\DotGGPK.ruleset" Link="DotGGPK.ruleset" />
   </ItemGroup>
     
