@@ -49,17 +49,5 @@ namespace DotGGPK
         public ulong Offset { get; set; } = 0;
 
         #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Gets the <see cref="string"/> representation of this class.
-        /// </summary>
-        /// <returns>The <see cref="string"/> representation of this class.</returns>
-        public override string ToString() =>
-            $@"Length: {this.Length}
-Offset: {this.Offset}";
-
-        #endregion
     }
 }
