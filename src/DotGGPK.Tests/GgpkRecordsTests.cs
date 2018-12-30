@@ -82,6 +82,16 @@ namespace DotGGPK.Tests
             IEnumerable<GgpkRecord> records = GgpkRecords.From(new FileInfo(@"C:\i_do_not_exist.test"));
         }
 
+        /// <summary>
+        /// Checks if a file with wrong record marker length is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(GgpkException))]
+        public void FromFileWrongLength()
+        {
+            IEnumerable<GgpkRecord> records = GgpkRecords.From(@"fail-length.ggpk");
+        }
+
         #endregion
     }
 }

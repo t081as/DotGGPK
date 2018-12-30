@@ -16,6 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\test\fail-length.ggpk" Link="fail-length.ggpk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\DotGGPK.ruleset" Link="DotGGPK.ruleset" />
   </ItemGroup>
     
