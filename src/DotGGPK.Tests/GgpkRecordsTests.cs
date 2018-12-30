@@ -92,6 +92,16 @@ namespace DotGGPK.Tests
             IEnumerable<GgpkRecord> records = GgpkRecords.From(@"fail-length.ggpk");
         }
 
+        /// <summary>
+        /// Checks if a file with wrong record marker type is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(GgpkException))]
+        public void FromFileWrongMarker()
+        {
+            IEnumerable<GgpkRecord> records = GgpkRecords.From(@"fail-marker.ggpk");
+        }
+
         #endregion
     }
 }
