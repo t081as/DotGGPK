@@ -22,12 +22,24 @@ Task("ggpk-fail-length")
     }
 });
 
+Task("ggpk-fail-marker")
+    .Does(() =>
+{
+    using (BinaryWriter writer = new BinaryWriter(System.IO.File.Create("fail-marker.ggpk")))
+    {
+        writer.Write((uint)12);
+        writer.Write(Encoding.ASCII.GetBytes("ABCD"));
+        writer.Write((uint)0);
+    }
+});
+
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("ggpk-fail-length");
+    .IsDependentOn("ggpk-fail-length")
+    .IsDependentOn("ggpk-fail-marker");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
