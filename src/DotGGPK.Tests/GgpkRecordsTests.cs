@@ -135,6 +135,11 @@ namespace DotGGPK.Tests
             Assert.AreEqual<ulong>(6, fileRecord2.FileLength);
 
             Assert.AreEqual<ulong>(0, freeRecord.NextFreeRecordOffset);
+
+            foreach (GgpkRecord record in records)
+            {
+                Assert.AreNotEqual<string>(string.Empty, record.ToString());
+            }
         }
 
         #endregion
