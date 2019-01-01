@@ -6,10 +6,6 @@ cache:
   paths:
   - .cache/
 
-before_script:
-    - dotnet tool install --global Cake.Tool --version 0.31.0 
-    - dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.0.4
-
 release:
     stage: deploy
     only:
