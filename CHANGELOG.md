@@ -1,4 +1,4 @@
-## 0.X.Y (YYYY-MM-DD)
+## 0.3.0 (2019-01-02)
 
 - Support for .NET Framework (v4.7, v4.7.1, v4.7.2, v4.6, v4.6.1, v4.6.2) added
 
