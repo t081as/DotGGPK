@@ -22,7 +22,6 @@ Stable versions can be downloaded [here](https://gitlab.com/tobiaskoch/DotGGPK/p
 The following tools must be available:
 
 * [.NET Core SDK](https://dotnet.microsoft.com/download)
-* [Cake Global Tool](https://www.nuget.org/packages/Cake.Tool/)
 * [Reportgenerator Global Tool](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)
 
 #### Source code
@@ -31,12 +30,12 @@ Get the source code using the following command:
     > git clone https://gitlab.com/tobiaskoch/DotGGPK.git
 
 #### Test
-    > dotnet-cake
+    > ./build.ps1
 
 The script will report if the tests succeeded; the coverage report will be located in the directory *./src/DotGGPK.Tests/bin/Debug/Coverage/*.
 
 #### Build
-    > dotnet-cake --configuration=Release
+    > ./build.ps1 --configuration=Release
 
 The libraries will be located in the directory *./src/DotGGPK/bin/Release* if the build succeeds.
 
