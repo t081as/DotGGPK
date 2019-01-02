@@ -23,8 +23,6 @@ The build configuration to use.
 Specifies the amount of information to be displayed.
 .PARAMETER ShowDescription
 Shows description about tasks.
-.PARAMETER DryRun
-Performs a dry run.
 .PARAMETER SkipToolPackageRestore
 Skips restoring of packages.
 .PARAMETER ScriptArgs
@@ -34,6 +32,20 @@ Remaining arguments are added here.
 https://cakebuild.net
 
 #>
+
+[CmdletBinding()]
+Param(
+    [string]$Script = "build.cake",
+    [string]$Target,
+    [string]$Configuration,
+    [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
+    [string]$Verbosity,
+    [switch]$ShowDescription,
+    [Alias("WhatIf", "Noop")]
+    [switch]$DryRun,
+    [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
+    [string[]]$ScriptArgs
+)
 
 Write-Host "Preparing to run build script..."
 
@@ -68,14 +80,14 @@ if (!(Test-Path $CAKE_DLL)) {
 
 # Build Cake arguments
 $cakeArguments = @("$Script");
-if ($Target) { $cakeArguments += "-target=$Target" }
-if ($Configuration) { $cakeArguments += "-configuration=$Configuration" }
-if ($Verbosity) { $cakeArguments += "-verbosity=$Verbosity" }
-if ($ShowDescription) { $cakeArguments += "-showdescription" }
-if ($DryRun) { $cakeArguments += "-dryrun" }
+if ($Target) { $cakeArguments += "--target=$Target" }
+if ($Configuration) { $cakeArguments += "--configuration=$Configuration" }
+if ($Verbosity) { $cakeArguments += "--verbosity=$Verbosity" }
+if ($ShowDescription) { $cakeArguments += "--showdescription" }
+if ($DryRun) { $cakeArguments += "--dryrun" }
 $cakeArguments += $ScriptArgs
 
 # Start Cake
 Write-Host "Running build script..."
-&dotnet $CAKE_DLL $cakeArguments
+&dotnet $CAKE_DLL $cakeArguments 
 exit $LASTEXITCODE
