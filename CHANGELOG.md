@@ -1,6 +1,6 @@
 ## 0.X.Y (YYYY-MM-DD)
 
-- Support for .NET Framework (v4.7, v4.7.1, v4.7.2) added
+- Support for .NET Framework (v4.7, v4.7.1, v4.7.2, v4.6, v4.6.1, v4.6.2) added
 
 ## 0.2.0 (2018-12-30)
 
