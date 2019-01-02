@@ -64,10 +64,10 @@ if ((Test-Path $PSScriptRoot) -and !(Test-Path $TOOLS_DIR)) {
     New-Item -Path $TOOLS_DIR -Type directory | out-null
 }
 
-# Make sure that tools.csproj exist.
-if (!(Test-Path $TOOLS_PROJ)) {
-    Write-Verbose -Message "Writing tools.csproj..."
-    $contents = '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>netstandard1.5</TargetFramework></PropertyGroup></Project>'
+# Make sure that cake exist.
+if (!(Test-Path $CAKE_DLL)) {
+    Write-Verbose -Message "Downloading cake..."
+    $contents = '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>netstandard1.6</TargetFramework></PropertyGroup></Project>'
     Out-File -InputObject $contents -FilePath $TOOLS_PROJ
     Invoke-Expression "&dotnet add $TOOLS_PROJ package cake.coreclr -v `"$CAKE_VERSION`" --package-directory `"$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION`""
 }
@@ -76,7 +76,6 @@ if (!(Test-Path $TOOLS_PROJ)) {
 if (!(Test-Path $CAKE_DLL)) {
     Throw "Could not find Cake.dll at $CAKE_DLL"
 }
-
 
 # Build Cake arguments
 $cakeArguments = @("$Script");
