@@ -156,30 +156,30 @@ Task("ggpk-pass")
          */
 
         // Offset: 288
-        writer.Write((uint)60);
+        writer.Write((uint)62);
 
         // Offset: 292
         writer.Write(Encoding.ASCII.GetBytes("PDIR"));
 
         // Offset: 296
-        writer.Write((uint)0);
+        writer.Write((uint)1);
 
-        // Offset: 298
+        // Offset: 300
         writer.Write((uint)1);
 
         // Offset: 304
         writer.Write(new byte[32]);
 
         // Offset: 336
-        // Empty directory name (root directory)
+        writer.Write(Encoding.Unicode.GetBytes("\0"));
 
-        // Offset: 336
+        // Offset: 338
         writer.Write((uint)0);
 
-        // Offset: 340
+        // Offset: 342
         writer.Write((ulong)186); // Reference: directory
 
-        // Offset: 348
+        // Offset: 350
     }
 });
 
