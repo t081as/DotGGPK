@@ -129,11 +129,11 @@ namespace DotGGPK.Tests
 
             GgpkMainRecord mainRecord = records.OfType<GgpkMainRecord>().FirstOrDefault();
             GgpkDirectoryRecord dirRecord = records.OfType<GgpkDirectoryRecord>().Where(d => d.DirectoryName.Length > 0).FirstOrDefault();
-            GgpkFileRecord fileRecord1 = records.OfType<GgpkFileRecord>().Where(r => r.Offset == 20).FirstOrDefault();
-            GgpkFileRecord fileRecord2 = records.OfType<GgpkFileRecord>().Where(r => r.Offset == 100).FirstOrDefault();
+            GgpkFileRecord fileRecord1 = records.OfType<GgpkFileRecord>().Where(r => r.Offset == 28).FirstOrDefault();
+            GgpkFileRecord fileRecord2 = records.OfType<GgpkFileRecord>().Where(r => r.Offset == 108).FirstOrDefault();
             GgpkFreeRecord freeRecord = records.OfType<GgpkFreeRecord>().FirstOrDefault();
 
-            Assert.AreEqual<int>(1, mainRecord.RecordOffsets.Count());
+            Assert.AreEqual<int>(2, mainRecord.RecordOffsets.Count());
 
             Assert.AreEqual<string>("Dir_1", dirRecord.DirectoryName);
             Assert.AreEqual<int>(2, dirRecord.Entries.Count());

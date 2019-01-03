@@ -43,140 +43,143 @@ Task("ggpk-pass")
          */
         
         // Offset: 0
-        writer.Write((uint)20);
+        writer.Write((uint)28);
 
         // Offset: 4
         writer.Write(Encoding.ASCII.GetBytes("GGPK"));
 
         // Offset: 8
-        writer.Write((uint)1);
+        writer.Write((uint)2);
 
         // Offset: 12
-        writer.Write((ulong)280);
+        writer.Write((ulong)288); // Offset: root PDIR
+
+        // Offset: 20
+        writer.Write((ulong)270); // Offset: first FREE
 
         /*
          * FILE Record
          */
 
-        // Offset: 20
+        // Offset: 28
         writer.Write((uint)80);
 
-        // Offset: 24
+        // Offset: 32
         writer.Write(Encoding.ASCII.GetBytes("FILE"));
 
-        // Offset: 28
+        // Offset: 36
         writer.Write((uint)16);
 
-        // Offset: 32
+        // Offset: 40
         writer.Write(new byte[32]);
 
-        // Offset: 64
+        // Offset: 72
         writer.Write(Encoding.Unicode.GetBytes("test-file-1.bin\0"));
 
-        // Offset: 96
+        // Offset: 104
         writer.Write(new byte[] { 0, 1, 2, 3 });
 
         /*
          * FILE Record
          */
 
-        // Offset: 100
+        // Offset: 108
         writer.Write((uint)78);
 
-        // Offset: 104
+        // Offset: 112
         writer.Write(Encoding.ASCII.GetBytes("FILE"));
 
-        // Offset: 108
+        // Offset: 116
         writer.Write((uint)14);
 
-        // Offset: 112
+        // Offset: 120
         writer.Write(new byte[32]);
 
-        // Offset: 144
+        // Offset: 152
         writer.Write(Encoding.Unicode.GetBytes("Aa_Bb-Cc.DdEe\0"));
 
-        // Offset: 172
+        // Offset: 180
         writer.Write(new byte[] { 4, 5, 3, 9, 50, 254 });
 
         /*
          * DIRECTORY Record
          */
 
-        // Offset: 178
+        // Offset: 186
         writer.Write((uint)84);
 
-        // Offset: 182
+        // Offset: 190
         writer.Write(Encoding.ASCII.GetBytes("PDIR"));
 
-        // Offset: 186
+        // Offset: 194
         writer.Write((uint)6);
 
-        // Offset: 190
+        // Offset: 198
         writer.Write((uint)2);
 
-        // Offset: 194
+        // Offset: 202
         writer.Write(new byte[32]);
 
-        // Offset: 226
+        // Offset: 232
         writer.Write(Encoding.Unicode.GetBytes("Dir_1\0"));
 
-        // Offset: 238
+        // Offset: 246
         writer.Write((uint)0);
 
-        // Offset: 242
-        writer.Write((ulong)20);
-
         // Offset: 250
+        writer.Write((ulong)28);
+
+        // Offset: 258
         writer.Write((uint)120);
 
-        // Offset: 254
-        writer.Write((ulong)100);
+        // Offset: 262
+        writer.Write((ulong)108);
 
         /*
          * FREE Record
          */
 
-        // Offset: 262
+        // Offset: 270
         writer.Write((uint)18);
 
-        // Offset: 266
+        // Offset: 274
         writer.Write(Encoding.ASCII.GetBytes("FREE"));
 
-        // Offset: 270
+        // Offset: 278
         writer.Write((ulong)0);
 
-        // Offset: 278
+        // Offset: 286
         writer.Write(new byte[2]);
 
         /*
          * DIRECTORY Record
          */
 
-        // Offset: 280
+        // Offset: 288
         writer.Write((uint)60);
 
-        // Offset: 284
+        // Offset: 292
         writer.Write(Encoding.ASCII.GetBytes("PDIR"));
 
-        // Offset: 288
+        // Offset: 296
         writer.Write((uint)0);
 
-        // Offset: 292
+        // Offset: 298
         writer.Write((uint)1);
 
-        // Offset: 296
+        // Offset: 304
         writer.Write(new byte[32]);
 
-        // Offset: 328
+        // Offset: 336
         // Empty directory name (root directory)
 
-        // Offset: 328
+        // Offset: 336
         writer.Write((uint)0);
 
-        // Offset: 332
-        writer.Write((ulong)178); // Reference: directory
-
         // Offset: 340
+        writer.Write((ulong)186); // Reference: directory
+
+        // Offset: 348
     }
 });
 
