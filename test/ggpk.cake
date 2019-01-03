@@ -52,7 +52,7 @@ Task("ggpk-pass")
         writer.Write((uint)1);
 
         // Offset: 12
-        writer.Write((ulong)178);
+        writer.Write((ulong)280);
 
         /*
          * FILE Record
@@ -148,7 +148,35 @@ Task("ggpk-pass")
         // Offset: 278
         writer.Write(new byte[2]);
 
+        /*
+         * DIRECTORY Record
+         */
+
         // Offset: 280
+        writer.Write((uint)60);
+
+        // Offset: 284
+        writer.Write(Encoding.ASCII.GetBytes("PDIR"));
+
+        // Offset: 288
+        writer.Write((uint)6);
+
+        // Offset: 292
+        writer.Write((uint)1);
+
+        // Offset: 296
+        writer.Write(new byte[32]);
+
+        // Offset: 328
+        // Empty directory name (root directory)
+
+        // Offset: 328
+        writer.Write((uint)0);
+
+        // Offset: 332
+        writer.Write((ulong)178); // Reference: directory
+
+        // Offset: 340
     }
 });
 
