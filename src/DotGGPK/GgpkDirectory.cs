@@ -26,7 +26,6 @@
 #endregion
 
 #region Namespaces
-using System;
 using System.Collections.Generic;
 #endregion
 
@@ -38,17 +37,65 @@ namespace DotGGPK
     /// </summary>
     public class GgpkDirectory : GgpkElement
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// Contains the subdirectories of this directory.
+        /// </summary>
+        private List<GgpkDirectory> directories = new List<GgpkDirectory>();
+
+        /// <summary>
+        /// Contains the files.
+        /// </summary>
+        private List<GgpkFile> files = new List<GgpkFile>();
+
+        #endregion
+
         #region Properties
 
         /// <summary>
-        /// Gets or sets the subdirectories.
+        /// Gets the subdirectories of this directory.
         /// </summary>
-        public IEnumerable<GgpkDirectory> Directories { get; set; } = new List<GgpkDirectory>();
+        public IEnumerable<GgpkDirectory> Directories
+        {
+            get
+            {
+                return this.directories;
+            }
+        }
 
         /// <summary>
-        /// Gets or sets the files.
+        /// Gets the files of this directory.
         /// </summary>
-        public IEnumerable<GgpkFile> Files { get; set; } = new List<GgpkFile>();
+        public IEnumerable<GgpkFile> Files
+        {
+            get
+            {
+                return this.files;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Adds a directory to the list of directories.
+        /// </summary>
+        /// <param name="directory">The directory to add.</param>
+        public void Add(GgpkDirectory directory)
+        {
+            this.directories.Add(directory);
+        }
+
+        /// <summary>
+        /// Adds a file to the list of files.
+        /// </summary>
+        /// <param name="file">The file to add.</param>
+        public void Add(GgpkFile file)
+        {
+            this.files.Add(file);
+        }
 
         #endregion
     }

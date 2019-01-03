@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
@@ -41,12 +42,52 @@ namespace DotGGPK.Tests
         #region Methods
 
         /// <summary>
-        /// Does nothing, successfully.
+        /// Checks if a null reference is detected correctly.
         /// </summary>
         [TestMethod]
-        public void DoNothingTest()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromStringNullTest()
         {
-            Console.WriteLine("Nothing");
+            GgpkArchive archive = GgpkArchive.From((string)null);
+        }
+
+        /// <summary>
+        /// Checks if a non existing file is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void FromStringNotExistsTest()
+        {
+            GgpkArchive archive = GgpkArchive.From(@"C:\i_do_not_exist.test");
+        }
+
+        /// <summary>
+        /// Checks if a null reference is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromFileNullTest()
+        {
+            GgpkArchive archive = GgpkArchive.From((FileInfo)null);
+        }
+
+        /// <summary>
+        /// Checks if a non existing file is detected correctly.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void FromFileNotExistsTest()
+        {
+            GgpkArchive archive = GgpkArchive.From(new FileInfo(@"C:\i_do_not_exist.test"));
+        }
+
+        /// <summary>
+        /// Checks if a valid ggpk file is read correctly.
+        /// </summary>
+        [TestMethod]
+        public void FromTest()
+        {
+            GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
         }
 
         #endregion

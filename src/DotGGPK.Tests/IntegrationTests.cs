@@ -68,15 +68,6 @@ namespace DotGGPK.Tests
             }
 
             IEnumerable<GgpkRecord> records = GgpkRecords.From(contentFile);
-            StringBuilder builder = new StringBuilder();
-
-            foreach (GgpkRecord record in records)
-            {
-                builder.AppendLine(record.ToString());
-                builder.AppendLine();
-            }
-
-            File.WriteAllText("ggpk-content.txt", builder.ToString());
             Assert.IsTrue(records.Count() > 0);
         }
 

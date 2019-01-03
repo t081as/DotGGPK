@@ -37,9 +37,14 @@ namespace DotGGPK
     /// <summary>
     /// Represents a package of files in the ggpk archive format.
     /// </summary>
-    public class GgpkArchive
+    public sealed class GgpkArchive
     {
         #region Constants and Fields
+
+        /// <summary>
+        /// The exposed root directory of the ggpk archive.
+        /// </summary>
+        private GgpkDirectory root;
 
         #endregion
 
@@ -50,8 +55,10 @@ namespace DotGGPK
         /// </summary>
         /// <param name="fileName">The ggpk archive file.</param>
         /// <exception cref="GgpkException">Error while reading the archive.</exception>
-        protected GgpkArchive(string fileName)
+        internal GgpkArchive(string fileName)
         {
+            this.root = new GgpkDirectory();
+
             IEnumerable<GgpkRecord> records = GgpkRecords.From(fileName);
             GgpkMainRecord mainRecord = records.OfType<GgpkMainRecord>().FirstOrDefault();
 
@@ -59,6 +66,14 @@ namespace DotGGPK
             {
                 throw new GgpkException($"Error while analyzing the ggpk archive file: no record of type GGPK found");
             }
+
+            IEnumerable<GgpkDirectoryRecordEntry> createdEntries = mainRecord.RecordOffsets.Select((offset) => new GgpkDirectoryRecordEntry()
+            {
+                Offset = offset,
+                TimeStamp = 0
+            }).ToList();
+
+            BuildDirectoryTree(ref this.root, createdEntries, records);
         }
 
         #endregion
@@ -66,9 +81,15 @@ namespace DotGGPK
         #region Properties
 
         /// <summary>
-        /// Gets or sets the root directory of the ggpk file.
+        /// Gets the root directory of the ggpk file.
         /// </summary>
-        public GgpkDirectory Root { get; set; } = new GgpkDirectory();
+        public GgpkDirectory Root
+        {
+            get
+            {
+                return this.root;
+            }
+        }
 
         #endregion
 
@@ -94,7 +115,7 @@ namespace DotGGPK
                 throw new FileNotFoundException($"Archive file {fileName} not found", fileName);
             }
 
-            return From(new FileInfo(fileName));
+            return new GgpkArchive(fileName);
         }
 
         /// <summary>
@@ -118,6 +139,59 @@ namespace DotGGPK
             }
 
             return From(file.FullName);
+        }
+
+        /// <summary>
+        /// Builds the directory and file tree.
+        /// </summary>
+        /// <param name="currentDirectory">The current directory.</param>
+        /// <param name="currentDirectoryContent">The desired content of the current directory.</param>
+        /// <param name="records">All <see cref="GgpkRecord">records</see> from the ggpk archive used to find the references.</param>
+        private static void BuildDirectoryTree(
+            ref GgpkDirectory currentDirectory,
+            IEnumerable<GgpkDirectoryRecordEntry> currentDirectoryContent,
+            IEnumerable<GgpkRecord> records)
+        {
+            foreach (GgpkDirectoryRecordEntry recordEntry in currentDirectoryContent)
+            {
+                GgpkRecord referencedRecord = records.Where(r => r.Offset == recordEntry.Offset).FirstOrDefault();
+
+                if (referencedRecord is null)
+                {
+                    throw new GgpkException($"Error while analyzing the ggpk archive file: no element found at offset {recordEntry.Offset}");
+                }
+
+                switch (referencedRecord)
+                {
+                    case GgpkDirectoryRecord directoryRecord:
+
+                        GgpkDirectory directory = new GgpkDirectory()
+                        {
+                            Name = directoryRecord.DirectoryName,
+                            TimeStamp = recordEntry.TimeStamp
+                        };
+
+                        currentDirectory.Add(directory);
+                        BuildDirectoryTree(ref directory, directoryRecord.Entries, records);
+
+                        break;
+
+                    case GgpkFileRecord fileRecord:
+
+                        GgpkFile file = new GgpkFile()
+                        {
+                            Name = fileRecord.FileName,
+                            TimeStamp = recordEntry.TimeStamp
+                        };
+
+                        currentDirectory.Add(file);
+
+                        break;
+
+                    default:
+                        throw new GgpkException($"Error while analyzing the ggpk archive file: no element of type directory or file found at offset {recordEntry.Offset}");
+                }
+            }
         }
 
         #endregion
