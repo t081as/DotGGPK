@@ -159,7 +159,7 @@ Task("ggpk-pass")
         writer.Write(Encoding.ASCII.GetBytes("PDIR"));
 
         // Offset: 288
-        writer.Write((uint)6);
+        writer.Write((uint)0);
 
         // Offset: 292
         writer.Write((uint)1);
