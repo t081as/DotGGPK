@@ -183,7 +183,8 @@ namespace DotGGPK
                         GgpkDirectory directory = new GgpkDirectory()
                         {
                             Name = directoryRecord.DirectoryName,
-                            TimeStamp = recordEntry.TimeStamp
+                            TimeStamp = recordEntry.TimeStamp,
+                            Hash = directory.Hash
                         };
 
                         if (currentDirectory != null)
@@ -204,7 +205,8 @@ namespace DotGGPK
                         GgpkFile file = new GgpkFile()
                         {
                             Name = fileRecord.FileName,
-                            TimeStamp = recordEntry.TimeStamp
+                            TimeStamp = recordEntry.TimeStamp,
+                            Hash = fileRecord.Hash
                         };
 
                         currentDirectory.Add(file);

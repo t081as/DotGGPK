@@ -49,6 +49,11 @@ namespace DotGGPK
         /// </summary>
         public uint TimeStamp { get; set; } = 0;
 
+        /// <summary>
+        /// Gets or sets the SHA-256 hash of the data.
+        /// </summary>
+        public string Hash { get; set; } = string.Empty;
+
         #endregion
     }
 }
