@@ -184,7 +184,7 @@ namespace DotGGPK
                         {
                             Name = directoryRecord.DirectoryName,
                             TimeStamp = recordEntry.TimeStamp,
-                            Hash = directory.Hash
+                            Hash = directoryRecord.Hash
                         };
 
                         if (currentDirectory != null)
