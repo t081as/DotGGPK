@@ -47,6 +47,7 @@ namespace DotGGPK
         /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>fileName</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>fileName</c> does not exist.</exception>
+        /// <exception cref="GgpkException">Error while reading the archive.</exception>
         public static IEnumerable<GgpkRecord> From(string fileName)
         {
             if (fileName is null)
@@ -86,6 +87,7 @@ namespace DotGGPK
         /// <param name="stream">The ggpk <see cref="Stream"/>.</param>
         /// <returns>All <see cref="GgpkRecord">records</see> read from the <see cref="Stream"/>.</returns>
         /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
+        /// <exception cref="GgpkException">Error while reading the archive.</exception>
         public static IEnumerable<GgpkRecord> From(Stream stream)
         {
             if (stream is null)
