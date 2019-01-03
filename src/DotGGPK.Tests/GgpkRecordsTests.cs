@@ -121,7 +121,7 @@ namespace DotGGPK.Tests
         {
             IEnumerable<GgpkRecord> records = GgpkRecords.From(@"pass.ggpk");
 
-            Assert.AreEqual<int>(5, records.Count());
+            Assert.AreEqual<int>(6, records.Count());
             Assert.AreEqual<int>(1, records.OfType<GgpkMainRecord>().Count());
             Assert.AreEqual<int>(1, records.OfType<GgpkDirectoryRecord>().Count());
             Assert.AreEqual<int>(2, records.OfType<GgpkFileRecord>().Count());
