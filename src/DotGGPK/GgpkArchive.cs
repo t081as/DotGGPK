@@ -57,23 +57,33 @@ namespace DotGGPK
         /// <exception cref="GgpkException">Error while reading the archive.</exception>
         internal GgpkArchive(string fileName)
         {
-            this.root = new GgpkDirectory();
-
             IEnumerable<GgpkRecord> records = GgpkRecords.From(fileName);
             GgpkMainRecord mainRecord = records.OfType<GgpkMainRecord>().FirstOrDefault();
+
+            this.RawRecords = records;
+            this.root = new GgpkDirectory();
 
             if (mainRecord is null)
             {
                 throw new GgpkException($"Error while analyzing the ggpk archive file: no record of type GGPK found");
             }
 
+            // Convert references in main record (ulong) to type GgpkDirectoryRecordEntry required by BuildDirectoryTree-method
             IEnumerable<GgpkDirectoryRecordEntry> createdEntries = mainRecord.RecordOffsets.Select((offset) => new GgpkDirectoryRecordEntry()
             {
                 Offset = offset,
                 TimeStamp = 0
             }).ToList();
 
-            BuildDirectoryTree(ref this.root, createdEntries, records);
+            // Create record dictionary (which is /much/ faster than querying the IEnumerable with Linq)
+            Dictionary<ulong, GgpkRecord> recordDictionary = new Dictionary<ulong, GgpkRecord>();
+
+            foreach (GgpkRecord record in records)
+            {
+                recordDictionary.Add(record.Offset, record);
+            }
+
+            this.BuildDirectoryTree(null, createdEntries, recordDictionary);
         }
 
         #endregion
@@ -90,6 +100,11 @@ namespace DotGGPK
                 return this.root;
             }
         }
+
+        /// <summary>
+        /// Gets the underlaying <see cref="GgpkRecord">raw ggpk records</see>.
+        /// </summary>
+        public IEnumerable<GgpkRecord> RawRecords { get; private set; }
 
         #endregion
 
@@ -147,14 +162,14 @@ namespace DotGGPK
         /// <param name="currentDirectory">The current directory.</param>
         /// <param name="currentDirectoryContent">The desired content of the current directory.</param>
         /// <param name="records">All <see cref="GgpkRecord">records</see> from the ggpk archive used to find the references.</param>
-        private static void BuildDirectoryTree(
-            ref GgpkDirectory currentDirectory,
+        private void BuildDirectoryTree(
+            GgpkDirectory currentDirectory,
             IEnumerable<GgpkDirectoryRecordEntry> currentDirectoryContent,
-            IEnumerable<GgpkRecord> records)
+            IDictionary<ulong, GgpkRecord> records)
         {
             foreach (GgpkDirectoryRecordEntry recordEntry in currentDirectoryContent)
             {
-                GgpkRecord referencedRecord = records.Where(r => r.Offset == recordEntry.Offset).FirstOrDefault();
+                GgpkRecord referencedRecord = records[recordEntry.Offset];
 
                 if (referencedRecord is null)
                 {
@@ -171,8 +186,16 @@ namespace DotGGPK
                             TimeStamp = recordEntry.TimeStamp
                         };
 
-                        currentDirectory.Add(directory);
-                        BuildDirectoryTree(ref directory, directoryRecord.Entries, records);
+                        if (currentDirectory != null)
+                        {
+                            currentDirectory.Add(directory);
+                        }
+                        else
+                        {
+                            this.root = directory;
+                        }
+
+                        this.BuildDirectoryTree(directory, directoryRecord.Entries, records);
 
                         break;
 
@@ -186,6 +209,9 @@ namespace DotGGPK
 
                         currentDirectory.Add(file);
 
+                        break;
+
+                    case GgpkFreeRecord freeRecord:
                         break;
 
                     default:

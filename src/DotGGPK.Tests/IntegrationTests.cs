@@ -71,6 +71,31 @@ namespace DotGGPK.Tests
             Assert.IsTrue(records.Count() > 0);
         }
 
+        /// <summary>
+        /// Checks if the official content.ggpk can be read using the <see cref="GgpkArchive"/> class.
+        /// </summary>
+        [TestMethod]
+        public void TestArchive()
+        {
+            string poePath = Environment.GetEnvironmentVariable("POE_PATH");
+
+            if (string.IsNullOrEmpty(poePath))
+            {
+                Assert.Inconclusive("Environment variable POE_PATH not defined - skipping test");
+            }
+
+            string contentFile = Path.Combine(poePath, "content.ggpk");
+
+            if (!File.Exists(contentFile))
+            {
+                Assert.Inconclusive("content.ggpk not found - skipping test");
+            }
+
+            GgpkArchive archive = GgpkArchive.From(contentFile);
+
+            Assert.IsNotNull(archive.Root);
+        }
+
         #endregion
     }
 }
