@@ -36,5 +36,23 @@ namespace DotGGPK
     /// </summary>
     public interface IGgpkElement
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets the name of the element.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// Gets the timestamp of the element.
+        /// </summary>
+        uint TimeStamp { get; }
+
+        /// <summary>
+        /// Gets the SHA-256 hash of the data.
+        /// </summary>
+        string Hash { get; }
+
+        #endregion
     }
 }
