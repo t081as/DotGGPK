@@ -104,6 +104,11 @@ namespace DotGGPK.Tests
 
             Assert.AreEqual<ulong>(104, file1.Offset);
             Assert.AreEqual<ulong>(4, file1.Length);
+
+            Assert.IsNull(archive.Root.Parent);
+            Assert.IsNotNull(dir1.Parent);
+            Assert.IsNotNull(file1.Parent);
+            Assert.IsNotNull(file2.Parent);
         }
 
         #endregion

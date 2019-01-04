@@ -184,7 +184,8 @@ namespace DotGGPK
                         {
                             Name = directoryRecord.DirectoryName,
                             TimeStamp = recordEntry.TimeStamp,
-                            Hash = directoryRecord.Hash
+                            Hash = directoryRecord.Hash,
+                            Parent = currentDirectory
                         };
 
                         if (currentDirectory != null)
@@ -208,7 +209,8 @@ namespace DotGGPK
                             TimeStamp = recordEntry.TimeStamp,
                             Hash = fileRecord.Hash,
                             Offset = fileRecord.FileOffset,
-                            Length = fileRecord.FileLength
+                            Length = fileRecord.FileLength,
+                            Parent = currentDirectory
                         };
 
                         currentDirectory.Add(file);
