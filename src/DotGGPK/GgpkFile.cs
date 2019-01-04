@@ -36,5 +36,18 @@ namespace DotGGPK
     /// </summary>
     public class GgpkFile : GgpkElement
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the offset of the actual file data in the ggpk archive file.
+        /// </summary>
+        public ulong Offset { get; set; } = 0;
+
+        /// <summary>
+        /// Gets or sets the length of the actual file data, in byte.
+        /// </summary>
+        public ulong Length { get; set; } = 0;
+
+        #endregion
     }
 }

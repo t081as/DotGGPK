@@ -206,7 +206,9 @@ namespace DotGGPK
                         {
                             Name = fileRecord.FileName,
                             TimeStamp = recordEntry.TimeStamp,
-                            Hash = fileRecord.Hash
+                            Hash = fileRecord.Hash,
+                            Offset = fileRecord.FileOffset,
+                            Length = fileRecord.FileLength
                         };
 
                         currentDirectory.Add(file);
