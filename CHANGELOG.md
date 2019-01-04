@@ -1,3 +1,7 @@
+## 0.4.1 (2019-01-04)
+
+- Build script fix
+
 ## 0.4.0 (2019-01-04)
 
 - GgpkArchive class structure added
