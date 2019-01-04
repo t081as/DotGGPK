@@ -34,7 +34,7 @@ namespace DotGGPK
     /// <summary>
     /// Represents a single file in a ggpk archive.
     /// </summary>
-    public class GgpkFile : GgpkElement
+    internal class GgpkFile : GgpkElement, IGgpkFile
     {
         #region Properties
 

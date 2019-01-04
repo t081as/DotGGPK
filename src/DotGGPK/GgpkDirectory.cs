@@ -35,7 +35,7 @@ namespace DotGGPK
     /// Represents a directory in a ggpk archive that may contain other
     /// <see cref="GgpkDirectory">directories</see> or <see cref="GgpkFile">files</see>.
     /// </summary>
-    public class GgpkDirectory : GgpkElement
+    internal class GgpkDirectory : GgpkElement, IGgpkDirectory
     {
         #region Constants and Fields
 
@@ -56,7 +56,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets the subdirectories of this directory.
         /// </summary>
-        public IEnumerable<GgpkDirectory> Directories
+        public IEnumerable<IGgpkDirectory> Directories
         {
             get
             {
@@ -67,7 +67,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets the files of this directory.
         /// </summary>
-        public IEnumerable<GgpkFile> Files
+        public IEnumerable<IGgpkFile> Files
         {
             get
             {

@@ -92,12 +92,12 @@ namespace DotGGPK.Tests
 
             Assert.AreEqual<int>(1, archive.Root.Directories.Count());
 
-            GgpkDirectory dir1 = archive.Root.Directories.FirstOrDefault();
+            IGgpkDirectory dir1 = archive.Root.Directories.FirstOrDefault();
 
             Assert.AreEqual("Dir_1", dir1.Name);
 
-            GgpkFile file1 = dir1.Files.Where(f => f.Name == "test-file-1.bin").FirstOrDefault();
-            GgpkFile file2 = dir1.Files.Where(f => f.Name == "Aa_Bb-Cc.DdEe").FirstOrDefault();
+            IGgpkFile file1 = dir1.Files.Where(f => f.Name == "test-file-1.bin").FirstOrDefault();
+            IGgpkFile file2 = dir1.Files.Where(f => f.Name == "Aa_Bb-Cc.DdEe").FirstOrDefault();
 
             Assert.IsNotNull(file1);
             Assert.IsNotNull(file2);

@@ -35,7 +35,7 @@ namespace DotGGPK
     /// Represents the abstract base class for <see cref="GgpkDirectory">directories</see>
     /// and <see cref="GgpkFile">files</see>.
     /// </summary>
-    public abstract class GgpkElement
+    internal abstract class GgpkElement : IGgpkElement
     {
         #region Properties
 

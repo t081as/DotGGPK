@@ -42,12 +42,12 @@ namespace DotGGPK
         /// <summary>
         /// Gets the subdirectories of this directory.
         /// </summary>
-        IEnumerable<GgpkDirectory> Directories { get; }
+        IEnumerable<IGgpkDirectory> Directories { get; }
 
         /// <summary>
         /// Gets the files of this directory.
         /// </summary>
-        IEnumerable<GgpkFile> Files { get; }
+        IEnumerable<IGgpkFile> Files { get; }
 
         #endregion
     }

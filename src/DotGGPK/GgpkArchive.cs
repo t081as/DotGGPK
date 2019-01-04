@@ -93,7 +93,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets the root directory of the ggpk file.
         /// </summary>
-        public GgpkDirectory Root
+        public IGgpkDirectory Root
         {
             get
             {
