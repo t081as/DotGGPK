@@ -16,7 +16,7 @@ release:
           - ./*.nupkg
     script:
         - ./build --configuration=Release
-        - dotnet nuget push DotGGPK*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --no-symbols
+        - dotnet nuget push DotGGPK*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --no-symbols 1
 
 debug:
     stage: test
