@@ -34,7 +34,20 @@ namespace DotGGPK
     /// <summary>
     /// Describes single files in a ggpk archive.
     /// </summary>
-    public interface IGgpkFile
+    public interface IGgpkFile : IGgpkElement
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets the offset of the actual file data in the ggpk archive file.
+        /// </summary>
+        ulong Offset { get; }
+
+        /// <summary>
+        /// Gets the length of the actual file data, in byte.
+        /// </summary>
+        ulong Length { get; }
+
+        #endregion
     }
 }
