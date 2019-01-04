@@ -39,6 +39,12 @@ namespace DotGGPK
         #region Properties
 
         /// <summary>
+        /// Gets or sets the parent <see cref="IGgpkDirectory">directory.</see>
+        /// </summary>
+        /// <value>An instance of <see cref="IGgpkDirectory"/> or <c>null</c> if this is the root element.</value>
+        public IGgpkDirectory Parent { get; set; } = null;
+
+        /// <summary>
         /// Gets or sets the offset of the actual file data in the ggpk archive file.
         /// </summary>
         public ulong Offset { get; set; } = 0;
