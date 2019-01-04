@@ -26,7 +26,7 @@
 #endregion
 
 #region Namespaces
-using System;
+using System.Collections.Generic;
 #endregion
 
 namespace DotGGPK
@@ -35,7 +35,20 @@ namespace DotGGPK
     /// Describes directories in a ggpk archive that may contain other
     /// <see cref="IGgpkDirectory">directories</see> or <see cref="IGgpkFile">files</see>.
     /// </summary>
-    public interface IGgpkDirectory
+    public interface IGgpkDirectory : IGgpkElement
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets the subdirectories of this directory.
+        /// </summary>
+        IEnumerable<GgpkDirectory> Directories { get; }
+
+        /// <summary>
+        /// Gets the files of this directory.
+        /// </summary>
+        IEnumerable<GgpkFile> Files { get; }
+
+        #endregion
     }
 }
