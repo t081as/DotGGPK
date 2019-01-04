@@ -1,3 +1,7 @@
+## X.Y.Z (YYYY-MM-DD)
+
+- GgpkArchive: interfaces added
+
 ## 0.4.1 (2019-01-04)
 
 - Build script fix
