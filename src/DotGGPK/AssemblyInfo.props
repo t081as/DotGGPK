@@ -9,7 +9,7 @@
     <Copyright>Copyright © 2018-2019 Tobias Koch</Copyright>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageProjectUrl>https://gitlab.com/tobiaskoch/DotGGPK</PackageProjectUrl>
-    <RepositoryUrl>https://gitlab.com/tobiaskoch/DotGGPK</RepositoryUrl>
+    <RepositoryUrl>https://gitlab.com/tobiaskoch/DotGGPK.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageIconUrl>https://gitlab.com/tobiaskoch/DotGGPK/raw/master/img/DotGGPK.png</PackageIconUrl>
