@@ -1,4 +1,4 @@
-## X.Y.Z (YYYY-MM-DD)
+## 0.5.0 (2019-01-05)
 
 - GgpkArchive: interfaces added
 - IGgpkDirectory / IGgpkFile: Parent property added
