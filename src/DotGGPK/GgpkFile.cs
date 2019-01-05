@@ -66,7 +66,7 @@ namespace DotGGPK
         public Stream GetStream()
         {
             return new GgpkStream(
-                    new FileStream(
+                new FileStream(
                     this.ArchiveFileName,
                     FileMode.Open,
                     FileAccess.Read,

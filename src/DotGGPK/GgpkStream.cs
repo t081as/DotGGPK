@@ -102,7 +102,7 @@ namespace DotGGPK
         /// </summary>
         public override long Position
         {
-            get => this.ggpkStream.Position;
+            get => this.ggpkStream.Position - (long)this.offset;
             set => this.Seek(value, SeekOrigin.Begin);
         }
 
@@ -138,7 +138,35 @@ namespace DotGGPK
         /// <returns>The new position within the current stream.</returns>
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw new NotImplementedException();
+            switch (origin)
+            {
+                case SeekOrigin.Begin:
+                    this.ggpkStream.Seek((long)this.offset + offset, SeekOrigin.Begin);
+                    return offset;
+
+                case SeekOrigin.End:
+                    this.ggpkStream.Seek((long)this.offset + (long)this.length + offset, SeekOrigin.Begin);
+                    return (long)this.length + offset;
+
+                case SeekOrigin.Current:
+                    long newPosition = this.ggpkStream.Position + offset;
+
+                    if (newPosition < (long)this.offset)
+                    {
+                        newPosition = (long)this.offset;
+                    }
+                    else if (newPosition > (long)this.offset + (long)this.length)
+                    {
+                        newPosition = (long)this.offset + (long)this.length;
+                    }
+
+                    this.ggpkStream.Seek(newPosition, SeekOrigin.Begin);
+                    return newPosition - (long)this.offset;
+
+                default:
+                    this.ggpkStream.Seek((long)this.offset, SeekOrigin.Begin);
+                    return 0;
+            }
         }
 
         /// <summary>
@@ -160,6 +188,11 @@ namespace DotGGPK
         public override void Write(byte[] buffer, int offset, int count)
         {
             throw new NotSupportedException(NotSupported);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
 
         #endregion
