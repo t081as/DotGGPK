@@ -1,3 +1,7 @@
+## X.Y.Z (YYYY-MM-DD)
+
+- IGgpkDirectory / IGgpkFile: FullName property added
+
 ## 0.5.0 (2019-01-05)
 
 - GgpkArchive: interfaces added
