@@ -82,7 +82,7 @@ namespace DotGGPK
             }
             else
             {
-                return $"{currentDirectory.Parent}/{name}";
+                return $"{this.GetName(currentDirectory.Parent, name)}/{name}";
             }
         }
 
