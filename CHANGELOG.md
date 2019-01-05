@@ -2,7 +2,7 @@
 
 - GgpkArchive: interfaces added
 - IGgpkDirectory / IGgpkFile: Parent property added
-- IGgpk: GetStream method added
+- IGgpkFile: GetStream method added
 
 ## 0.4.1 (2019-01-04)
 
