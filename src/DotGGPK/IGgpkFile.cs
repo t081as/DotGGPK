@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.IO;
 #endregion
 
 namespace DotGGPK
@@ -45,14 +46,19 @@ namespace DotGGPK
         IGgpkDirectory Parent { get; }
 
         /// <summary>
-        /// Gets the offset of the actual file data in the ggpk archive file.
-        /// </summary>
-        ulong Offset { get; }
-
-        /// <summary>
         /// Gets the length of the actual file data, in byte.
         /// </summary>
         ulong Length { get; }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="Stream"/> representing the actual file data.
+        /// </summary>
+        /// <returns>A <see cref="Stream"/> representing the actual file data.</returns>
+        Stream GetStream();
 
         #endregion
     }

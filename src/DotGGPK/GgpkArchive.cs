@@ -62,6 +62,7 @@ namespace DotGGPK
 
             this.RawRecords = records;
             this.root = new GgpkDirectory();
+            this.FileName = fileName;
 
             if (mainRecord is null)
             {
@@ -105,6 +106,11 @@ namespace DotGGPK
         /// Gets the underlaying <see cref="GgpkRecord">raw ggpk records</see>.
         /// </summary>
         public IEnumerable<GgpkRecord> RawRecords { get; private set; }
+
+        /// <summary>
+        /// Gets the file name of the ggpk archive file.
+        /// </summary>
+        public string FileName { get; private set; }
 
         #endregion
 
@@ -185,7 +191,8 @@ namespace DotGGPK
                             Name = directoryRecord.DirectoryName,
                             TimeStamp = recordEntry.TimeStamp,
                             Hash = directoryRecord.Hash,
-                            Parent = currentDirectory
+                            Parent = currentDirectory,
+                            ArchiveFileName = this.FileName
                         };
 
                         if (currentDirectory != null)
@@ -210,7 +217,8 @@ namespace DotGGPK
                             Hash = fileRecord.Hash,
                             Offset = fileRecord.FileOffset,
                             Length = fileRecord.FileLength,
-                            Parent = currentDirectory
+                            Parent = currentDirectory,
+                            ArchiveFileName = this.FileName
                         };
 
                         currentDirectory.Add(file);

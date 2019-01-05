@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.IO;
 #endregion
 
 namespace DotGGPK
@@ -53,6 +54,26 @@ namespace DotGGPK
         /// Gets or sets the length of the actual file data, in byte.
         /// </summary>
         public ulong Length { get; set; } = 0;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="Stream"/> representing the actual file data.
+        /// </summary>
+        /// <returns>A <see cref="Stream"/> representing the actual file data.</returns>
+        public Stream GetStream()
+        {
+            return new GgpkStream(
+                    new FileStream(
+                    this.ArchiveFileName,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read),
+                this.Offset,
+                this.Length);
+        }
 
         #endregion
     }

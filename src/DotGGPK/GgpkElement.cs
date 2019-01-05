@@ -40,6 +40,11 @@ namespace DotGGPK
         #region Properties
 
         /// <summary>
+        /// Gets or sets the file name of the ggpk archive file.
+        /// </summary>
+        public string ArchiveFileName { get; set; } = string.Empty;
+
+        /// <summary>
         /// Gets or sets the name of the element.
         /// </summary>
         public string Name { get; set; } = string.Empty;
