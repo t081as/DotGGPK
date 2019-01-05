@@ -55,6 +55,17 @@ namespace DotGGPK
         /// </summary>
         public ulong Length { get; set; } = 0;
 
+        /// <summary>
+        /// Gets the full name of the element.
+        /// </summary>
+        public override string FullName
+        {
+            get
+            {
+                return $"/{this.GetName(this.Parent, this.Name)}";
+            }
+        }
+
         #endregion
 
         #region Methods

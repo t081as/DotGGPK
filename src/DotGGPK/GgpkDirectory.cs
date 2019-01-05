@@ -81,6 +81,17 @@ namespace DotGGPK
             }
         }
 
+        /// <summary>
+        /// Gets the full name of the element.
+        /// </summary>
+        public override string FullName
+        {
+            get
+            {
+                return $"/{this.GetName(this.Parent, this.Name)}/";
+            }
+        }
+
         #endregion
 
         #region Methods

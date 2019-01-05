@@ -53,6 +53,11 @@ namespace DotGGPK
         /// </summary>
         string Hash { get; }
 
+        /// <summary>
+        /// Gets the full name of the element.
+        /// </summary>
+        string FullName { get; }
+
         #endregion
     }
 }

@@ -59,6 +59,33 @@ namespace DotGGPK
         /// </summary>
         public string Hash { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets the full name of the element.
+        /// </summary>
+        public abstract string FullName { get; }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Gets the full name of the element (including the names of the parents).
+        /// </summary>
+        /// <param name="currentDirectory">The current <see cref="IGgpkDirectory"/>.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>The new name including the name of the current <see cref="IGgpkDirectory"/>.</returns>
+        protected virtual string GetName(IGgpkDirectory currentDirectory, string name)
+        {
+            if (currentDirectory is null)
+            {
+                return name;
+            }
+            else
+            {
+                return $"{currentDirectory.Parent}/{name}";
+            }
+        }
+
         #endregion
     }
 }
