@@ -71,6 +71,8 @@ namespace DotGGPK
             this.ggpkStream = ggpkStream;
             this.offset = offset;
             this.length = length;
+
+            this.ggpkStream.Seek((long)this.offset, SeekOrigin.Begin);
         }
 
         #endregion
