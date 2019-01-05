@@ -127,7 +127,19 @@ namespace DotGGPK
         /// <returns>The total number of bytes read into the buffer.</returns>
         public override int Read(byte[] buffer, int offset, int count)
         {
-            throw new NotImplementedException();
+            if (this.ggpkStream.Position + count > (long)(this.offset + this.length))
+            {
+                count = (int)((long)(this.offset + this.length) - (long)(this.ggpkStream.Position + count));
+            }
+
+            if (count > 0)
+            {
+                return this.ggpkStream.Read(buffer, offset, count);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         /// <summary>
@@ -154,10 +166,6 @@ namespace DotGGPK
                     if (newPosition < (long)this.offset)
                     {
                         newPosition = (long)this.offset;
-                    }
-                    else if (newPosition > (long)this.offset + (long)this.length)
-                    {
-                        newPosition = (long)this.offset + (long)this.length;
                     }
 
                     this.ggpkStream.Seek(newPosition, SeekOrigin.Begin);
@@ -190,8 +198,18 @@ namespace DotGGPK
             throw new NotSupportedException(NotSupported);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">Indicates whether managed resources shall also be disposed.</param>
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                this.ggpkStream.Dispose();
+                this.ggpkStream = null;
+            }
+
             base.Dispose(disposing);
         }
 
