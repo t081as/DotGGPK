@@ -62,7 +62,7 @@ namespace DotGGPK
         {
             get
             {
-                return $"/{this.GetName(this.Parent, this.Name)}";
+                return this.GetName(this.Parent, this.Name);
             }
         }
 

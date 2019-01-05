@@ -76,14 +76,20 @@ namespace DotGGPK
         /// <returns>The new name including the name of the current <see cref="IGgpkDirectory"/>.</returns>
         protected virtual string GetName(IGgpkDirectory currentDirectory, string name)
         {
-            if (currentDirectory is null)
+            IGgpkDirectory element = currentDirectory;
+            string result = name;
+
+            while (element != null)
             {
-                return name;
+                if (!string.IsNullOrEmpty(element.Name))
+                {
+                    result = $"/{element.Name}/{result}";
+                }
+
+                element = element.Parent;
             }
-            else
-            {
-                return $"{this.GetName(currentDirectory.Parent, name)}/{name}";
-            }
+
+            return result;
         }
 
         #endregion
