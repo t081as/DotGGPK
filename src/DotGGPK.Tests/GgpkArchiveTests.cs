@@ -135,11 +135,14 @@ namespace DotGGPK.Tests
         /// <summary>
         /// Checks the <see cref="GgpkArchive.GetFile(string)"/> method.
         /// </summary>
-        [TestMethod]
-        public void GetFileTest()
+        /// <param name="path">The path of the file.</param>
+        [DataTestMethod]
+        [DataRow("/Dir_1/test-file-1.bin")]
+        [DataRow("Dir_1/test-file-1.bin")]
+        public void GetFileTest(string path)
         {
             GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
-            IGgpkFile file = archive.GetFile("/Dir_1/test-file-1.bin");
+            IGgpkFile file = archive.GetFile(path);
 
             Assert.AreEqual((ulong)4, file.Length);
         }
@@ -160,6 +163,8 @@ namespace DotGGPK.Tests
         /// </summary>
         /// <param name="path">The path of the directory.</param>
         [DataTestMethod]
+        [DataRow("Dir_1")]
+        [DataRow("Dir_1/")]
         [DataRow("/Dir_1")]
         [DataRow("/Dir_1/")]
         public void GetDirectoryTest(string path)
