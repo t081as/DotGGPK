@@ -110,6 +110,63 @@ namespace DotGGPK.Tests
             Assert.IsNotNull(file2.Parent);
         }
 
+        /// <summary>
+        /// Checks <see cref="GgpkArchive.GetFile(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void GetFileDirectoryNotFoundTest()
+        {
+            GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
+            IGgpkFile file = archive.GetFile("/NonExistingDirectory/test-file-1.bin");
+        }
+
+        /// <summary>
+        /// Checks the <see cref="GgpkArchive.GetFile(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void GetFileNotFoundTest()
+        {
+            GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
+            IGgpkFile file = archive.GetFile("/Dir_1/i_do_not_exist.non");
+        }
+
+        /// <summary>
+        /// Checks the <see cref="GgpkArchive.GetFile(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void GetFileTest()
+        {
+            GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
+            IGgpkFile file = archive.GetFile("/Dir_1/test-file-1.bin");
+
+            Assert.AreEqual((ulong)4, file.Length);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="GgpkArchive.GetDirectory(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(DirectoryNotFoundException))]
+        public void GetDirectoryNotFoundTest()
+        {
+            GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
+            IGgpkDirectory dir = archive.GetDirectory("/NonExistingDirectory/");
+        }
+
+        /// <summary>
+        /// Checks the <see cref="GgpkArchive.GetDirectory(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void GetDirectoryTest()
+        {
+            GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
+            IGgpkDirectory dir = archive.GetDirectory("/Dir_1");
+
+            Assert.AreEqual(2, dir.Files.Count());
+        }
+
         #endregion
     }
 }
