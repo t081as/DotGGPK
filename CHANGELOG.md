@@ -1,4 +1,4 @@
-## X.Y.Z (YYYY-MM-DD)
+## 0.6.0 (2019-01-06)
 
 - IGgpkDirectory / IGgpkFile: FullName property added
 - GgpkArchive: GetDirectory and GetFile methods added
