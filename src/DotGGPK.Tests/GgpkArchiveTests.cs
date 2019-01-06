@@ -158,11 +158,14 @@ namespace DotGGPK.Tests
         /// <summary>
         /// Checks the <see cref="GgpkArchive.GetDirectory(string)"/> method.
         /// </summary>
-        [TestMethod]
-        public void GetDirectoryTest()
+        /// <param name="path">The path of the directory.</param>
+        [DataTestMethod]
+        [DataRow("/Dir_1")]
+        [DataRow("/Dir_1/")]
+        public void GetDirectoryTest(string path)
         {
             GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
-            IGgpkDirectory dir = archive.GetDirectory("/Dir_1");
+            IGgpkDirectory dir = archive.GetDirectory(path);
 
             Assert.AreEqual(2, dir.Files.Count());
         }
