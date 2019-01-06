@@ -163,6 +163,61 @@ namespace DotGGPK
         }
 
         /// <summary>
+        /// Gets a <see cref="IGgpkDirectory"/> based on the given path.
+        /// </summary>
+        /// <param name="path">The path of the directory to search for.</param>
+        /// <returns>A <see cref="IGgpkDirectory"/> representing the directory.</returns>
+        /// <exception cref="DirectoryNotFoundException"><c>path</c> does not exist.</exception>
+        public IGgpkDirectory GetDirectory(string path)
+        {
+            string[] pathParts = path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            IGgpkDirectory currentDirectory = this.Root;
+
+            foreach (string pathPart in pathParts)
+            {
+                currentDirectory = currentDirectory.Directories.Where(d => d.Name == pathPart).FirstOrDefault();
+
+                if (currentDirectory is null)
+                {
+                    throw new DirectoryNotFoundException($"Path {path} not found");
+                }
+            }
+
+            return currentDirectory;
+        }
+
+        /// <summary>
+        /// Gets a <see cref="IGgpkFile"/> based on the given path.
+        /// </summary>
+        /// <param name="path">The path of the file to search for.</param>
+        /// <returns>A <see cref="IGgpkFile"/> representing the file.</returns>
+        /// <exception cref="FileNotFoundException"><c>path</c> does not exist.</exception>
+        public IGgpkFile GetFile(string path)
+        {
+            string[] pathParts = path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            IGgpkDirectory currentDirectory = this.Root;
+
+            for (int i = 0; i < pathParts.Length - 1; i++)
+            {
+                currentDirectory = currentDirectory.Directories.Where(d => d.Name == pathParts[i]).FirstOrDefault();
+
+                if (currentDirectory is null)
+                {
+                    throw new FileNotFoundException($"File {path} not found");
+                }
+            }
+
+            IGgpkFile file = currentDirectory.Files.Where(f => f.Name == pathParts[pathParts.Length - 1]).FirstOrDefault();
+
+            if (file is null)
+            {
+                throw new FileNotFoundException($"File {path} not found");
+            }
+
+            return file;
+        }
+
+        /// <summary>
         /// Builds the directory and file tree.
         /// </summary>
         /// <param name="currentDirectory">The current directory.</param>
