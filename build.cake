@@ -1,5 +1,8 @@
 #addin nuget:?package=Cake.Coverlet&version=2.1.2
 #addin nuget:?package=Cake.Git&version=0.19.0
+#addin nuget:?package=Cake.DocFx&version=0.11.0
+
+#tool nuget:?package=docfx.console&version=2.40.7
 
 using System.IO;
 using System.Text;
@@ -83,6 +86,13 @@ Task("build")
     {
         Configuration = configuration
     });
+
+    if (configuration == "Release")
+    {
+        Information("Release - generating documentation");
+        DocFxBuild("./docs/docfx.json");
+        CopyDirectory("docs/_site", "./public");
+    }
 });
 
 Task("test")

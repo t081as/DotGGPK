@@ -6,6 +6,15 @@ cache:
   paths:
   - .cache/
 
+pages:
+  # only:
+  # - master
+  artifacts:
+    paths:
+    - public
+  script:
+  - ./build --configuration=Release
+
 release:
     stage: deploy
     only:

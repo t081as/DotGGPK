@@ -220,3 +220,6 @@ StyleCop.Cache
 # CAKE build
 tools/**
 !tools/Packages.config
+
+# GitLab pages output
+public/
