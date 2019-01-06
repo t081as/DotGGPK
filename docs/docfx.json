@@ -4,8 +4,9 @@
       "src": [
         {
           "files": [
-            "src/DotGGPK/**.csproj"
-          ]
+            "src/DotGGPK/DotGGPK.csproj"
+          ],
+          "cwd": ".."
         }
       ],
       "dest": "api",
