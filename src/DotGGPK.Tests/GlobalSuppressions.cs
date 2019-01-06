@@ -1,4 +1,4 @@
-﻿#region MIT License
+#region MIT License
 // The MIT License (MIT)
 //
 // Copyright © 2018-2019 Tobias Koch <t.koch@tk-software.de>
@@ -30,3 +30,4 @@
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Test methods must not be marked as static", Scope = "member", Target = "~M:DotGGPK.Tests.GgpkArchiveTests.GetDirectoryTest(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Test methods must not be marked as static", Scope = "member", Target = "~M:DotGGPK.Tests.GgpkArchiveTests.GetFileTest(System.String)")]
