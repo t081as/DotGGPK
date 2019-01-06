@@ -1,19 +1,11 @@
 stages:
     - test
     - deploy
+    - documentation
 
 cache:
   paths:
   - .cache/
-
-pages:
-  # only:
-  # - master
-  artifacts:
-    paths:
-    - public
-  script:
-  - ./build --configuration=Release
 
 release:
     stage: deploy
@@ -31,3 +23,13 @@ debug:
     stage: test
     script:
         - ./build
+
+pages:
+  stage: documentation
+  # only:
+  # - master
+  artifacts:
+    paths:
+    - public
+  script:
+  - ./build --configuration=Release
