@@ -4,9 +4,13 @@
       "src": [
         {
           "files": [
-            "src/DotGGPK/DotGGPK.csproj"
+            "**/**.csproj"
           ],
-          "cwd": ".."
+          "exclude": [
+            "**/**.Tests.csproj",
+            "**/tools.csproj"
+          ],
+          "src": ".."
         }
       ],
       "dest": "api",
