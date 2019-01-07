@@ -1,3 +1,7 @@
+## 0.8.0 (YYYY-MM-DD)
+
+- Documentation added: https://tobiaskoch.gitlab.io/DotGGPK/
+
 ## 0.7.0 (2019-01-08)
 
 - IGgpkDirectory: ToFileList method added
