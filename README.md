@@ -40,8 +40,7 @@ The script will report if the tests succeeded; the coverage report will be locat
 The libraries will be located in the directory *./src/DotGGPK/bin/Release* if the build succeeds.
 
 ## Usage
-
-Soon...
+The documentation of this library can be found here: [https://tobiaskoch.gitlab.io/DotGGPK/](https://tobiaskoch.gitlab.io/DotGGPK/)
 
 ## Contributing
 see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/DotGGPK/blob/master/CONTRIBUTING.md)
