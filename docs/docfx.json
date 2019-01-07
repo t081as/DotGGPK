@@ -57,11 +57,7 @@
       }
     ],
     "dest": "_site",
-    "globalMetadataFiles": [
-      {
-        "_gitUrlPattern": "github"
-      }
-    ],
+    "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
       "default"
