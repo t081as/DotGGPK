@@ -26,8 +26,8 @@ debug:
 
 pages:
   stage: documentation
-  only:
-  - tags
+  #only:
+  #- tags
   artifacts:
     paths:
     - public
