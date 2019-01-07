@@ -2,7 +2,7 @@
 #addin nuget:?package=Cake.Git&version=0.19.0
 #addin nuget:?package=Cake.DocFx&version=0.11.0
 
-#tool nuget:?package=docfx.console&version=2.39.2
+#tool nuget:?package=docfx.console&version=2.40.7
 
 using System.IO;
 using System.Text;
