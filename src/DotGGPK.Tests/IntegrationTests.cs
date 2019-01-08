@@ -94,6 +94,14 @@ namespace DotGGPK.Tests
             GgpkArchive archive = GgpkArchive.From(contentFile);
 
             Assert.IsNotNull(archive.Root);
+
+            IEnumerable<IGgpkFile> files = archive.Root.ToFileList();
+
+            foreach (var file in files)
+            {
+                StringAssert.StartsWith(file.FullName, "/");
+                Assert.AreEqual(false, file.FullName.Contains("//"));
+            }
         }
 
         #endregion
