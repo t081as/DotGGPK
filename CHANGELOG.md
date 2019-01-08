@@ -1,3 +1,7 @@
+## 0.7.0 (YYYY-MM-DD)
+
+- Issue fixed: file and directory names contains additinal slashes
+
 ## 0.6.0 (2019-01-06)
 
 - IGgpkDirectory / IGgpkFile: FullName property added
