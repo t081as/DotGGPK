@@ -83,13 +83,13 @@ namespace DotGGPK
             {
                 if (!string.IsNullOrEmpty(element.Name))
                 {
-                    result = $"/{element.Name}/{result}";
+                    result = $"{element.Name}/{result}";
                 }
 
                 element = element.Parent;
             }
 
-            return result;
+            return $"/{result}";
         }
 
         #endregion
