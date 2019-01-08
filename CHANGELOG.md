@@ -1,4 +1,4 @@
-## 0.7.9 (YYYY-MM-DD)
+## 0.7.0 (YYYY-MM-DD)
 
 - IGgpkDirectory: ToFileList method added
 
