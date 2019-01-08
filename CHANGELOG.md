@@ -1,7 +1,7 @@
-## 0.7.0 (YYYY-MM-DD)
+## 0.7.0 (2019-01-08)
 
 - IGgpkDirectory: ToFileList method added
-- Issue fixed: file and directory names contains additinal slashes
+- Issue fixed: file and directory names contains additional slashes
 
 ## 0.6.0 (2019-01-06)
 
