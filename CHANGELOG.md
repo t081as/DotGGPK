@@ -1,3 +1,7 @@
+## 0.7.9 (YYYY-MM-DD)
+
+- IGgpkDirectory: ToFileList method added
+
 ## 0.6.0 (2019-01-06)
 
 - IGgpkDirectory / IGgpkFile: FullName property added
