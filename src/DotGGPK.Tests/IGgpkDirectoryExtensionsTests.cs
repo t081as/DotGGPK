@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
@@ -34,23 +35,25 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DotGGPK.Tests
 {
     /// <summary>
-    /// Contains tests for implementations of the <see cref="IGgpkDirectory"/> interface.
+    /// Contains tests for the <see cref="IGgpkDirectoryExtensions"/> class.
     /// </summary>
     [TestClass]
-    public class GgpkDirectoryTests
+    public class IGgpkDirectoryExtensionsTests
     {
         #region Methods
 
         /// <summary>
-        /// Checks retrieving the full name of the element.
+        /// Checks the <see cref="IGgpkDirectoryExtensions.ToFileList(IGgpkDirectory)"/> method.
         /// </summary>
         [TestMethod]
-        public void TestFullName()
+        public void ToFileListTest()
         {
             GgpkArchive archive = GgpkArchive.From(@"pass.ggpk");
-            IGgpkDirectory dir = archive.Root.Directories.Where(d => d.Name == "Dir_1").FirstOrDefault();
+            IEnumerable<IGgpkFile> allFiles = archive.Root.ToFileList();
 
-            Assert.AreEqual("/Dir_1/", dir.FullName);
+            Assert.AreEqual(2, allFiles.Count());
+            Assert.IsNotNull(allFiles.Where(f => f.Name == "test-file-1.bin").FirstOrDefault());
+            Assert.IsNotNull(allFiles.Where(f => f.Name == "Aa_Bb-Cc.DdEe").FirstOrDefault());
         }
 
         #endregion
