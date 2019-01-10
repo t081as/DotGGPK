@@ -37,6 +37,17 @@ namespace DotGGPK
     /// <summary>
     /// Represents a package of files in the ggpk archive format.
     /// </summary>
+    /// <example>
+    /// The following example demonstrates how to use the <see cref="GgpkArchive"/> class to read a ggpk archive:
+    /// <code>
+    /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk"));
+    ///
+    /// foreach (var file in archive.Root.ToFileList())
+    /// {
+    ///     Console.WriteLine(file.FullName);
+    /// }
+    /// </code>
+    /// </example>
     public sealed class GgpkArchive
     {
         #region Constants and Fields
@@ -94,6 +105,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets the root directory of the ggpk file.
         /// </summary>
+        /// <value>The root directory of the ggpk file.</value>
         public IGgpkDirectory Root
         {
             get
@@ -105,6 +117,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets the underlaying raw ggpk records.
         /// </summary>
+        /// <value>The underlaying raw ggpk records.</value>
         /// <remarks>
         /// Additional information about the different record types can be found here: <see cref="GgpkRecords"/>
         /// </remarks>
@@ -113,6 +126,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets the file name of the ggpk archive file.
         /// </summary>
+        /// <value>The file name of the ggpk archive file.</value>
         public string FileName { get; private set; }
 
         #endregion
@@ -120,10 +134,10 @@ namespace DotGGPK
         #region Methods
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">records</see>.
+        /// Reads the given ggpk archive file and returns a <see cref="GgpkArchive"/>.
         /// </summary>
         /// <param name="fileName">The ggpk archive file.</param>
-        /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
+        /// <returns>A <see cref="GgpkArchive"/>.</returns>
         /// <exception cref="ArgumentNullException"><c>fileName</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>fileName</c> does not exist.</exception>
         /// <exception cref="GgpkException">Error while reading the archive.</exception>
@@ -143,10 +157,10 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">records</see>.
+        /// Reads the given ggpk archive file and returns a <see cref="GgpkArchive"/>.
         /// </summary>
         /// <param name="file">The ggpk archive file.</param>
-        /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
+        /// <returns>A <see cref="GgpkArchive"/>.</returns>
         /// <exception cref="ArgumentNullException"><c>file</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>file</c> does not exist.</exception>
         /// <exception cref="GgpkException">Error while reading the archive.</exception>
@@ -166,10 +180,10 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Gets a <see cref="IGgpkDirectory"/> based on the given path.
+        /// Gets an <see cref="IGgpkDirectory"/> based on the given path.
         /// </summary>
         /// <param name="path">The path of the directory to search for.</param>
-        /// <returns>A <see cref="IGgpkDirectory"/> representing the directory.</returns>
+        /// <returns>An <see cref="IGgpkDirectory"/> representing the directory.</returns>
         /// <exception cref="DirectoryNotFoundException"><c>path</c> does not exist.</exception>
         public IGgpkDirectory GetDirectory(string path)
         {
@@ -190,10 +204,10 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Gets a <see cref="IGgpkFile"/> based on the given path.
+        /// Gets an <see cref="IGgpkFile"/> based on the given path.
         /// </summary>
         /// <param name="path">The path of the file to search for.</param>
-        /// <returns>A <see cref="IGgpkFile"/> representing the file.</returns>
+        /// <returns>An <see cref="IGgpkFile"/> representing the file.</returns>
         /// <exception cref="FileNotFoundException"><c>path</c> does not exist.</exception>
         public IGgpkFile GetFile(string path)
         {
