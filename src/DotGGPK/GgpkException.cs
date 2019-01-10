@@ -76,6 +76,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the offset of the archive file where the exception has been thrown.
         /// </summary>
+        /// <value>The offset of the archive file where the exception has been thrown.</value>
         public long Offset { get; set; } = -1;
 
         #endregion

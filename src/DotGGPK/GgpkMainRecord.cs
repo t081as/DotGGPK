@@ -35,7 +35,7 @@ using System.Linq;
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the main ggpk record containing references to physical directory and free records.
+    /// Represents the main <see cref="GgpkRecord"/> in a ggpk archive file.
     /// </summary>
     public class GgpkMainRecord : GgpkRecord
     {
@@ -44,6 +44,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the list with offsets of PDIR and FREE records.
         /// </summary>
+        /// <value>The list with offsets of records.</value>
         public IEnumerable<ulong> RecordOffsets { get; set; } = new List<ulong>();
 
         #endregion
@@ -51,7 +52,7 @@ namespace DotGGPK
         #region Methods
 
         /// <summary>
-        /// Reads a <see cref="GgpkMainRecord"/> from the given <see cref="BinaryReader"/>.
+        /// Reads a <see cref="GgpkMainRecord"/> from the given <paramref name="reader"/>.
         /// </summary>
         /// <param name="reader">The <see cref="BinaryReader"/> that shall be read.</param>
         /// <returns>A <see cref="GgpkMainRecord"/>.</returns>

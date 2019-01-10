@@ -36,7 +36,7 @@ using System.Text;
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the a ggpk record containing a directory.
+    /// Represents a <see cref="GgpkRecord"/> containing a directory.
     /// </summary>
     public class GgpkDirectoryRecord : GgpkRecord
     {
@@ -45,16 +45,19 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the name of the directory.
         /// </summary>
+        /// <value>The name of the directory.</value>
         public string DirectoryName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the SHA-256 hash of the data.
         /// </summary>
+        /// <value>The SHA-256 hash of the data.</value>
         public string Hash { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the entries of this <see cref="GgpkDirectoryRecord"/>.
+        /// Gets or sets the entries of the directory.
         /// </summary>
+        /// <value>The entries of the directory.</value>
         public IEnumerable<GgpkDirectoryRecordEntry> Entries { get; set; } = new List<GgpkDirectoryRecordEntry>();
 
         #endregion
@@ -62,7 +65,7 @@ namespace DotGGPK
         #region Methods
 
         /// <summary>
-        /// Reads a <see cref="GgpkDirectoryRecord"/> from the given <see cref="BinaryReader"/>.
+        /// Reads a <see cref="GgpkDirectoryRecord"/> from the given <paramref name="reader"/>.
         /// </summary>
         /// <param name="reader">The <see cref="BinaryReader"/> that shall be read.</param>
         /// <returns>A <see cref="GgpkDirectoryRecord"/>.</returns>

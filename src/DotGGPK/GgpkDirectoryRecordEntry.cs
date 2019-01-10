@@ -41,11 +41,13 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the timestamp of the entry.
         /// </summary>
+        /// <value>The timestamp of the entry.</value>
         public uint TimeStamp { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the offset of the element this entry points to.
         /// </summary>
+        /// <value>The offset of the element this entry points to.</value>
         public ulong Offset { get; set; } = 0;
 
         #endregion

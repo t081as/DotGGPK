@@ -34,7 +34,7 @@ using System.Text;
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the a ggpk record containing a single file.
+    /// Represents a <see cref="GgpkRecord"/> containing a single file.
     /// </summary>
     public class GgpkFileRecord : GgpkRecord
     {
@@ -43,6 +43,7 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the name of the file.
         /// </summary>
+        /// <value>The name of the file.</value>
         public string FileName { get; set; } = string.Empty;
 
         /// <summary>

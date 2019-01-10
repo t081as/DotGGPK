@@ -41,11 +41,13 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the length of the entry.
         /// </summary>
+        /// <value>The length of the entry.</value>
         public uint Length { get; set; } = 0;
 
         /// <summary>
-        /// Gets or sets the offset of the data within the archive file.
+        /// Gets or sets the offset of the record within the archive file.
         /// </summary>
+        /// <value>The offset of the record within the archive file.</value>
         public ulong Offset { get; set; } = 0;
 
         #endregion

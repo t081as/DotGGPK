@@ -32,7 +32,7 @@ using System.IO;
 namespace DotGGPK
 {
     /// <summary>
-    /// Represents the a ggpk record containing free space.
+    /// Represents a <see cref="GgpkRecord"/> marking free space.
     /// </summary>
     public class GgpkFreeRecord : GgpkRecord
     {
