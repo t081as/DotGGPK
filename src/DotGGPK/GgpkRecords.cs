@@ -36,15 +36,43 @@ namespace DotGGPK
     /// <summary>
     /// Contains methods for reading a ggpk archive in raw format.
     /// </summary>
+    /// <remarks>
+    /// The returned <see cref="IEnumerable{T}"/> contains the following record types:
+    /// <list type="bullet">
+    /// <item>
+    /// <term><see cref="GgpkMainRecord"/></term>
+    /// </item>
+    /// <item>
+    /// <term><see cref="GgpkFileRecord"/></term>
+    /// </item>
+    /// <item>
+    /// <term><see cref="GgpkDirectoryRecord"/></term>
+    /// </item>
+    /// <item>
+    /// <term><see cref="GgpkFreeRecord"/></term>
+    /// </item>
+    /// </list>
+    /// </remarks>
+    /// <example>
+    /// The following example demonstrates how to use the <see cref="GgpkRecords"/> class to read a ggpk archive:
+    /// <code>
+    /// IEnumerable&lt;GgpkRecord&gt; records = GgpkRecords.From("/path/to/content.ggpk"));
+    ///
+    /// foreach (GgpkRecord record in records)
+    /// {
+    ///     Console.WriteLine($"Record: {record.GetType()} @ offset {record.Offset} (length: {record.Length})");
+    /// }
+    /// </code>
+    /// </example>
     public static class GgpkRecords
     {
         #region Methods
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">records</see>.
+        /// Reads the given ggpk archive file and returns all records.
         /// </summary>
         /// <param name="fileName">The ggpk archive file.</param>
-        /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
+        /// <returns>All records read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>fileName</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>fileName</c> does not exist.</exception>
         /// <exception cref="GgpkException">Error while reading the archive.</exception>
@@ -59,10 +87,10 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">records</see>.
+        /// Reads the given ggpk archive file and returns all records.
         /// </summary>
         /// <param name="file">The ggpk archive file.</param>
-        /// <returns>All <see cref="GgpkRecord">records</see> read from the file.</returns>
+        /// <returns>All records read from the file.</returns>
         /// <exception cref="ArgumentNullException"><c>file</c> is <c>null</c>.</exception>
         /// <exception cref="FileNotFoundException"><c>file</c> does not exist.</exception>
         /// <exception cref="GgpkException">Error while reading the archive.</exception>
@@ -82,10 +110,10 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Reads the given ggpk archive file and returns all <see cref="GgpkRecord">records</see>.
+        /// Reads the given ggpk archive <paramref name="stream"/> and returns all records.
         /// </summary>
         /// <param name="stream">The ggpk <see cref="Stream"/>.</param>
-        /// <returns>All <see cref="GgpkRecord">records</see> read from the <see cref="Stream"/>.</returns>
+        /// <returns>All records read from the <see cref="Stream"/>.</returns>
         /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="GgpkException">Error while reading the archive.</exception>
         public static IEnumerable<GgpkRecord> From(Stream stream)

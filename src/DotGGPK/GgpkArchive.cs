@@ -103,8 +103,11 @@ namespace DotGGPK
         }
 
         /// <summary>
-        /// Gets the underlaying <see cref="GgpkRecord">raw ggpk records</see>.
+        /// Gets the underlaying raw ggpk records.
         /// </summary>
+        /// <remarks>
+        /// Additional information about the different record types can be found here: <see cref="GgpkRecords"/>
+        /// </remarks>
         public IEnumerable<GgpkRecord> RawRecords { get; private set; }
 
         /// <summary>

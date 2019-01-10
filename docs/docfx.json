@@ -8,7 +8,8 @@
           ],
           "exclude": [
             "**/**.Tests.csproj",
-            "**/tools.csproj"
+            "**/tools.csproj",
+            "examples/**"
           ],
           "src": ".."
         }
