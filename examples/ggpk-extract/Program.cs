@@ -22,10 +22,15 @@ namespace ggpk_extract
 
                 Directory.CreateDirectory(new FileInfo(destinationFileName).DirectoryName);
 
-                using (Stream fileStream = File.Create(destinationFileName))
+                using (BinaryWriter destinationFileWriter = new BinaryWriter(File.Create(destinationFileName)))
                 {
-                    Console.WriteLine($"Extracting {file.FullName}...");
-                    file.GetStream().CopyTo(fileStream);
+                    using (BinaryReader sourceFileReader = new BinaryReader(file.GetStream()))
+                    {
+                        Console.WriteLine($"Extracting {file.FullName}...");
+
+                        destinationFileWriter.Write(sourceFileReader.ReadBytes((int)file.Length));
+                        destinationFileWriter.Flush();
+                    }
                 }
             }
         }
