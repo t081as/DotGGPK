@@ -39,6 +39,9 @@ namespace DotGGPK
     {
         #region Constants and Fields
 
+        /// <summary>
+        /// The text for exceptions thrown if a write operation is triggered.
+        /// </summary>
         private const string NotSupported = "Ggpk stream does not support write operations";
 
         /// <summary>
@@ -82,26 +85,31 @@ namespace DotGGPK
         /// <summary>
         /// Gets a value indicating whether the current stream supports reading.
         /// </summary>
+        /// <value>A value indicating whether the current stream supports reading.</value>
         public override bool CanRead => true;
 
         /// <summary>
         /// Gets a value indicating whether the current stream supports seeking.
         /// </summary>
+        /// <value>A value indicating whether the current stream supports seeking.</value>
         public override bool CanSeek => true;
 
         /// <summary>
         /// Gets a value indicating whether the current stream supports writing.
         /// </summary>
+        /// <value>A value indicating whether the current stream supports writing.</value>
         public override bool CanWrite => false;
 
         /// <summary>
         /// Gets the length in bytes of the stream.
         /// </summary>
+        /// <value>The length in bytes of the stream.</value>
         public override long Length => (long)this.length;
 
         /// <summary>
         /// Gets or sets the position within the current stream.
         /// </summary>
+        /// <value>The position within the current stream.</value>
         public override long Position
         {
             get => this.ggpkStream.Position - (long)this.offset;

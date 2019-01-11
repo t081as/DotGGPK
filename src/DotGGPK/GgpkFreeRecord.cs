@@ -39,8 +39,9 @@ namespace DotGGPK
         #region Constants and Fields
 
         /// <summary>
-        /// The size of a <see cref="GgpkFreeRecord"/>, in byte.
+        /// The size of a <see cref="GgpkFreeRecord"/>.
         /// </summary>
+        /// <value>The size of a <see cref="GgpkFreeRecord"/>, in byte.</value>
         public const int Size = 8;
 
         #endregion
@@ -50,11 +51,13 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the amount of free space marked by this record, in byte.
         /// </summary>
+        /// <value>The amount of free space marked by this record, in byte.</value>
         public uint DataLength { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the offset of the next <see cref="GgpkFreeRecord"/> in the ggpk file.
         /// </summary>
+        /// <value>The offset of the next <see cref="GgpkFreeRecord"/> in the ggpk file.</value>
         public ulong NextFreeRecordOffset { get; set; } = 0;
 
         #endregion

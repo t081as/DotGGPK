@@ -33,7 +33,7 @@ namespace DotGGPK
 {
     /// <summary>
     /// Describes directories in a ggpk archive that may contain other
-    /// <see cref="IGgpkDirectory">directories</see> or <see cref="IGgpkFile">files</see>.
+    /// directories or files.
     /// </summary>
     public interface IGgpkDirectory : IGgpkElement
     {
@@ -46,13 +46,15 @@ namespace DotGGPK
         IGgpkDirectory Parent { get; }
 
         /// <summary>
-        /// Gets the subdirectories of this directory.
+        /// Gets the subdirectories in this directory.
         /// </summary>
+        /// <value>The subdirectories in this directory.</value>
         IEnumerable<IGgpkDirectory> Directories { get; }
 
         /// <summary>
-        /// Gets the files of this directory.
+        /// Gets the files in this directory.
         /// </summary>
+        /// <value>The files in this directory.</value>
         IEnumerable<IGgpkFile> Files { get; }
 
         #endregion

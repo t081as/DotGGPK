@@ -40,8 +40,9 @@ namespace DotGGPK
         #region Constants and Fields
 
         /// <summary>
-        /// The size of a <see cref="GgpkRecordMarker"/>, in byte.
+        /// The size of a <see cref="GgpkRecordMarker"/>.
         /// </summary>
+        /// <value>The size of a <see cref="GgpkRecordMarker"/>, in byte.</value>
         public const int Size = 8;
 
         #endregion
@@ -51,16 +52,19 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the offset of this record marker.
         /// </summary>
+        /// <value>The offset of this record marker.</value>
         public ulong Offset { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the length of the complete record (including this record marker).
         /// </summary>
+        /// <value>The length of the complete record (including this record marker).</value>
         public uint Length { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the record type following this record marker.
         /// </summary>
+        /// <value>The record type following this record marker.</value>
         public string Type { get; set; } = string.Empty;
 
         #endregion

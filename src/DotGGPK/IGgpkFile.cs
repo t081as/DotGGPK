@@ -46,8 +46,9 @@ namespace DotGGPK
         IGgpkDirectory Parent { get; }
 
         /// <summary>
-        /// Gets the length of the actual file data, in byte.
+        /// Gets the length of the actual file data.
         /// </summary>
+        /// <value>The length of the actual file data, in byte.</value>
         ulong Length { get; }
 
         #endregion

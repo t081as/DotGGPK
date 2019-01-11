@@ -32,7 +32,7 @@ using System;
 namespace DotGGPK
 {
     /// <summary>
-    /// Describes common properties of <see cref="IGgpkDirectory">directories</see> and <see cref="IGgpkFile">files</see>.
+    /// Describes common properties of directories and files.
     /// </summary>
     public interface IGgpkElement
     {
@@ -41,21 +41,25 @@ namespace DotGGPK
         /// <summary>
         /// Gets the name of the element.
         /// </summary>
+        /// <value>The name of the element.</value>
         string Name { get; }
 
         /// <summary>
         /// Gets the timestamp of the element.
         /// </summary>
+        /// <value>The timestamp of the element.</value>
         uint TimeStamp { get; }
 
         /// <summary>
         /// Gets the SHA-256 hash of the data.
         /// </summary>
+        /// <value>The SHA-256 hash of the data.</value>
         string Hash { get; }
 
         /// <summary>
         /// Gets the full name of the element.
         /// </summary>
+        /// <value>The full name of the element.</value>
         string FullName { get; }
 
         #endregion

@@ -48,16 +48,19 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the offset of the actual file data in the ggpk archive file.
         /// </summary>
+        /// <value>The offset of the actual file data in the ggpk archive file.</value>
         public ulong Offset { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the length of the actual file data, in byte.
         /// </summary>
+        /// <value>The length of the actual file data, in byte.</value>
         public ulong Length { get; set; } = 0;
 
         /// <summary>
         /// Gets the full name of the element.
         /// </summary>
+        /// <value>The full name of the element.</value>
         public override string FullName
         {
             get

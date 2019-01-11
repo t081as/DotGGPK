@@ -49,16 +49,19 @@ namespace DotGGPK
         /// <summary>
         /// Gets or sets the SHA-256 hash of the data.
         /// </summary>
+        /// <value>The SHA-256 hash of the data.</value>
         public string Hash { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the offset of the actual file data.
         /// </summary>
+        /// <value>The offset of the actual file data.</value>
         public ulong FileOffset { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the length of the actual file data.
         /// </summary>
+        /// <value>The length of the actual file data.</value>
         public ulong FileLength { get; set; } = 0;
 
         #endregion
