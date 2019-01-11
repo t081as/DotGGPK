@@ -1,23 +1,24 @@
 # DotGGPK
-DotGGPK is a .NET standard library (supporting .NET Framework 4.6+ and .NET Core 1.0+) for parsing Path of Exile's GGPK archive file format
+DotGGPK is a .NET standard library (supporting .NET Framework 4.6+ and .NET Core 1.0+) for parsing Path of Exile's GGPK archive file format.
 
 ## Nuget packages
-Please find the nuget packages of this library here: [https://www.nuget.org/packages/DotGGPK/](https://www.nuget.org/packages/DotGGPK/)
+Please find nuget packages of this library here: [https://www.nuget.org/packages/DotGGPK/](https://www.nuget.org/packages/DotGGPK/)
 
 ## Repository
 Please find the source code of this library here: [https://gitlab.com/tobiaskoch/DotGGPK](https://gitlab.com/tobiaskoch/DotGGPK)
 
 ## Examples
-Please find some example code here:
+Please find example code here:
 
-* [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-read-raw](Read a ggpk archive file in raw mode)
-* [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-list-files](List all files in a ggpk archive file)
-* [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-extract](Extract all files in a ggpk archive file)
+* Example 1: [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-read-raw](Read a ggpk archive file in raw mode)
+* Example 2: [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-list-files](List all files in a ggpk archive file)
+* Example 3: [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-extract](Extract all files in a ggpk archive file)
 
 ## Quick Start Notes:
 1. Open a shell and create a new directory:
 
     > mkdir ggpk-cli
+
     > cd ggpk-cli
 
 2. Create a new console project
