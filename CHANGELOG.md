@@ -1,4 +1,4 @@
-## 0.8.0 (YYYY-MM-DD)
+## 0.8.0 (2019-01-12)
 
 - Documentation added: https://tobiaskoch.gitlab.io/DotGGPK/
 
