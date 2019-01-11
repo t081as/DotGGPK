@@ -2,7 +2,7 @@
 DotGGPK is a .NET standard library (supporting .NET Framework 4.6+ and .NET Core 1.0+) for parsing Path of Exile's GGPK archive file format.
 
 ## Nuget packages
-Please find nuget packages of this library here: [https://www.nuget.org/packages/DotGGPK/](https://www.nuget.org/packages/DotGGPK/)
+Please find nuget packages of this library here: [https://www.nuget.org/packages/DotGGPK](https://www.nuget.org/packages/DotGGPK/)
 
 ## Repository
 Please find the source code of this library here: [https://gitlab.com/tobiaskoch/DotGGPK](https://gitlab.com/tobiaskoch/DotGGPK)
