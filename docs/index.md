@@ -10,9 +10,9 @@ Please find the source code of this library here: [https://gitlab.com/tobiaskoch
 ## Examples
 Please find example code here:
 
-* Example 1: [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-read-raw](Read a ggpk archive file in raw mode)
-* Example 2: [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-list-files](List all files in a ggpk archive file)
-* Example 3: [https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-extract](Extract all files in a ggpk archive file)
+* Example 1: [Read a ggpk archive file in raw mode](https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-read-raw)
+* Example 2: [List all files in a ggpk archive file](https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-list-files)
+* Example 3: [Extract all files in a ggpk archive file](https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-extract)
 
 ## Quick Start Notes:
 1. Open a shell and create a new directory:
