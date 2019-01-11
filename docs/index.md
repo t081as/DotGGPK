@@ -15,7 +15,7 @@ Please find example code here:
 * Example 3: [Extract all files in a ggpk archive file](https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-extract)
 
 ## Quick Start Notes:
-1. Open a shell and create a new directory:
+1. Open a shell and create a new directory
 
     > mkdir ggpk-cli
 
