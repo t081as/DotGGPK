@@ -56,7 +56,7 @@ namespace DotGGPK
     /// <example>
     /// The following example demonstrates how to use the <see cref="GgpkRecords"/> class to read a ggpk archive:
     /// <code>
-    /// IEnumerable&lt;GgpkRecord&gt; records = GgpkRecords.From("/path/to/content.ggpk"));
+    /// IEnumerable&lt;GgpkRecord&gt; records = GgpkRecords.From("/path/to/content.ggpk");
     ///
     /// foreach (GgpkRecord record in records)
     /// {

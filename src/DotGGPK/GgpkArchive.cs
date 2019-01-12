@@ -40,7 +40,7 @@ namespace DotGGPK
     /// <example>
     /// The following example demonstrates how to use the <see cref="GgpkArchive"/> class to read a ggpk archive:
     /// <code>
-    /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk"));
+    /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk");
     ///
     /// foreach (var file in archive.Root.ToFileList())
     /// {
@@ -124,7 +124,7 @@ namespace DotGGPK
         ///     {
         ///         static void Main(string[] args)
         ///         {
-        ///             GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk"));
+        ///             GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk");
         ///             PrintDirectory(archive.Root);
         ///         }
         ///
@@ -226,7 +226,7 @@ namespace DotGGPK
         /// <example>
         /// The following example demonstrates how to use <see cref="GgpkArchive.GetDirectory(string)"/> method:
         /// <code>
-        /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk"));
+        /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk");
         /// IGgpkDirectory dialogueDirectory = archive.GetDirectory("/Audio/Dialogue/");
         /// </code>
         /// </example>
@@ -257,7 +257,7 @@ namespace DotGGPK
         /// <example>
         /// The following example demonstrates how to use <see cref="GgpkArchive.GetFile(string)"/> method:
         /// <code>
-        /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk"));
+        /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk");
         /// IGgpkFile noAudioFoundFile = archive.GetFile("/Audio/NoFileFound.ogg");
         /// </code>
         /// </example>
