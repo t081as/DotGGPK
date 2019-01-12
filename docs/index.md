@@ -13,6 +13,7 @@ Please find example code here:
 * Example 1: [Read a ggpk archive file in raw mode](https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-read-raw)
 * Example 2: [List all files in a ggpk archive file](https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-list-files)
 * Example 3: [Extract all files in a ggpk archive file](https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-extract)
+* Example 4: [Working with the Root property](https://gitlab.com/tobiaskoch/DotGGPK/tree/master/examples/ggpk-root)
 
 ## Quick Start Notes:
 1. Open a shell and create a new directory
