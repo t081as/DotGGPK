@@ -106,6 +106,44 @@ namespace DotGGPK
         /// Gets the root directory of the ggpk file.
         /// </summary>
         /// <value>The root directory of the ggpk file.</value>
+        /// <remarks>
+        /// This is the main entry point when working with a ggpk archive file. It contains all folders
+        /// and files of the archive.
+        /// </remarks>
+        /// <example>
+        /// The following example demonstrates how to use the <see cref="GgpkArchive.Root"/> property
+        /// to access the file system of a ggpk archive:
+        /// <code>
+        /// using System;
+        /// using System.IO;
+        /// using DotGGPK;
+        ///
+        /// namespace ggpk_root
+        /// {
+        ///     class Program
+        ///     {
+        ///         static void Main(string[] args)
+        ///         {
+        ///             GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk"));
+        ///             PrintDirectory(archive.Root);
+        ///         }
+        ///
+        ///         static void PrintDirectory(IGgpkDirectory directory)
+        ///         {
+        ///             foreach (var file in directory.Files)
+        ///             {
+        ///                 Console.WriteLine(file.FullName);
+        ///             }
+        ///
+        ///             foreach (var subDirectory in directory.Directories)
+        ///             {
+        ///                 PrintDirectory(subDirectory);
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// </code>
+        /// </example>
         public IGgpkDirectory Root
         {
             get
