@@ -185,6 +185,13 @@ namespace DotGGPK
         /// <param name="path">The path of the directory to search for.</param>
         /// <returns>An <see cref="IGgpkDirectory"/> representing the directory.</returns>
         /// <exception cref="DirectoryNotFoundException"><c>path</c> does not exist.</exception>
+        /// <example>
+        /// The following example demonstrates how to use <see cref="GgpkArchive.GetDirectory(string)"/> method:
+        /// <code>
+        /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk"));
+        /// IGgpkDirectory dialogueDirectory = archive.GetDirectory("/Audio/Dialogue/");
+        /// </code>
+        /// </example>
         public IGgpkDirectory GetDirectory(string path)
         {
             string[] pathParts = path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
@@ -209,6 +216,13 @@ namespace DotGGPK
         /// <param name="path">The path of the file to search for.</param>
         /// <returns>An <see cref="IGgpkFile"/> representing the file.</returns>
         /// <exception cref="FileNotFoundException"><c>path</c> does not exist.</exception>
+        /// <example>
+        /// The following example demonstrates how to use <see cref="GgpkArchive.GetFile(string)"/> method:
+        /// <code>
+        /// GgpkArchive archive = GgpkArchive.From("/path/to/content.ggpk"));
+        /// IGgpkFile noAudioFoundFile = archive.GetFile("/Audio/NoFileFound.ogg");
+        /// </code>
+        /// </example>
         public IGgpkFile GetFile(string path)
         {
             string[] pathParts = path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
