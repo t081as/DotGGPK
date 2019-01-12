@@ -102,6 +102,12 @@ namespace DotGGPK.Tests
                 StringAssert.StartsWith(file.FullName, "/");
                 Assert.AreEqual(false, file.FullName.Contains("//"));
             }
+
+            IGgpkDirectory dialogueDirectory = archive.GetDirectory("/Audio/Dialogue/");
+            Assert.IsNotNull(dialogueDirectory);
+
+            IGgpkFile noAudioFoundFile = archive.GetFile("/Audio/NoFileFound.ogg");
+            Assert.IsNotNull(noAudioFoundFile);
         }
 
         #endregion
