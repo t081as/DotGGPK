@@ -40,9 +40,9 @@ namespace DotGGPK
         #region Properties
 
         /// <summary>
-        /// Gets or sets the parent <see cref="IGgpkDirectory">directory.</see>
+        /// Gets or sets the parent directory.
         /// </summary>
-        /// <value>An instance of <see cref="IGgpkDirectory"/> or <c>null</c> if this is the root element.</value>
+        /// <value>An instance of <see cref="IGgpkDirectory"/>.</value>
         public IGgpkDirectory Parent { get; set; } = null;
 
         /// <summary>
