@@ -1,3 +1,7 @@
+## 1.0.0 (2019-01-12)
+
+- API is considered stable
+
 ## 0.8.0 (2019-01-12)
 
 - Documentation added: https://tobiaskoch.gitlab.io/DotGGPK/
