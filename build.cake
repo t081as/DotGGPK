@@ -20,17 +20,11 @@ var configuration = Argument("configuration", "Debug");
 // TASKS
 //////////////////////////////////////////////////////////////////////
 
-Task("clean")
-    .Does(() =>
-{
-    DotNetCoreClean("./");
-});
-
 Task("restore")
-    .IsDependentOn("clean")
     .Does(() =>
 {
     DotNetCoreRestore();
+    DotNetCoreClean("./");
 });
 
 Task("versioning")
