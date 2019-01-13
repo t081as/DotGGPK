@@ -19,7 +19,6 @@ NuGet packages are available [here](https://www.nuget.org/packages/DotGGPK/).
 The following tools must be available:
 
 * [.NET Core SDK](https://dotnet.microsoft.com/download)
-* [Reportgenerator Global Tool](https://www.nuget.org/packages/dotnet-reportgenerator-globaltool)
 
 #### Source code
 Get the source code using the following command:

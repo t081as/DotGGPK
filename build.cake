@@ -3,6 +3,7 @@
 #addin nuget:?package=Cake.DocFx&version=0.11.0
 
 #tool nuget:?package=docfx.console&version=2.40.7
+#tool "nuget:?package=ReportGenerator&version=4.0.4"
 
 using System.IO;
 using System.Text;
@@ -103,16 +104,7 @@ Task("test")
     };
 
     DotNetCoreTest("./src/DotGGPK.Tests/DotGGPK.Tests.csproj", testSettings, coverletSettings);
-
-    // Since CAKE report generator addin does not support .NET Core yet we'll call report generator global tool if available
-    try
-    {
-        StartProcess("reportgenerator", "-reports:./src/DotGGPK.Tests/bin/Debug/coverage*.* -targetdir:./src/DotGGPK.Tests/bin/Debug/coverage/");
-    }
-    catch
-    {
-        Information("Unable to execute Report Generator (Global Tool)");
-    }
+    ReportGenerator("./src/DotGGPK.Tests/bin/Debug/coverage*.*", "./src/DotGGPK.Tests/bin/Debug/coverage/");
 });
 
 Task("pack")
