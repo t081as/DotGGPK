@@ -34,6 +34,7 @@ Task("restore")
 
 Task("versioning")
     .IsDependentOn("restore")
+    .WithCriteria(configuration == "Release")
     .WithCriteria(DirectoryExists(".git"))
     .Does(() =>
 {
@@ -67,15 +68,7 @@ Task("versioning")
     Information("Version (long): " + longVersionString);
     Information("Version (short): " + shortVersionString);
 
-    if (configuration == "Release")
-    {
-        Information("Release - writing version information");
-        WriteVersion("./src/DotGGPK/Version.props", shortVersionString, versionString);
-    }
-    else
-    {
-        Information("Debug - skipping version information");
-    }
+    WriteVersion("./src/DotGGPK/Version.props", shortVersionString, versionString);
 });
 
 Task("build")
