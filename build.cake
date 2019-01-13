@@ -24,7 +24,6 @@ Task("restore")
     .Does(() =>
 {
     DotNetCoreRestore();
-    DotNetCoreClean("./");
 });
 
 Task("versioning")
@@ -70,6 +69,7 @@ Task("build")
     .IsDependentOn("versioning")
     .Does(() =>
 {
+    DotNetCoreClean("./");
     DotNetCoreBuild("./", new DotNetCoreBuildSettings
     {
         Configuration = configuration
