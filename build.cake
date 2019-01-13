@@ -63,7 +63,7 @@ Task("versioning")
 
     string versionString = string.Format("{0}.{1}.{2}.{3}", major, minor, buildNumber, revision);
     string shortVersionString = string.Format("{0}.{1}.{2}", major, minor, revision);
-    string longVersionString = string.Format("{0}.{1}.{2}.{3}-{4}", major, minor, buildNumber, revision, shasum);
+    string longVersionString = string.Format("{0}.{1}.{2}.{3}+{4}", major, minor, buildNumber, revision, shasum);
 
     Information("Version: " + versionString);
     Information("Version (long): " + longVersionString);
