@@ -2,11 +2,6 @@
 
 # DOTGGPK
 
-[![pipeline status](https://gitlab.com/tobiaskoch/DotGGPK/badges/master/pipeline.svg)](https://gitlab.com/tobiaskoch/DotGGPK/commits/master)
-[![coverage report](https://gitlab.com/tobiaskoch/DotGGPK/badges/master/coverage.svg)](https://gitlab.com/tobiaskoch/DotGGPK/commits/master)
-[![maintained: yes](https://tobiaskoch.gitlab.io/badges/maintained-yes.svg)](https://gitlab.com/tobiaskoch/DotGGPK/commits/master)
-[![donate: paypal](https://tobiaskoch.gitlab.io/badges/donate-paypal.svg)](https://www.tk-software.de/donate)
-
 DotGGPK is a .NET standard library for parsing Path of Exile's GGPK archive file format.
 
 ## Installation
