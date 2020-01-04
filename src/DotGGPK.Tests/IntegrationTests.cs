@@ -67,7 +67,7 @@ namespace DotGGPK.Tests
             }
 
             IEnumerable<GgpkRecord> records = GgpkRecords.From(contentFile);
-            Assert.IsTrue(records.Count() > 0);
+            Assert.IsTrue(records.Any());
         }
 
         /// <summary>

@@ -144,7 +144,7 @@ namespace DotGGPK.Tests
             GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
             IGgpkFile file = archive.GetFile(path);
 
-            Assert.AreEqual((ulong)4, file.Length);
+            Assert.AreEqual(4UL, file.Length);
         }
 
         /// <summary>
