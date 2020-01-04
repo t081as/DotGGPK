@@ -55,7 +55,7 @@ if(!$PSScriptRoot){
 
 $TOOLS_DIR = Join-Path $PSScriptRoot "tools"
 $TOOLS_PROJ = Join-Path $TOOLS_DIR "tools.csproj"
-$CAKE_VERSION = "0.31.0"
+$CAKE_VERSION = "0.35.0"
 $CAKE_DLL = Join-Path $TOOLS_DIR "Cake.CoreCLR.$CAKE_VERSION/cake.coreclr/$CAKE_VERSION/Cake.dll"
 
 # Make sure tools folder exists
