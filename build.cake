@@ -1,8 +1,8 @@
-#addin nuget:?package=Cake.Coverlet&version=2.1.2
-#addin nuget:?package=Cake.DocFx&version=0.11.0
+#addin nuget:?package=Cake.Coverlet&version=2.3.4
+#addin nuget:?package=Cake.DocFx&version=0.13.1
 
-#tool nuget:?package=docfx.console&version=2.40.7
-#tool nuget:?package=ReportGenerator&version=4.0.4
+#tool nuget:?package=docfx.console&version=2.48.0
+#tool nuget:?package=ReportGenerator&version=4.4.0
 
 #load nuget:?package=Mjolnir.Cake
 
@@ -48,7 +48,7 @@ Task("versioning")
             Warning(currentException.Message);
             Warning(currentException.StackTrace);
             Warning("---");
-            
+
             currentException = currentException.InnerException;
         }
 
