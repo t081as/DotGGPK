@@ -223,3 +223,7 @@ tools/**
 
 # GitLab pages output
 public/
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
