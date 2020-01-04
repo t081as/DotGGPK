@@ -55,7 +55,7 @@ if(!$PSScriptRoot){
 
 $TOOLS_DIR = Join-Path $PSScriptRoot "tools"
 $TOOLS_PROJ = Join-Path $TOOLS_DIR "tools.csproj"
-$CAKE_VERSION = "0.31.0"
+$CAKE_VERSION = "0.35.0"
 $CAKE_DLL = Join-Path $TOOLS_DIR "Cake.CoreCLR.$CAKE_VERSION/cake.coreclr/$CAKE_VERSION/Cake.dll"
 
 # Make sure tools folder exists
@@ -67,7 +67,7 @@ if ((Test-Path $PSScriptRoot) -and !(Test-Path $TOOLS_DIR)) {
 # Make sure that cake exist.
 if (!(Test-Path $CAKE_DLL)) {
     Write-Verbose -Message "Downloading cake..."
-    $contents = '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>netstandard1.6</TargetFramework></PropertyGroup></Project>'
+    $contents = '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>netstandard2.1</TargetFramework></PropertyGroup></Project>'
     Out-File -InputObject $contents -FilePath $TOOLS_PROJ
     Invoke-Expression "&dotnet add $TOOLS_PROJ package cake.coreclr -v `"$CAKE_VERSION`" --package-directory `"$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION`""
 }

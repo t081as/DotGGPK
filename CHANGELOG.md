@@ -1,3 +1,8 @@
+## vNext
+
+- .NET Core 3.0 / 3.1 support added
+- .NET Classic support removed
+
 ## 1.0.0 (2019-01-12)
 
 - API is considered stable

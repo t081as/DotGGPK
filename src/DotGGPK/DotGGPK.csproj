@@ -1,16 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.6;net472;net471;net47;net462;net461;net46</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;netcoreapp3.0;netstandard2.1;netstandard2.0;netstandard1.6</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\DotGGPK.ruleset</CodeAnalysisRuleSet>
     <WarningsAsErrors />
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\DotGGPK.xml</DocumentationFile>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugType>None</DebugType>
-    <DebugSymbols>false</DebugSymbols>
+    <EmbedAllSources>true</EmbedAllSources>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +14,7 @@
     <None Include="..\..\LICENSE.md" Pack="true" PackagePath=""/>
     <None Include="..\..\README.md" Pack="true" PackagePath=""/>
     <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath=""/>
+    <None Include="..\..\img\DotGGPK.png" Pack="true" PackagePath=""/>
   </ItemGroup>
     
   <ItemGroup>

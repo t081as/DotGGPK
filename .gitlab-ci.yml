@@ -1,11 +1,9 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.1.100
+
 stages:
     - test
     - deploy
     - documentation
-
-cache:
-  paths:
-  - .cache/
 
 release:
     stage: deploy
@@ -16,13 +14,19 @@ release:
         paths:
           - ./*.nupkg
     script:
-        - ./build --configuration=Release
-        - dotnet nuget push DotGGPK*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --no-symbols 1
+        - ./build.sh --configuration=Release --buildnumber=$CI_PIPELINE_IID
+        - dotnet nuget push DotGGPK*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
 
 debug:
     stage: test
     script:
-        - ./build
+        - ./build.sh
+    coverage: /Total\s+\|\s+\d+\D\d+\%/
+    artifacts:
+        reports:
+            junit:
+                - './src/**/TestResults/TestResults.xml'
+
 
 pages:
   stage: documentation
@@ -32,4 +36,4 @@ pages:
     paths:
     - public
   script:
-  - ./build --configuration=Release
+  - ./build.sh --configuration=Release

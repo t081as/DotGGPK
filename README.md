@@ -13,13 +13,7 @@ NuGet packages are available [here](https://www.nuget.org/packages/DotGGPK/).
 #### Requirements
 The following tools must be available:
 
-* [.NET Core SDK](https://dotnet.microsoft.com/download)
-* [.NET 4.7.2 Dev Pack](https://dotnet.microsoft.com/download)
-* [.NET 4.7.1 Dev Pack](https://dotnet.microsoft.com/download)
-* [.NET 4.7 Dev Pack](https://dotnet.microsoft.com/download)
-* [.NET 4.6.2 Dev Pack](https://dotnet.microsoft.com/download)
-* [.NET 4.6.1 Dev Pack](https://dotnet.microsoft.com/download)
-* [.NET 4.6 Dev Pack](https://dotnet.microsoft.com/download)
+* [.NET Core SDK 3.1 (3.1.100)](https://dotnet.microsoft.com/download)
 
 #### Source code
 Get the source code using the following command:
@@ -49,4 +43,4 @@ see [AUTHORS.txt](https://gitlab.com/tobiaskoch/DotGGPK/blob/master/AUTHORS.txt)
 Thanks for your interest in this project. You can show your appreciation and support further development by [donating](https://www.tk-software.de/donate).
 
 ## License
-**DotGGPK** © 2018-2019  [Tobias Koch](https://www.tk-software.de). Released under the [MIT License](https://gitlab.com/tobiaskoch/DotGGPK/blob/master/LICENSE.md).
+**DotGGPK** © 2018-2020  [Tobias Koch](https://www.tk-software.de). Released under the [MIT License](https://gitlab.com/tobiaskoch/DotGGPK/blob/master/LICENSE.md).

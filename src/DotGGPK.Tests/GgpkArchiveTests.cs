@@ -1,7 +1,7 @@
 ﻿#region MIT License
 // The MIT License (MIT)
 //
-// Copyright © 2018-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2018-2020 Tobias Koch <t.koch@tk-software.de>
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -144,7 +144,7 @@ namespace DotGGPK.Tests
             GgpkArchive archive = GgpkArchive.From(new FileInfo(@"pass.ggpk"));
             IGgpkFile file = archive.GetFile(path);
 
-            Assert.AreEqual((ulong)4, file.Length);
+            Assert.AreEqual(4UL, file.Length);
         }
 
         /// <summary>

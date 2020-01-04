@@ -1,7 +1,7 @@
 ﻿#region MIT License
 // The MIT License (MIT)
 //
-// Copyright © 2018-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2018-2020 Tobias Koch <t.koch@tk-software.de>
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -30,7 +30,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
@@ -68,7 +67,7 @@ namespace DotGGPK.Tests
             }
 
             IEnumerable<GgpkRecord> records = GgpkRecords.From(contentFile);
-            Assert.IsTrue(records.Count() > 0);
+            Assert.IsTrue(records.Any());
         }
 
         /// <summary>
@@ -100,7 +99,7 @@ namespace DotGGPK.Tests
             foreach (var file in files)
             {
                 StringAssert.StartsWith(file.FullName, "/");
-                Assert.AreEqual(false, file.FullName.Contains("//"));
+                Assert.AreEqual(false, file.FullName.Contains('\\', StringComparison.InvariantCultureIgnoreCase));
             }
 
             IGgpkDirectory dialogueDirectory = archive.GetDirectory("/Audio/Dialogue/");
