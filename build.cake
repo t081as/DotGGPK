@@ -3,7 +3,7 @@
 #addin nuget:?package=Cake.DocFx&version=0.11.0
 
 #tool nuget:?package=docfx.console&version=2.40.7
-#tool "nuget:?package=ReportGenerator&version=4.0.4"
+#tool nuget:?package=ReportGenerator&version=4.0.4
 
 using System.IO;
 using System.Text;
@@ -98,7 +98,11 @@ Task("test")
     };
 
     DotNetCoreTest("./src/DotGGPK.Tests/DotGGPK.Tests.csproj", testSettings, coverletSettings);
-    ReportGenerator("./src/DotGGPK.Tests/bin/Debug/coverage*.*", "./src/DotGGPK.Tests/bin/Debug/coverage/");
+    
+    if (IsRunningOnWindows())
+    {
+        ReportGenerator("./src/DotGGPK.Tests/bin/Debug/coverage*.*", "./src/DotGGPK.Tests/bin/Debug/coverage/");
+    }
 });
 
 Task("pack")
