@@ -35,7 +35,7 @@ fi
 # Make sure that cake exist.
 if [ ! -f "$CAKE_DLL" ]; then
     echo "Downloading cake..."
-    echo "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>netstandard1.6</TargetFramework></PropertyGroup></Project>" > $TOOLS_PROJ
+    echo "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>netstandard2.1</TargetFramework></PropertyGroup></Project>" > $TOOLS_PROJ
     dotnet add $TOOLS_PROJ package cake.coreclr -v $CAKE_VERSION --package-directory $TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION
 fi
 
