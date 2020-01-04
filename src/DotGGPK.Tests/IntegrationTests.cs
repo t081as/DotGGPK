@@ -99,7 +99,7 @@ namespace DotGGPK.Tests
             foreach (var file in files)
             {
                 StringAssert.StartsWith(file.FullName, "/");
-                Assert.AreEqual(false, file.FullName.Contains('/', StringComparison.InvariantCultureIgnoreCase));
+                Assert.AreEqual(false, file.FullName.Contains('\\', StringComparison.InvariantCultureIgnoreCase));
             }
 
             IGgpkDirectory dialogueDirectory = archive.GetDirectory("/Audio/Dialogue/");
