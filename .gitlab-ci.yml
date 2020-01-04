@@ -25,7 +25,7 @@ debug:
     stage: test
     script:
         - ./build.sh
-    coverage: \[TOTAL\]\s+(\d+\.\d+)%
+    coverage: /Total\s+\|\s+\d+\D\d+\%/
 
 pages:
   stage: documentation
