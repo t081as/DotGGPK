@@ -88,7 +88,11 @@ Task("test")
     .IsDependentOn("build")
     .Does(() =>
 {
-    var testSettings = new DotNetCoreTestSettings();
+    var testSettings = new DotNetCoreTestSettings
+    {
+        Logger = "junit"
+    };
+
     var coverletSettings = new CoverletSettings
     {
         CollectCoverage = true,

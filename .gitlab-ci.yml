@@ -18,7 +18,7 @@ release:
         paths:
           - ./*.nupkg
     script:
-        - ./build.sh --configuration=Release
+        - ./build.sh --configuration=Release --buildnumber=$CI_PIPELINE_IID
         - dotnet nuget push DotGGPK*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --no-symbols 1
 
 debug:
@@ -26,6 +26,11 @@ debug:
     script:
         - ./build.sh
     coverage: /Total\s+\|\s+\d+\D\d+\%/
+    artifacts:
+        reports:
+            junit:
+                - './src/**/TestResults/TestResults.xml'
+
 
 pages:
   stage: documentation
