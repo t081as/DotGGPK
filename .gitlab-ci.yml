@@ -1,3 +1,5 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.1.100
+
 stages:
     - test
     - deploy
@@ -16,13 +18,14 @@ release:
         paths:
           - ./*.nupkg
     script:
-        - ./build --configuration=Release
+        - ./build.sh --configuration=Release
         - dotnet nuget push DotGGPK*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --no-symbols 1
 
 debug:
     stage: test
     script:
-        - ./build
+        - ./build.sh
+    coverage: Total\s+\|\s+\d+\D\d+\%
 
 pages:
   stage: documentation
@@ -32,4 +35,4 @@ pages:
     paths:
     - public
   script:
-  - ./build --configuration=Release
+  - ./build.sh --configuration=Release
