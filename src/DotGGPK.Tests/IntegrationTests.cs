@@ -30,7 +30,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
@@ -100,7 +99,7 @@ namespace DotGGPK.Tests
             foreach (var file in files)
             {
                 StringAssert.StartsWith(file.FullName, "/");
-                Assert.AreEqual(false, file.FullName.Contains("//"));
+                Assert.AreEqual(false, file.FullName.Contains('/', StringComparison.InvariantCultureIgnoreCase));
             }
 
             IGgpkDirectory dialogueDirectory = archive.GetDirectory("/Audio/Dialogue/");
