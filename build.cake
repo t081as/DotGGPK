@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Debug");
+var buildnumber = Argument("buildnumber", 0);
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -52,7 +53,7 @@ Task("versioning")
         shasum = match.Groups["shasum"].Value;
     }
 
-    buildNumber = GetPersistentBuildNumber(MakeAbsolute(new DirectoryPath("./")).FullPath).ToString();
+    buildNumber = buildnumber.ToString();
 
     string versionString = string.Format("{0}.{1}.{2}.{3}", major, minor, buildNumber, revision);
     string shortVersionString = string.Format("{0}.{1}.{2}", major, minor, revision);
@@ -139,32 +140,6 @@ RunTarget(target);
 //////////////////////////////////////////////////////////////////////
 // FUNCTIONS
 //////////////////////////////////////////////////////////////////////
-
-public static int GetPersistentBuildNumber(string baseDirectory)
-{
-    int buildNumber;
-    string persistentPathName = System.IO.Path.Combine(baseDirectory, ".cache");
-    string persistentFileName = System.IO.Path.Combine(persistentPathName, "build-number");
-
-    try
-    {
-        if (!System.IO.Directory.Exists(persistentPathName))
-        {
-            System.IO.Directory.CreateDirectory(persistentPathName);
-        }
-
-        buildNumber = int.Parse(System.IO.File.ReadAllText(persistentFileName).Trim());
-        buildNumber++;
-    }
-    catch
-    {
-        buildNumber = 1;
-    }
-
-    System.IO.File.WriteAllText(persistentFileName, buildNumber.ToString());
-
-    return buildNumber;
-}
 
 public static void WriteVersion(string fileName, string shortVersion, string version)
 {
