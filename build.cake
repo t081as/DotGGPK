@@ -30,17 +30,44 @@ Task("restore")
 
 Task("versioning")
     .IsDependentOn("restore")
-    .WithCriteria(configuration == "Release")
     .WithCriteria(DirectoryExists(".git"))
     .Does((context) =>
 {
-    (string version, string versionShort, string versionSematic) versions = GetGitTagVersion(context, buildnumber);
+    (string version, string versionShort, string versionSematic) versions;
+
+    try
+    {
+        versions = GetGitTagVersion(context, buildnumber);
+    }
+    catch (Exception ex)
+    {
+        Exception currentException = ex;
+
+        while (currentException != null)
+        {
+            Warning(currentException.Message);
+            Warning(currentException.StackTrace);
+            Warning("---");
+            
+            currentException = currentException.InnerException;
+        }
+
+        throw;
+    }
 
     Information("Version: " + versions.version);
     Information("Version (sematic): " + versions.versionSematic);
     Information("Version (short): " + versions.versionShort);
 
-    CreateVersionProps("./src/DotGGPK/Version.props", versions.version, versions.version, versions.versionSematic);
+    if (configuration == "Release")
+    {
+        Information("Release build - writing version output");
+        CreateVersionProps("./src/DotGGPK/Version.props", versions.version, versions.version, versions.versionSematic);
+    }
+    else
+    {
+        Information("Debug build - skipping version output");
+    }
 });
 
 Task("build")
