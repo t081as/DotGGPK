@@ -1,4 +1,4 @@
-## vNext
+## 2.0.0 (2020-01-04)
 
 - .NET Core 3.0 / 3.1 support added
 - .NET Classic support removed
