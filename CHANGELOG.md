@@ -1,4 +1,4 @@
-## Unreleased (YYYY-MM-DD)
+## 2.1.9 (2020-01-17)
 
 - Assembly signature added
 
