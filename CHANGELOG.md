@@ -1,4 +1,4 @@
-## [Unreleased] / YYYY-MM-DD
+## [2.1.1] / 2020-01-17
 - Version number issue fixed
 
 ## [2.1.0] / 2020-01-17
