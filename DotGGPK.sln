@@ -7,12 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotGGPK", "src\DotGGPK\DotG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotGGPK.Tests", "src\DotGGPK.Tests\DotGGPK.Tests.csproj", "{4F0CF8F0-DF46-41E7-95A9-981D9E35D0F4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "build\Build.csproj", "{548B964D-C6EA-4D92-B2F0-C23B71EB425C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{548B964D-C6EA-4D92-B2F0-C23B71EB425C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{548B964D-C6EA-4D92-B2F0-C23B71EB425C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D546739-9F85-499C-8A6C-42B5BCDDA05A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D546739-9F85-499C-8A6C-42B5BCDDA05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D546739-9F85-499C-8A6C-42B5BCDDA05A}.Release|Any CPU.ActiveCfg = Release|Any CPU

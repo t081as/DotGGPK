@@ -1,92 +1,68 @@
-##########################################################################
-# This is the Cake bootstrapper script for PowerShell.
-# This file was downloaded from https://github.com/cake-build/resources
-# Feel free to change this file to fit your needs.
-##########################################################################
-
-<#
-
-.SYNOPSIS
-This is a Powershell script to bootstrap a Cake build.
-
-.DESCRIPTION
-This Powershell script will restore Cake and execute your Cake build script
-with the parameters you provide.
-
-.PARAMETER Script
-The build script to execute.
-.PARAMETER Target
-The build script target to run.
-.PARAMETER Configuration
-The build configuration to use.
-.PARAMETER Verbosity
-Specifies the amount of information to be displayed.
-.PARAMETER ShowDescription
-Shows description about tasks.
-.PARAMETER SkipToolPackageRestore
-Skips restoring of packages.
-.PARAMETER ScriptArgs
-Remaining arguments are added here.
-
-.LINK
-https://cakebuild.net
-
-#>
-
 [CmdletBinding()]
 Param(
-    [string]$Script = "build.cake",
-    [string]$Target,
-    [string]$Configuration,
-    [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
-    [string]$Verbosity,
-    [switch]$ShowDescription,
-    [Alias("WhatIf", "Noop")]
-    [switch]$DryRun,
     [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
-    [string[]]$ScriptArgs
+    [string[]]$BuildArguments
 )
 
-Write-Host "Preparing to run build script..."
+Write-Output "PowerShell $($PSVersionTable.PSEdition) version $($PSVersionTable.PSVersion)"
 
-if(!$PSScriptRoot){
-    $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
+Set-StrictMode -Version 2.0; $ErrorActionPreference = "Stop"; $ConfirmPreference = "None"; trap { exit 1 }
+$PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
+
+###########################################################################
+# CONFIGURATION
+###########################################################################
+
+$BuildProjectFile = "$PSScriptRoot\build\Build.csproj"
+$TempDirectory = "$PSScriptRoot\\.tmp"
+
+$DotNetGlobalFile = "$PSScriptRoot\\global.json"
+$DotNetInstallUrl = "https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.ps1"
+$DotNetChannel = "Current"
+
+$env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 1
+$env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
+
+###########################################################################
+# EXECUTION
+###########################################################################
+
+function ExecSafe([scriptblock] $cmd) {
+    & $cmd
+    if ($LASTEXITCODE) { exit $LASTEXITCODE }
 }
 
-$TOOLS_DIR = Join-Path $PSScriptRoot "tools"
-$TOOLS_PROJ = Join-Path $TOOLS_DIR "tools.csproj"
-$CAKE_VERSION = "0.35.0"
-$CAKE_DLL = Join-Path $TOOLS_DIR "Cake.CoreCLR.$CAKE_VERSION/cake.coreclr/$CAKE_VERSION/Cake.dll"
-
-# Make sure tools folder exists
-if ((Test-Path $PSScriptRoot) -and !(Test-Path $TOOLS_DIR)) {
-    Write-Verbose -Message "Creating tools directory..."
-    New-Item -Path $TOOLS_DIR -Type directory | out-null
+# If global.json exists, load expected version
+if (Test-Path $DotNetGlobalFile) {
+    $DotNetGlobal = $(Get-Content $DotNetGlobalFile | Out-String | ConvertFrom-Json)
+    if ($DotNetGlobal.PSObject.Properties["sdk"] -and $DotNetGlobal.sdk.PSObject.Properties["version"]) {
+        $DotNetVersion = $DotNetGlobal.sdk.version
+    }
 }
 
-# Make sure that cake exist.
-if (!(Test-Path $CAKE_DLL)) {
-    Write-Verbose -Message "Downloading cake..."
-    $contents = '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>netstandard2.1</TargetFramework></PropertyGroup></Project>'
-    Out-File -InputObject $contents -FilePath $TOOLS_PROJ
-    Invoke-Expression "&dotnet add $TOOLS_PROJ package cake.coreclr -v `"$CAKE_VERSION`" --package-directory `"$TOOLS_DIR/Cake.CoreCLR.$CAKE_VERSION`""
+# If dotnet is installed locally, and expected version is not set or installation matches the expected version
+if ($null -ne (Get-Command "dotnet" -ErrorAction SilentlyContinue) -and `
+     (!(Test-Path variable:DotNetVersion) -or $(& dotnet --version) -eq $DotNetVersion)) {
+    $env:DOTNET_EXE = (Get-Command "dotnet").Path
+}
+else {
+    $DotNetDirectory = "$TempDirectory\dotnet-win"
+    $env:DOTNET_EXE = "$DotNetDirectory\dotnet.exe"
+
+    # Download install script
+    $DotNetInstallFile = "$TempDirectory\dotnet-install.ps1"
+    New-Item -ItemType Directory -Path $TempDirectory | Out-Null
+    (New-Object System.Net.WebClient).DownloadFile($DotNetInstallUrl, $DotNetInstallFile)
+
+    # Install by channel or version
+    if (!(Test-Path variable:DotNetVersion)) {
+        ExecSafe { & $DotNetInstallFile -InstallDir $DotNetDirectory -Channel $DotNetChannel -NoPath }
+    } else {
+        ExecSafe { & $DotNetInstallFile -InstallDir $DotNetDirectory -Version $DotNetVersion -NoPath }
+    }
 }
 
-# Make sure that Cake has been installed.
-if (!(Test-Path $CAKE_DLL)) {
-    Throw "Could not find Cake.dll at $CAKE_DLL"
-}
+Write-Output "Microsoft (R) .NET Core SDK version $(& $env:DOTNET_EXE --version)"
 
-# Build Cake arguments
-$cakeArguments = @("$Script");
-if ($Target) { $cakeArguments += "--target=$Target" }
-if ($Configuration) { $cakeArguments += "--configuration=$Configuration" }
-if ($Verbosity) { $cakeArguments += "--verbosity=$Verbosity" }
-if ($ShowDescription) { $cakeArguments += "--showdescription" }
-if ($DryRun) { $cakeArguments += "--dryrun" }
-$cakeArguments += $ScriptArgs
-
-# Start Cake
-Write-Host "Running build script..."
-&dotnet $CAKE_DLL $cakeArguments 
-exit $LASTEXITCODE
+ExecSafe { & $env:DOTNET_EXE build $BuildProjectFile /nodeReuse:false }
+ExecSafe { & $env:DOTNET_EXE run --project $BuildProjectFile --no-build -- $BuildArguments }
