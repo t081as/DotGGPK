@@ -17,7 +17,6 @@
 [Rr]eleases/
 x64/
 x86/
-build/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -215,13 +214,12 @@ ModelManifest.xml
 # StyleCop
 StyleCop.Cache
 
-# CAKE build
-tools/**
-!tools/Packages.config
-
 # GitLab pages output
 public/
 
 # VS Code
 .vscode/
 !.vscode/extensions.json
+
+# NUKE build
+/output
