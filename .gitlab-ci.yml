@@ -11,17 +11,16 @@ release:
     artifacts:
         name: "${CI_PROJECT_NAME}-${CI_COMMIT_TAG}"
         paths:
-          - ./*.nupkg
+          - ./**/*.nupkg
     script:
-        - ./build.sh --configuration=Release --buildnumber=$CI_PIPELINE_IID
-        - dotnet nuget push DotGGPK*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+        - ./build.sh --configuration Release --buildnumber $CI_PIPELINE_IID --target Push --key $NUGET_API_KEY
 
 debug:
     stage: test
     script:
         - ./build.sh
-    coverage: /Total\s+\|\s+\d+\D\d+\%/
+    coverage: /Line coverage[\s\S].+%/
     artifacts:
         reports:
             junit:
-                - './src/**/TestResults/TestResults.xml'
+                - './**/TestResults/TestResults.xml'
