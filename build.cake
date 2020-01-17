@@ -1,7 +1,6 @@
 #addin nuget:?package=Cake.Coverlet&version=2.3.4
 #addin nuget:?package=Cake.DocFx&version=0.13.1
 
-#tool nuget:?package=docfx.console&version=2.48.0
 #tool nuget:?package=ReportGenerator&version=4.4.0
 
 #load nuget:?package=Mjolnir.Cake
@@ -79,14 +78,6 @@ Task("build")
     {
         Configuration = configuration
     });
-
-    if (configuration == "Release")
-    {
-        Information("Release - generating documentation");
-        DocFxMetadata("./docs/docfx.json");
-        DocFxBuild("./docs/docfx.json");
-        CopyDirectory("docs/_site", "./public");
-    }
 });
 
 Task("test")

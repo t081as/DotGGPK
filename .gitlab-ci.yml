@@ -3,7 +3,6 @@ image: mcr.microsoft.com/dotnet/core/sdk:3.1.100-bionic
 stages:
     - test
     - deploy
-    - documentation
 
 release:
     stage: deploy
@@ -26,14 +25,3 @@ debug:
         reports:
             junit:
                 - './src/**/TestResults/TestResults.xml'
-
-
-pages:
-  stage: documentation
-  only:
-  - tags
-  artifacts:
-    paths:
-    - public
-  script:
-  - ./build.sh --configuration=Release
