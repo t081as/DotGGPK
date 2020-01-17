@@ -1,54 +1,45 @@
-## 2.1.9 (2020-01-17)
+## [Unreleased] / YYYY-MM-DD
+- Version number issue fixed
 
+## [2.1.0] / 2020-01-17
 - Assembly signature added
 
-## 2.0.0 (2020-01-04)
-
+## [2.0.0] / 2020-01-04
 - .NET Core 3.0 / 3.1 support added
 - .NET Classic support removed
 
-## 1.0.0 (2019-01-12)
-
+## [1.0.0] / 2019-01-12
 - API is considered stable
 
-## 0.8.0 (2019-01-12)
-
+## [0.8.0] / 2019-01-12
 - Documentation added: https://tobiaskoch.gitlab.io/DotGGPK/
 
-## 0.7.0 (2019-01-08)
-
+## [0.7.0] / 2019-01-08
 - IGgpkDirectory: ToFileList method added
 - Issue fixed: file and directory names contains additional slashes
 
-## 0.6.0 (2019-01-06)
-
+## [0.6.0] / 2019-01-06
 - IGgpkDirectory / IGgpkFile: FullName property added
 - GgpkArchive: GetDirectory and GetFile methods added
 
-## 0.5.0 (2019-01-05)
-
+## [0.5.0] / 2019-01-05
 - GgpkArchive: interfaces added
 - IGgpkDirectory / IGgpkFile: Parent property added
 - IGgpkFile: GetStream method added
 
-## 0.4.1 (2019-01-04)
-
+## [0.4.1] / 2019-01-04
 - Build script fix
 
-## 0.4.0 (2019-01-04)
-
+## [0.4.0] / 2019-01-04
 - GgpkArchive class structure added
 
-## 0.3.0 (2019-01-02)
-
+## [0.3.0] / 2019-01-02
 - Support for .NET Framework (v4.7, v4.7.1, v4.7.2, v4.6, v4.6.1, v4.6.2) added
 
-## 0.2.0 (2018-12-30)
-
+## [0.2.0] / 2018-12-30
 - New logo added
 - Additional unit tests added
 - GgpkRecords.From(Stream) method added
 
-## 0.1.0 (2018-12-29)
-
+## [0.1.0] / 2018-12-29
 - Initial release
