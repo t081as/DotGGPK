@@ -1,45 +1,47 @@
-## [2.1.1] / 2020-01-17
-- Version number issue fixed
+# Changelog
 
-## [2.1.0] / 2020-01-17
-- Assembly signature added
+## [2.1.1] - 2020-01-17
+- Fixed version number issue
 
-## [2.0.0] / 2020-01-04
-- .NET Core 3.0 / 3.1 support added
-- .NET Classic support removed
+## [2.1.0] - 2020-01-17
+- Added assembly signature
 
-## [1.0.0] / 2019-01-12
+## [2.0.0] - 2020-01-04
+- Added .NET Core 3.0 / 3.1 support
+- Removed explicit .NET Classic support
+
+## [1.0.0] - 2019-01-12
 - API is considered stable
 
-## [0.8.0] / 2019-01-12
-- Documentation added: https://tobiaskoch.gitlab.io/DotGGPK/
+## [0.8.0] - 2019-01-12
+- Added documentation: https://tobiaskoch.gitlab.io/DotGGPK/
 
-## [0.7.0] / 2019-01-08
-- IGgpkDirectory: ToFileList method added
-- Issue fixed: file and directory names contains additional slashes
+## [0.7.0] - 2019-01-08
+- Added IGgpkDirectory ToFileList method
+- Fixed file and directory names
 
-## [0.6.0] / 2019-01-06
-- IGgpkDirectory / IGgpkFile: FullName property added
-- GgpkArchive: GetDirectory and GetFile methods added
+## [0.6.0] - 2019-01-06
+- Added IGgpkDirectory / IGgpkFile FullName property
+- Added GgpkArchive GetDirectory and GetFile methods
 
-## [0.5.0] / 2019-01-05
-- GgpkArchive: interfaces added
-- IGgpkDirectory / IGgpkFile: Parent property added
-- IGgpkFile: GetStream method added
+## [0.5.0] - 2019-01-05
+- Added GgpkArchive interfaces
+- Added IGgpkDirectory / IGgpkFile Parent property
+- Added IGgpkFile GetStream method
 
-## [0.4.1] / 2019-01-04
-- Build script fix
+## [0.4.1] - 2019-01-04
+- Fixed build script
 
-## [0.4.0] / 2019-01-04
-- GgpkArchive class structure added
+## [0.4.0] - 2019-01-04
+- Added GgpkArchive class structure
 
-## [0.3.0] / 2019-01-02
-- Support for .NET Framework (v4.7, v4.7.1, v4.7.2, v4.6, v4.6.1, v4.6.2) added
+## [0.3.0] - 2019-01-02
+- Added support for .NET Framework (v4.7, v4.7.1, v4.7.2, v4.6, v4.6.1, v4.6.2)
 
-## [0.2.0] / 2018-12-30
-- New logo added
-- Additional unit tests added
-- GgpkRecords.From(Stream) method added
+## [0.2.0] - 2018-12-30
+- Added new logo
+- Added additional unit tests
+- Added GgpkRecords.From(Stream) method
 
 ## [0.1.0] / 2018-12-29
 - Initial release
