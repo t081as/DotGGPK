@@ -28,7 +28,12 @@ The script will report if the tests succeeded; the coverage report will be locat
 #### Build
     > ./build.ps1 --configuration Release
 
-The libraries will be located in the directory *./src/DotGGPK/bin/Release* if the build succeeds; the nuget package will be located in the directory ./output
+The libraries will be located in the directory *./src/DotGGPK/bin/Release* if the build succeeds.
+
+#### Generate package
+    > ./build.ps1 --configuration Release --target Pack
+
+The Nuget package will be located in the directory *./output* if the build succeeds.
 
 ## Usage
 The documentation of this library can be found here: [https://tobiaskoch.gitlab.io/DotGGPK/](https://tobiaskoch.gitlab.io/DotGGPK/)
