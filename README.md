@@ -23,12 +23,12 @@ Get the source code using the following command:
 #### Test
     > ./build.ps1
 
-The script will report if the tests succeeded; the coverage report will be located in the directory *./src/DotGGPK.Tests/bin/Debug/Coverage/*.
+The script will report if the tests succeeded; the coverage report will be located in the directory *./output/coverage/*.
 
 #### Build
-    > ./build.ps1 --configuration=Release
+    > ./build.ps1 --configuration Release
 
-The libraries will be located in the directory *./src/DotGGPK/bin/Release* if the build succeeds.
+The libraries will be located in the directory *./src/DotGGPK/bin/Release* if the build succeeds; the nuget package will be located in the directory ./output
 
 ## Usage
 The documentation of this library can be found here: [https://tobiaskoch.gitlab.io/DotGGPK/](https://tobiaskoch.gitlab.io/DotGGPK/)
